@@ -1,0 +1,89 @@
+.footer {
+    background-color: #333333;
+    align-items: center;
+    display: flex;
+    flex-flow: column wrap;
+    padding: 16px 24px 0;
+
+    &-picture {
+        margin-bottom: 8px;
+    }
+
+    &-links {
+        align-items: center;
+        display: flex;
+        flex-flow: column wrap;
+
+        &__link {
+            align-items: center;
+            display: flex;
+            flex-flow: column wrap;
+            margin-bottom: 24px;
+            @media screen and (min-width: 1024px) {
+                flex-direction: row;
+            }
+
+            >a {
+                font-size: 0.875rem;
+                font-weight: bold;
+                line-height: 24px;
+                text-decoration: none;
+                text-transform: uppercase;
+                @media screen and (min-width: 1024px) {
+                    margin: 0 16px;
+                }
+            }
+
+            &:first-child>a {
+                color: $white;
+            }
+
+            &:last-child>a {
+                color: $gray;
+            }
+        }
+    }
+
+    &-social {
+        display: flex;
+        flex-flow: row wrap;
+        margin-bottom: 16px;
+
+        .icon {
+            background-color: #fff;
+            border-radius: 50%;
+            fill: #333333;
+            height: 40px;
+            margin: 0 4px;
+            padding: 0px 10px;
+            width: 40px;
+            @media screen and (min-width: 1024px) {
+                transition: background-color ease 0.5s, fill ease 0.3s;
+                &:hover {
+                    background-color: $navyBlue;
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+    &-copyright {
+        color: $gray;
+        font-size: 0.6rem;
+        line-height: 12px;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    &-logo {
+        align-items: center;
+        border-top: 1px solid $gray;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        padding: 8px 0;
+        text-align: center;
+        width: 100%;
+
+    }
+}

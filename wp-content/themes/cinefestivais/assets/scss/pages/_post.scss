@@ -1,0 +1,248 @@
+.postpage-body {
+
+    &--title {
+        font-size: 2rem;
+        margin-bottom: 32px;
+        padding: 0 32px;
+
+        @media screen and (min-width: 1024px) {
+            margin: 0 64px 32px;
+            width: 70%;
+        }
+    }
+
+    &--author {
+        padding: 0 32px;
+
+        @media screen and (min-width: 1024px) {
+            margin: 0 64px;
+            width: 70%;
+        }
+
+        .author-picture {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+        }
+
+        .author-name {
+            margin-bottom: 16px;
+
+            a {
+                font-size: 0.875rem;
+            }
+
+            a:not(:last-child)::after {
+                content: ', '
+            }
+        }
+    }
+
+    &--timehour {
+        border-right: 2px solid $gray;
+        color: $black;
+        font-weight: bold;
+        font-size: 0.875rem;
+        margin-bottom: 8px;
+        padding: 0 8px 0 32px;
+
+        @media screen and (min-width: 1024px) {
+            margin: 0 64px 8px;
+            width: 70%;
+        }
+
+    }
+
+    &--updated {
+        color: $gray;
+        display: block;
+        font-size: 0.875rem;
+        margin-bottom: 32px;
+        padding: 0 32px;
+
+        @media screen and (min-width: 1024px) {
+            margin: 0 64px 32px;
+            width: 70%;
+        }
+    }
+
+    &--separator {
+        border: 0;
+        border-top: 1px solid #ccc;
+        display: block;
+        height: 1px;
+        margin: 32px;
+        padding: 0;
+        @media screen and (min-width: 768px) {
+            margin: 32px 64px;
+        }
+    }
+
+
+    &--text {
+        padding: 0 32px;
+
+        @media screen and (min-width: 1024px) {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            margin: 0 64px;
+            width: 60%;
+        }
+
+        p {
+            margin: 32px 0;
+        }
+    }
+
+    &--ads {
+        display: none;
+        @media screen and (min-width: 1024px) {
+            height: 300px;
+            display: block;
+            padding: 32px 0;
+            margin: 0 64px;
+            width: 150px;
+        }
+    }
+
+    &--figure {
+        @media screen and (min-width: 1024px) {
+            margin: 0 64px;
+        }
+        img {
+            width: 100%;
+        }
+
+        figcaption {
+            color: $gray;
+            font-size: 0.750rem;
+            padding: 0 32px;
+            text-align: justify; 
+            @media screen and (min-width: 1024px) {
+                left: calc(100% - 250px);
+                margin-top: 16px;
+                max-width: 200px;
+                position: absolute;
+            }   
+        }
+
+        .figure-title {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+
+    q {
+        margin: 0 0 32px;
+        padding: 0 32px;
+        @media screen and (min-width: 1024px) {
+            margin: 16px 112px;
+            text-align: left;
+            width: 70%;
+        }
+    }
+
+    &--related {
+        margin: 32px 0;
+        @media screen and (min-width: 1024px) {
+            margin: 32px 64px;
+            width: 70%;
+        }
+
+        .related-title {
+            text-align: center;
+
+            @media screen and (min-width: 1024px) {
+                padding: 0 32px;
+                text-align: left;
+            }
+        }
+
+        .tags {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            margin: 16px 0;
+
+            @media screen and (min-width: 1024px) {
+                justify-content: flex-start;
+                padding: 0 32px;
+            }
+        }
+
+    }
+
+    &--contact {
+        display: flex;
+        flex-flow: column wrap;
+        padding: 0 32px;
+        @media screen and (min-width: 768px) {
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        @media screen and (min-width: 1024px) {
+            flex-direction: row;
+            justify-content: flex-start;
+            margin: 32px 64px;
+            width: 70%;
+        }
+        .content-title {
+            width: 100%;
+            @media screen and (min-width: 1024px) {
+                text-align: left;
+
+                &::before {
+                    left: 0;
+                }
+            }
+        }
+
+        .contact-author {
+            align-items: center;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            @media screen and (min-width: 768px) {
+                justify-content: flex-start;
+                width: 50%;
+            }
+
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+            }
+
+            .icon {
+                fill: $pink;
+                height: 15px;
+                margin-right: 8px;
+                width: 15px;
+            }
+
+            &--info {
+                color: $pink;
+                padding-left: 8px;
+                width: 70%;
+                @media screen and (min-width: 1024px) {
+                    padding-left: 16px;
+                }
+
+                h3 {
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                }
+
+                span {
+                    align-items: center;
+                    display: inline-flex;
+                    flex-flow: row nowrap;
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+}

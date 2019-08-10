@@ -1,0 +1,72 @@
+.is-center {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    text-align: center !important;
+}
+
+.flex-row-between {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.is-hidden { 
+    display: none !important;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.mb-24 {
+    margin-bottom: 24px!important;
+}
+
+.m-32 {
+    margin: 32px 0;
+}
+
+.mt-32 {
+    margin-top: 32px;
+}
+
+.lg-50 {
+    @media screen and (min-width: 1024px) {
+        width: 50%;
+    }
+}
+
+.nomargin {
+    margin: 0!important;
+}
+
+
+.deco-none {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.has-error {
+    color: #F44336;
+}
+
+.bg-grey {
+    background: #333333;
+}
+
+.bg-lightgrey {
+    background-color: $lightGray;
+}
+
+.bg-blue {
+    background: $navyBlue;
+}

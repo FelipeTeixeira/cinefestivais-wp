@@ -1,0 +1,67 @@
+.cards {
+    @media screen and (min-width: 768px) {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+}
+.card {
+    margin: 0 0 36px;
+    @media screen and (min-width: 768px) {
+        margin: 0 16px 36px;
+        width: calc(45% - 16px);
+    }
+    @media screen and (min-width: 1024px) {
+        width: calc(25% - 36px);
+    }
+
+    &-picture {
+        width: 100%;
+    }
+
+    &-label {
+        display: block;
+        text-align: center;
+        transform: translateY(-16px);
+        position: relative;
+        margin-bottom: 0;
+        
+        &__text {
+            background-color: $navyBlue;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 16px;
+
+            &.white {
+                background-color: #fff;
+                border: 1px solid $navyBlue;
+                color: $navyBlue;
+            }
+        }
+    }
+
+    &-text {
+        font-size: 0.85rem;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &-time {
+        color: $gray;
+        font-size: 0.750rem;
+        margin-top: 16px;
+        text-align: center;
+        &::before {
+            bottom: 8px;
+            border-top: 1px solid $gray;
+            content: "";
+            display: block;
+            left: calc(50% - 12px);
+            position: relative;
+            width: 24px;
+        }
+    }
+}

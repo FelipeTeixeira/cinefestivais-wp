@@ -1,0 +1,85 @@
+.btn {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: bold;
+    justify-content: space-around;
+    padding: 10px;
+    transition: all .5s ease-in;
+    text-transform: uppercase;
+    width: 100%;
+
+    .icon {
+        fill: $white;
+        height: 20px;
+        width: 20px;
+    }
+
+    &.btn-default {
+        background-color: transparent;
+        border: 1px solid $white;
+        color: $white;
+
+        &:hover {
+            background-color: $white;
+            color: #424242;
+        }
+    }
+
+    &.btn-primary {
+        background-color: $pink;
+        color: #fff;
+        transition: ease .5s all;
+
+        &:hover {
+            background-color:darken($pink, 3);
+        }
+
+        &.blue {
+            background-color: $navyBlue;
+            &:hover {
+                background-color:darken($navyBlue, 3);
+            }
+        }
+    }
+
+    &.btn-secondary {
+        background-color: #fff;
+        border: 1px solid $pink;
+        color: $pink;
+        transition: ease .5s all;
+
+        &:hover {
+            color: #fff;
+            background-color: $pink;
+        }
+    }
+    
+
+    &.btn-small {
+        max-width: 200px;
+        width: 50%;
+        @media screen and (min-width: 1024px) {
+            width: 15%;
+        }
+    }
+    &.btn-medium {
+        max-width: 250px;
+        width: 75%;
+        @media screen and (min-width: 768px) {
+            max-width: 200px;
+            width: 40%;
+        }
+        @media screen and (min-width: 1024px) {
+            width: 20%;
+        }
+    }
+
+    &.btn-large {
+        width: 100%;
+        @media screen and (min-width: 1024px) {
+            width: 50%;
+        }
+    }
+}

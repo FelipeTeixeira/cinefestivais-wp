@@ -1,0 +1,9 @@
+.header {
+    &-picture {
+        width: 100%;
+
+        @media screen and (min-width: 1024px) {
+            height: 90vh;
+        }
+    }
+}

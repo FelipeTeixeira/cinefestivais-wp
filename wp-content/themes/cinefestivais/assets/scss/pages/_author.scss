@@ -1,0 +1,62 @@
+.author {
+    padding: 0 16px;
+
+    &-info {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 200px 0 0;
+        position: relative;
+        @media screen and (min-width: 768px) {
+            align-items: end;
+            padding: 200px 150px 0;
+        }
+
+        &--column {
+            @media screen and (min-width: 768px) {
+                padding: 0 32px;
+                width: 70%;
+            }
+        }
+    }
+
+    .profile-photo {
+        width: 100px;
+    }
+
+    &-title {
+        font-size: 1.7rem;
+        margin: 16px 0 0;
+        text-transform: uppercase;
+        @media screen and (min-width: 768px) {
+            margin: 0;
+        }
+    }
+    &-text {
+        margin: 16px 0;
+    }
+    &-contact {
+        color: $pink;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        margin: 16px 0;
+        @media screen and (min-width: 768px) {
+            flex-flow: row wrap;
+            justify-content: flex-start;
+        }
+
+        span:last-child {
+            @media screen and (min-width: 768px) {
+                padding: 0 32px;
+            }
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+    }
+
+    .content-title {
+        font-size: 1rem;
+    }
+}

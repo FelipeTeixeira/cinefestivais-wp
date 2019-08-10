@@ -1,0 +1,24 @@
+.tags-center {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.tag {
+    border: 1px solid $navyBlue;
+    color: $navyBlue;
+    font-size: 0.75rem;
+    margin: 4px;
+    font-weight: bold;
+    padding: 0 8px ;
+    text-transform: uppercase;
+    @media screen and (min-width: 1024px) {
+        margin: 4px 8px;
+    }
+
+    &:first-child {
+        background-color: $navyBlue;
+        color: $white;
+        margin-left: 0;
+    }
+}
