@@ -1,3 +1,18 @@
+<?php
+    // Compressor HTML
+    ob_start();
+
+    $pagina         = (!isset($pagina )) ? '' : $pagina ;
+    $body           = (!isset($body)) ? '' : $body;
+    $header         = (!isset($header)) ? '' : $header;
+    $current_user   = wp_get_current_user();
+
+    // LINKS PAGES
+    $menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
+    $menu_autor			= esc_url( home_url( '/' ) )."autor";
+    $menu_contato		= esc_url( home_url( '/' ) )."contato";
+    $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,7 +61,6 @@
 				<use xlink:href="#icon-menu"></use>
 			</svg>
 		</button>
-		
 
 		<ul class="navbar-links">
 			<li><a href="entrevistas.php" class="navbar-menu-item">Entrevistas</a></li>
@@ -55,9 +69,9 @@
 			<li><a href="" class="navbar-menu-item">Notícias</a></li>
 			<li><a href="" class="navbar-menu-item">Reportagens</a></li>
 			<li><a href="" class="navbar-menu-item">Podcasts</a></li>
-			<li><a href="quem-somos.php" class="navbar-menu-item teste">Quem Somos</a></li>
-			<li><a href="anuncie.php" class="navbar-menu-item teste">Anuncie</a></li>
-			<li><a href="contato.php" class="navbar-menu-item teste">Contato</a></li>
+			<li><a href="<?= $menu_quem_somos ?>" class="navbar-menu-item teste">Quem Somos</a></li>
+			<li><a href="<?= $menu_anuncie ?>" class="navbar-menu-item teste">Anuncie</a></li>
+			<li><a href="<?= $menu_contato ?>" class="navbar-menu-item teste">Contato</a></li>
 			<li>
 				<a href="" class="navbar-menu-social">
 					<svg class="icon icon-facebook">

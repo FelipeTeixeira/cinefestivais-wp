@@ -1,0 +1,23 @@
+{
+  "name": "teste",
+  "version": "1.0.0",
+  "description": "Teste Front-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^2.2.0",
+    "node-sass": "^4.12.0"
+  },
+  "dependencies": {
+    "node-gyp": "^5.0.3",
+    "windows-build-tools": "^5.2.2"
+  }
+}
