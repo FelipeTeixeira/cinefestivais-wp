@@ -46,7 +46,7 @@
 		</svg>
 	</button>
 
-	<a href="/" class="navbar-logo">
+	<a href="/" class="navbar-logo js-navbar-logo">
 		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" class="navbar-logo-logo">
 		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50px" class="navbar-logo-icon">
 	</a>

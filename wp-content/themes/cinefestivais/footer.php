@@ -56,7 +56,7 @@
 <!-- FALTA ISSO -->
 <script>
     _toggleLogo = () => {
-        const imgNavbar = document.querySelector('.navbar-logo');
+        const imgNavbar = document.querySelector('.js-navbar-logo');
 
         if (window.pageYOffset > 100) {
             imgNavbar.classList.add('is-active');
