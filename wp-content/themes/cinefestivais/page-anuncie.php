@@ -14,7 +14,7 @@
 <header class="post-header full bg-img bg-quemsomos">
 </header>
 
-<article class="">
+<article>
     <section class="content content-card">
         <h1 class="content-card--title">
 			Anuncie

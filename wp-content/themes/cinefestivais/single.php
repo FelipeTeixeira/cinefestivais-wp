@@ -3,7 +3,7 @@ $css_escolhido = 'single';
 require_once('header.php');
 ?>
 
-<main>
+<main class="align-top">
 	
 	<article>
 
@@ -13,6 +13,7 @@ require_once('header.php');
 
 		<div class="single-imovel-thumbnail">
 			<?php the_post_thumbnail(); ?>
+
 		</div>
 
 		<div class="container">
@@ -28,19 +29,6 @@ require_once('header.php');
 
 				<?php	$imoveis_meta_data = get_post_meta( $post->ID ); ?>
 				 
-				<dl class="single-imovel-informacoes">
-					<dt>Preço</dt>
-					<dd>R$ <?= esc_attr( $imoveis_meta_data['preco_id'][0] ); ?></dd>
-
-					<dt>Vagas</dt>
-					<dd><?= esc_attr( $imoveis_meta_data['vagas_id'][0] ); ?></dd>
-
-					<dt>Banheiros</dt>
-					<dd><?= esc_attr( $imoveis_meta_data['banheiros_id'][0] ); ?></dd>
-					
-					<dt>Quartos</dt>
-					<dd><?= esc_attr( $imoveis_meta_data['quartos_id'][0] ); ?></dd>
-				</dl>
 
 
 			</section>

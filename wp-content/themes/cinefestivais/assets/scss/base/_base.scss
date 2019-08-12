@@ -3,6 +3,10 @@
 main {
     min-height: calc(100vh - 70px - 44px);
     position: relative;
+
+    &.align-top {
+        padding-top: 50px;
+    }
 }
 
 img {

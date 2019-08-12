@@ -1,5 +1,5 @@
 <?php
-	$pagina 	 	 = "pg-category";
+	$pagina 	 = "pg-category";
 	$body 	 	 = "header-active-main";
 	$header  	 = "header-active";
 	$quem_somos	 = "quem-somos";
@@ -14,7 +14,7 @@
 <header class="post-header full bg-img bg-quemsomos">
 </header>
 
-<article class="">
+<article>
     <section class="content content-card">
         <h1 class="content-card--title">
 			Autor
