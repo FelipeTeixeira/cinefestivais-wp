@@ -7,6 +7,7 @@
     height: 50px;
     position: fixed;
     width: 100%;
+    box-shadow: 0 3px 1px -2px rgba(66,66,66,.2), 0 2px 2px 0 rgba(66,66,66,.14), 0 1px 5px 0 rgba(66,66,66,.12);
     z-index: 3;
 
     &-btn {
@@ -23,6 +24,7 @@
     }
 
     &-logo {
+        text-align: center;
         left: 0;
         margin: auto;
         right: 0;
@@ -31,8 +33,18 @@
         top: 0;
         width: 100px;
 
-        &.scroll {
-            width: 50px;
+        &-icon {
+            display: none;
+        }
+
+        &.is-active {
+            .navbar-logo-logo {
+                display: none;
+            } 
+
+            .navbar-logo-icon {
+                display: inline-block;
+            }
         }
     }
     

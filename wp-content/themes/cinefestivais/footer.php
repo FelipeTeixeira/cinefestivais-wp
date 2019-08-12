@@ -56,14 +56,12 @@
 <!-- FALTA ISSO -->
 <script>
     _toggleLogo = () => {
-        const imgNavbar = document.getElementById('js-navbar-logo');
+        const imgNavbar = document.querySelector('.navbar-logo');
 
         if (window.pageYOffset > 100) {
-            imgNavbar.src = './assets/img/icone-cine-festivais.svg';
-            imgNavbar.classList.add('scroll');
+            imgNavbar.classList.add('is-active');
         } else {
-            imgNavbar.src = './assets/img/logo-cine-festivais.svg';
-            imgNavbar.classList.remove('scroll');
+            imgNavbar.classList.remove('is-active');
         }
     }
 
