@@ -11,7 +11,7 @@ add_filter('update_footer', 'change_footer_version', 9999);
 // ALTERAR TEXTO "OBG POR CRIAR WORDPRESS"
 function remove_footer_admin()
 {
-  echo 'Administrador - Artigo19';
+  echo 'Administrador - Cine Festivais';
 }
 add_filter('admin_footer_text', 'remove_footer_admin');
 

@@ -16,6 +16,19 @@ require_once('header.php');
 		<h1 class="content-card--title">
 			Categorias
 		</h1>
+
+
+		esse cara vai virar uma pagina, que vai listar TODAS as categorias do site,
+		menos "entrevista, noticias, criticas, reportagens, podcast"
+
+		<img src="<?= z_taxonomy_image_url(); ?>" alt="">
+		
+
+		<h2>
+		</h2>
+
+		
+
 		<article class="categoryText article-text">
 			<?php
 
