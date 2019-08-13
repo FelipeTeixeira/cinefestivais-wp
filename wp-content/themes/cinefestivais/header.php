@@ -12,6 +12,7 @@
     $menu_autor			= esc_url( home_url( '/' ) )."autor";
     $menu_contato		= esc_url( home_url( '/' ) )."contato";
     $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
+    $menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -46,7 +47,7 @@
 		</svg>
 	</button>
 
-	<a href="/" class="navbar-logo js-navbar-logo">
+	<a href="<?php echo home_url('/'); ?>" class="navbar-logo js-navbar-logo">
 		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" class="navbar-logo-logo">
 		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50px" class="navbar-logo-icon">
 	</a>
@@ -66,7 +67,7 @@
 		<ul class="navbar-links">
 			<li><a href="entrevistas.php" class="navbar-menu-item">Entrevistas</a></li>
 			<li><a href="" class="navbar-menu-item">Críticas</a></li>
-			<li><a href="coberturas.php" class="navbar-menu-item">Coberturas</a></li>
+			<li><a href="<?= $menu_coberturas ?>" class="navbar-menu-item">Coberturas</a></li>
 			<li><a href="" class="navbar-menu-item">Notícias</a></li>
 			<li><a href="" class="navbar-menu-item">Reportagens</a></li>
 			<li><a href="" class="navbar-menu-item">Podcasts</a></li>
@@ -100,3 +101,5 @@
 	</div>
 
 </nav>
+
+<main>

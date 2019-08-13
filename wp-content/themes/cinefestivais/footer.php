@@ -1,4 +1,5 @@
-<?php wp_footer(); ?>
+
+</main>
 <footer class="footer">
 
     <img src="https://i.imgur.com/sGFajGu.png" alt="" class="footer-picture">
@@ -51,6 +52,8 @@
         <img src="https://i.imgur.com/dEZ0sdV.png" alt="">
     </div>
 </footer>
+
+<?php wp_footer(); ?>
 
 <!-- JSfiles -->
 <!-- FALTA ISSO -->

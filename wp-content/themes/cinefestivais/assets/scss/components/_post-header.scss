@@ -1,5 +1,6 @@
 .post-header {
     font-weight: bold;
+
     @media screen and (min-width: 768px) {
         padding: 32px 0;
     }
@@ -21,8 +22,9 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-start;
-        height: 500px;
+        height: 300px;
         padding: 0 16px;
+
         @media screen and (min-width: 768px) {
             height: 400px;
             padding: 0 32px;
@@ -60,11 +62,14 @@
     }
 
     &--title {
-        border: 3px solid #fff;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        border: 2px solid #fff;
         color: #fff;
-        bottom: 16px;
+        bottom: 24px;
         position: relative;
-        padding: 0 16px;
+        padding: 4px 24px;
+        left: 12px;
 
         @media screen and (min-width: 1024px) {
             bottom: 32px;

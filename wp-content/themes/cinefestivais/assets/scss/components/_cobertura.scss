@@ -34,6 +34,12 @@
         font-weight: bold;
         margin-top: 8px;
         text-align: center;
+        color: #333;
         text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    &-name {
+        display: block;
     }
 }
