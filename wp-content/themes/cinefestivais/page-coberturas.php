@@ -34,10 +34,23 @@ require_once('header.php');
 						$slug !== 'reportagens' && 
 						$slug !== 'podcasts' &&
 						$slug !== 'entrevistas') {
+
+							if (function_exists('get_wp_term_image'))
+							{
+								$meta_image = get_wp_term_image($category->cat_ID); 
+							}	
 			?>
 					<li class="cobertura">
 						<a href="<?= esc_url($category_link) ?>" class="cobertura-legend">
-							<?php if (function_exists('z_taxonomy_image')) z_taxonomy_image($category->cat_ID); ?>
+						
+							<?php 
+								if ($meta_image) {
+							?>
+								<img src="<?= $meta_image; ?>" alt="<?= $category->name ?>">
+							<?php 
+								}
+							?>
+							
 							<strong class="cobertura-name">
 								<?= $category->name ?>  
 							</strong>

@@ -14,7 +14,7 @@ require_once('header.php');
 <article>
 	<section class="content content-card">
 		<h1 class="content-card--title">
-			Entrevistas
+			Entrevistas ---
 		</h1>
 		<article class="categoryText article-text">
 			<?php
