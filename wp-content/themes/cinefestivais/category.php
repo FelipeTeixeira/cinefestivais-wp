@@ -16,6 +16,9 @@
         <h1 class="content-card--title">
 			CATEGORIA GERAL
 		</h1>
+
+		<?php if (function_exists('z_taxonomy_image')) z_taxonomy_image(); ?>
+
 		<article class="categoryText article-text">
 			<?php the_content(); ?>
 		</article>

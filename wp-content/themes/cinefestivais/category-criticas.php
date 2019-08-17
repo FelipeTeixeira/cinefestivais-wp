@@ -15,7 +15,7 @@ require_once('header.php');
 	<section class="content content-card">
 		<h1 class="content-card--title">
 			Críticas
-		</h1>
+		</h1>		
 		<article class="categoryText article-text">
 			<?php
 

@@ -21,22 +21,30 @@ require_once('header.php');
 					'taxonomy'   => 'category',
 					'orderby'    => 'name',
 					'parent'     => 0,
-					'hide_empty' => 1, // change to 1 to hide categores not having a single post
+					'hide_empty' => 0, // change to 1 to hide categores not having a single post
 				));
 
 				foreach  ($categories as $category) {
 				$category_link = get_category_link($category->cat_ID);
+				$slug = $category->slug;
+				
+					if (
+						$slug !== 'criticas' && 
+						$slug !== 'noticias' && 
+						$slug !== 'reportagens' && 
+						$slug !== 'podcasts' &&
+						$slug !== 'entrevistas') {
 			?>
-			<!-- TO DO, ignorar quando for reportagens essas coisas -->
-				<li class="cobertura">
-					<a href="<?= esc_url($category_link) ?>" class="cobertura-legend">
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI4U1f1iXMC3gROM0-_MkhqF0E2ke8evi8kIqYyvtGnRbzmh79" alt="" class="cobertura-picture">
-						<strong class="cobertura-name">
-							<?= $category->name ?>  
-						</strong>
-					</a>
-				</li>
-			<?php	
+					<li class="cobertura">
+						<a href="<?= esc_url($category_link) ?>" class="cobertura-legend">
+							<?php if (function_exists('z_taxonomy_image')) z_taxonomy_image($category->cat_ID); ?>
+							<strong class="cobertura-name">
+								<?= $category->name ?>  
+							</strong>
+						</a>
+					</li>
+				<?php	
+					}	
 				}
 			?>
 		</ul>
