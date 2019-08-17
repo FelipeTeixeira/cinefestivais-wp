@@ -1,52 +1,222 @@
 <?php
-$css_escolhido = 'single';
-require_once('header.php');
+	$pagina = "pg-article";
+	require_once('header.php');
+
+	if( have_posts() ) {
+	while( have_posts() ) {
+		the_post();
 ?>
 
-<main class="align-top">
-	
-	<article>
-
-		<?php if( have_posts() ) {
-			while( have_posts() ) {
-				the_post(); ?>
-
-		<div class="single-imovel-thumbnail">
-			<?php the_post_thumbnail(); ?>
-
+<header class="post-header">
+	<img src="https://picsum.photos/id/237/350/500" alt="" class="post-header--picture">
+	<div class="post-header--social">
+		<div class="tags">
+			<span class="tag">Entrevistas</span>
+			<span class="tag">8º olhar de cinema</span>
 		</div>
+		<div class="social-icons">
 
-		<div class="container">
-			<section class="chamada-principal">
-				<h1><?php the_title(); ?></h1>
-			</section>
+			<svg class="icon icon-bubble">
+				<use xlink:href="#icon-bubble"></use>
+			</svg>
 
-			<section class="single-imovel-geral">
-				
-				<div class="single-imovel-descricao">
-					<?php the_content(); ?>
+			<span></span>
+
+			<div class="social-icons--share">
+				<div class="share-icon">
+					<svg class="icon icon-share-alt">
+						<use xlink:href="#icon-share-alt"></use>
+					</svg>
+					<span class="share-icon--text">Compartilhar</span>
 				</div>
-
-				<?php	$imoveis_meta_data = get_post_meta( $post->ID ); ?>
-				 
-
-
-			</section>
-
-			<span class="single-imovel-data">
-			 <?php the_date(); ?>
-			</span>
-
-
+				<a href="">
+					<svg class="icon icon-facebook">
+						<use xlink:href="#icon-facebook"></use>
+					</svg>
+				</a>
+				<a href="">
+					<svg class="icon icon-twitter">
+						<use xlink:href="#icon-twitter"></use>
+					</svg>
+				</a>
+				<a href="">
+					<svg class="icon icon-envelope">
+						<use xlink:href="#icon-envelope"></use>
+					</svg>
+				</a>
+				<a href="">
+					<svg class="icon icon-link">
+						<use xlink:href="#icon-link"></use>
+					</svg>
+				</a>
+			</div>
 		</div>
-		
-		<?php }
-		} ?>
+	</div>
+</header>
 
-	</article>
+<h1 class="postpage-body--title">
+	<?php the_title(); ?>
+</h1>
 
-</main>
+<section class="postpage-body--author">
+
+	<div class="author-picture">
+		<img src="https://randomuser.me/api/portraits/men/12.jpg" class="profile-photo" alt="">
+		<img src="https://randomuser.me/api/portraits/women/28.jpg" class="profile-photo" alt="">
+	</div>
+	<div class="author-name">
+		<a href="#">Adriano Garrett</a>
+		<a href="#">Gabriela Oliveira</a>
+	</div>
+
+</section>
+
+<span class="postpage-body--timehour">
+	<?= get_the_date('d/m/y'); ?>
+	às 
+	<?= the_time('H:i'); ?>
+</span>
+<?php
+ 	if (
+		get_the_time('H:i') !== get_the_modified_time('H:i')
+	) {
+?>
+	<span class="postpage-body--updated">
+		Atualizado em
+		<?= get_the_modified_date('d/m/y') ?>
+		as
+		<?= get_the_modified_time('H:i') ?>
+	</span>
+<?php
+ 	}
+?>
+
+<hr class="postpage-body--separator">
+
+<div class="flex-row-between">
+	<section class="postpage-body--text">
+		<?php the_content(); ?>
+		<q>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit.
+		</q>
+				
+	</section>
+
+
+</div>
+
+<!-- 
+<figure class="postpage-body--figure">
+	<img src="https://picsum.photos/id/236/600/300" alt="Random picture">
+	<figcaption>
+		<span class="figure-title">
+			Caminhos
+		</span>
+		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus, ipsum temporibus
+		necessitatibus doloremque a tempore obcaecati reprehenderit
+	</figcaption>
+</figure>
+-->
+
+<hr class="postpage-body--separator">
+
+<section class="postpage-body--related">
+	<h2 class="related-title">
+		Assuntos Relacionados
+	</h2>
+	<div class="tags">
+		<span class="tag">Entrevistas</span>
+		<span class="tag">8º olhar de cinema</span>
+		<span class="tag">8º olhar de cinema</span>
+		<span class="tag">Cinema</span>
+		<span class="tag">Filme</span>
+	</div>
+
+</section>
+
+<section class="postpage-body--contact content">
+
+	<h2 class="content-title">Entre em contato</h2>
+
+	<div class="contact-author">
+
+		<img src="https://randomuser.me/api/portraits/men/12.jpg" alt="">
+		<div class="contact-author--info">
+			<h3>Adriano Garrett</h3>
+			<span>
+				<svg class="icon icon-envelope">
+					<use xlink:href="#icon-envelope"></use>
+				</svg>
+				adriano@cinefestivais.com.br
+			</span>
+			<span>
+				<svg class="icon icon-facebook">
+					<use xlink:href="#icon-facebook"></use>
+				</svg>
+				/adrianogarrett
+			</span>
+		</div>
+
+	</div>
+
+	<div class="contact-author">
+
+		<img src="https://randomuser.me/api/portraits/women/28.jpg" alt="">
+		<div class="contact-author--info">
+			<h3>Gabriela Oliveira</h3>
+			<span>
+				<svg class="icon icon-envelope">
+					<use xlink:href="#icon-envelope"></use>
+				</svg>
+				gabriela@cinefestivais.com.br
+			</span>
+			<span>
+				<svg class="icon icon-facebook">
+					<use xlink:href="#icon-facebook"></use>
+				</svg>
+				/gabrielaoliveiraa
+			</span>
+		</div>
+
+	</div>
+
+</section>
+
+<div class="is-center">
+	<button type="button" class="btn btn-primary btn-medium mb-24">
+		<svg class="icon icon-chevron-down">
+			<use xlink:href="#icon-chevron-down"></use>
+		</svg>
+		Ver Comentários
+	</button>
+</div>
 
 
 
-<?php get_footer(); ?>
+<article class="headerArticle">
+
+
+	<time class="headerArticle-dateUser">
+		<i class="icon-time"></i>
+		Publicado em
+		<?= get_the_date('d/m/y'); ?>
+	</time>
+	<small class="headerArticle-dateUser">
+		<i class="icon-user"></i>
+		<?php nameUser(); ?>
+	</small>
+	<figure class="bannerArticle">
+		<?php
+				the_post_thumbnail( 'large', array('title' => get_the_title(), 'alt' => get_the_title() ) );
+			?>
+		<figcaption class="banner-legend">
+			legenda se tiver
+		</figcaption>
+	</figure>
+</article>
+
+<?php 
+		}
+	}
+	get_footer(); 
+?>
