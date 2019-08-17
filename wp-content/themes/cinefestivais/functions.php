@@ -30,3 +30,11 @@ function nameUser() {
 
 	echo $full_name;
 }
+
+function categoryDefault($slug) {
+	return $slug !== 'criticas' && 
+	$slug !== 'noticias' && 
+	$slug !== 'reportagens' && 
+	$slug !== 'podcasts' &&
+	$slug !== 'entrevistas';
+}

@@ -28,12 +28,7 @@ require_once('header.php');
 				$category_link = get_category_link($category->cat_ID);
 				$slug = $category->slug;
 				
-					if (
-						$slug !== 'criticas' && 
-						$slug !== 'noticias' && 
-						$slug !== 'reportagens' && 
-						$slug !== 'podcasts' &&
-						$slug !== 'entrevistas') {
+					if (categoryDefault($slug)) {
 
 							if (function_exists('get_wp_term_image'))
 							{
