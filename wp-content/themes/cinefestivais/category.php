@@ -1,11 +1,5 @@
 <?php
-	$pagina 	 	 = "pg-category";
-	$body 	 	 = "header-active-main";
-	$header  	 = "header-active";
-	$quem_somos	 = "quem-somos";
-
 	require_once('header.php');
-
 ?>
 	<header class="post-header full bg-img bg-quemsomos" style="background-image: url(<?php if (function_exists('z_taxonomy_image')) echo z_taxonomy_image_url(); ?>)">
 		<h1 class="post-header--title">
