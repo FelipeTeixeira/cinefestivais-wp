@@ -57,6 +57,8 @@
 
 <!-- JSfiles -->
 <!-- FALTA ISSO -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/min/tiny-slider.js"></script>
 <script>
     _toggleLogo = () => {
         const imgNavbar = document.querySelector('.js-navbar-logo');
@@ -100,6 +102,24 @@
         _toggleLogo();
         _showProgressBar();
     };
+
+
+
+		
+		
+        var slider = tns({
+            container: '.carousel',
+            loop: true,
+            items: 1,
+            slideBy: 'page',
+            nav: false,
+            autoplay: true,
+            speed: 400,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            lazyload: true,
+            controlsContainer: "#customize-controls"    
+        });
 </script>
 </body>
 

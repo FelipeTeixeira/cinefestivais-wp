@@ -28,3 +28,50 @@
 @import "pages/post";
 
 @import "trumps/trumps";
+
+.slider-container {
+	position: relative;
+}
+
+.carousel {
+    position: relative;
+    
+    img {
+        margin: auto;
+        display: block;
+    }
+}
+
+
+.controls {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 50%;
+	transform: translatey(-50%);
+	display: flex;
+	align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    
+	&:focus {
+		outline: none;
+	}
+
+	li {
+		background: red;
+		width: 50px;
+        height: 50px;
+        
+        &:focus {
+            outline: 0;
+        }
+	}
+
+	li:hover {
+		cursor: pointer;
+	}
+}

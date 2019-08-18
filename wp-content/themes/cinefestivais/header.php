@@ -26,12 +26,15 @@
 
 	<link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">
+
+
 	<?php wp_head(); ?>
 
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+	<![endif]-->	
 </head>
 <body>
 
@@ -39,7 +42,6 @@
 	include 'templates/svg.php'; 
 	include 'templates/progressReader.php';
 ?>
-
 <nav class="navbar">
 	<button class="navbar-btn" onclick="toggleMenu()">
 		<svg class="icon icon-menu">
@@ -102,4 +104,28 @@
 
 </nav>
 
+
+
+<div class="slider-container">
+    <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
+        <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
+            <
+        </li>
+        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
+            >
+        </li>
+    </ul>
+    <ul class="carousel">
+        <li>           
+			<img src="<?= $url ?>/assets/img/teste.png" alt="">
+        </li>
+        <li>           
+			<img src="<?= $url ?>/assets/img/cobertura-header.png" alt="">
+		</li>
+		<li>           
+			<img src="<?= $url ?>/assets/img/contato-bg.png" alt="">
+        </li>
+    </ul>    
+</div>
+ 
 <main>
