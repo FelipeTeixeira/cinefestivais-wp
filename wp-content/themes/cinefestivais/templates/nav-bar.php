@@ -18,8 +18,8 @@
 		<img src="assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" id="js-navbar-logo" class="navbar-logo">
 	</a>
 	<button class="navbar-btn">
-		<svg class="icon icon-search1">
-			<use xlink:href="#icon-search1"></use>
+		<svg class="icon icon-search">
+			<use xlink:href="#icon-search"></use>
 		</svg>
 	</button>
 

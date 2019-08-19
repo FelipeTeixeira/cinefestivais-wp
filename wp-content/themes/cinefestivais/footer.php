@@ -101,25 +101,21 @@
     window.onscroll = () => {
         _toggleLogo();
         _showProgressBar();
-    };
-
-
-
+    };	
 		
-		
-        var slider = tns({
-            container: '.carousel',
-            loop: true,
-            items: 1,
-            slideBy: 'page',
-            nav: false,
-            autoplay: true,
-            speed: 400,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            lazyload: true,
-            controlsContainer: "#customize-controls"    
-        });
+    var slider = tns({
+        container: '.carousel',
+        loop: true,
+        items: 1,
+        slideBy: 'page',
+        nav: false,
+        autoplay: true,
+        speed: 400,
+        autoplayButtonOutput: false,
+        mouseDrag: true,
+        lazyload: true,
+        controlsContainer: "#customize-controls"    
+    });
 </script>
 </body>
 

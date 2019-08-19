@@ -54,8 +54,8 @@
 		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50px" class="navbar-logo-icon">
 	</a>
 	<button class="navbar-btn">
-		<svg class="icon icon-search1">
-			<use xlink:href="#icon-search1"></use>
+		<svg class="icon icon-search">
+			<use xlink:href="#icon-search"></use>
 		</svg>
 	</button>
 
@@ -103,29 +103,4 @@
 	</div>
 
 </nav>
-
-
-
-<div class="slider-container">
-    <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
-        <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
-            <
-        </li>
-        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
-            >
-        </li>
-    </ul>
-    <ul class="carousel">
-        <li>           
-			<img src="<?= $url ?>/assets/img/teste.png" alt="">
-        </li>
-        <li>           
-			<img src="<?= $url ?>/assets/img/cobertura-header.png" alt="">
-		</li>
-		<li>           
-			<img src="<?= $url ?>/assets/img/contato-bg.png" alt="">
-        </li>
-    </ul>    
-</div>
- 
 <main>
