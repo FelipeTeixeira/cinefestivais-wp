@@ -25,24 +25,12 @@
 				
 					if (categoryDefault($slug)) 
 					{
-
-						if (function_exists('get_wp_term_image'))
-						{
-							$meta_image = get_wp_term_image($category->cat_ID); 
-						}	
 			?>
 					<li class="cobertura">
 						<a href="<?= esc_url($category_link) ?>" class="cobertura-legend">
-						
-							<?php 
-								if ($meta_image) 
-								{
-							?>
-									<img src="<?= $meta_image; ?>" alt="<?= $category->name ?>">
-							<?php 
-								}
-							?>
-							
+							<?php if( get_field('image_poster', $category) ): ?>
+								<img src="<?php the_field('image_poster', $category); ?>" alt="<?= $category->name ?>"/>
+							<?php endif; ?>
 							<strong class="cobertura-name">
 								<?= $category->name ?>  
 							</strong>

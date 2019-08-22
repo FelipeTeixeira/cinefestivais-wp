@@ -1,14 +1,19 @@
 <?php
 	require_once('header.php');
+	$category = get_queried_object();
 ?>
-	<header class="post-header full bg-img bg-quemsomos" style="background-image: url(<?php if (function_exists('z_taxonomy_image')) echo z_taxonomy_image_url(); ?>)">
+	<header class="post-header full bg-img bg-quemsomos" 
+		style="background-image: url(<?php if (get_field('image_background', $category)) the_field('image_background', $category); ?>)">
 		<h1 class="post-header--title">
 			<?php single_cat_title(''); ?>
 		</h1>
 	</header>
+
+	
 	<h2 class="header-banner">
 		<?= category_description(); ?>
 	</h2>
+
 
 	<section class="content bg-lightgrey">
 		<article class="categoryText article-text">
