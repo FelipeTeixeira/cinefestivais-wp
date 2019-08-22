@@ -89,3 +89,17 @@
 		cursor: pointer;
 	}
 }
+
+.is-tablet {
+	display: none !important;
+
+	@media (min-width: 600px) {
+		display: block !important;
+	}
+}
+
+.is-mobile {
+	@media (min-width: 599px) {
+		display: none !important;
+	}
+}
