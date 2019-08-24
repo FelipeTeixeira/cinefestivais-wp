@@ -1,9 +1,10 @@
 .postpage-body {
 
     &--title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-bottom: 32px;
         padding: 0 32px;
+        margin-top: -24px;
 
         @media screen and (min-width: 1024px) {
             margin: 0 64px 32px;
@@ -29,11 +30,14 @@
             margin-bottom: 16px;
 
             a {
-                font-size: 0.875rem;
+                font-size: 0.7rem;
+                text-decoration: underline;
+                font-weight: bold;
             }
 
             a:not(:last-child)::after {
-                content: ', '
+                content: ',';
+                font-family: 'Noto Sans', sans-serif;
             }
         }
     }
@@ -41,8 +45,7 @@
     &--timehour {
         border-right: 2px solid $gray;
         color: $black;
-        font-weight: bold;
-        font-size: 0.875rem;
+        font-size: 0.7rem;
         margin-bottom: 8px;
         padding: 0 8px 0 32px;
 
@@ -56,7 +59,7 @@
     &--updated {
         color: $gray;
         display: block;
-        font-size: 0.875rem;
+        font-size: 0.7rem;
         margin-bottom: 32px;
         padding: 0 32px;
 

@@ -16,7 +16,6 @@
 		<?= category_description(); ?>
 	</h2>
 
-
 	<section class="content bg-lightgrey">
 		<article class="categoryText article-text">
 			<?php
@@ -25,7 +24,14 @@
 
 			<div class="card">
 				<a href="<?php the_permalink() ?>">
-					<?php the_post_thumbnail(); ?>
+
+					<?php
+						the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
+					?> 
+					<?php if( get_field('image_mobile') ): ?>
+						<img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
+					<?php endif; ?>
+
 					<div class="card-label">
 						<?php
 							$categories = get_the_category();

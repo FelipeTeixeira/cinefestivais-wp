@@ -8,17 +8,24 @@
 ?>
 
 <header class="post-header">
-	<img src="https://picsum.photos/id/237/350/500" alt="" class="post-header--picture">
+	<?php
+		the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
+	?> 
+	<?php if( get_field('image_mobile') ): ?>
+		<img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
+	<?php endif; ?>
+
 	<div class="post-header--social">
 		<div class="tags">
 			<span class="tag">Entrevistas</span>
 			<span class="tag">8º olhar de cinema</span>
 		</div>
 		<div class="social-icons">
-
-			<svg class="icon icon-bubble">
-				<use xlink:href="#icon-bubble"></use>
-			</svg>
+			<a class="btn-bubble">
+				<svg class="icon icon-bubble">
+					<use xlink:href="#icon-bubble"></use>
+				</svg>
+			</a>
 
 			<span></span>
 
@@ -29,22 +36,22 @@
 					</svg>
 					<span class="share-icon--text">Compartilhar</span>
 				</div>
-				<a href="">
+				<a href="" class="social-icons--share-item">
 					<svg class="icon icon-facebook">
 						<use xlink:href="#icon-facebook"></use>
 					</svg>
 				</a>
-				<a href="">
+				<a href="" class="social-icons--share-item">
 					<svg class="icon icon-twitter">
 						<use xlink:href="#icon-twitter"></use>
 					</svg>
 				</a>
-				<a href="">
+				<a href="" class="social-icons--share-item">
 					<svg class="icon icon-envelope">
 						<use xlink:href="#icon-envelope"></use>
 					</svg>
 				</a>
-				<a href="">
+				<a href="" class="social-icons--share-item">
 					<svg class="icon icon-link">
 						<use xlink:href="#icon-link"></use>
 					</svg>
