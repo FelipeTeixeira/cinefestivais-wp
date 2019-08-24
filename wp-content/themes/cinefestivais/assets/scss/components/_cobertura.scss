@@ -2,6 +2,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    margin: 0 -8px;
 }
 
 .cobertura {
@@ -10,6 +11,7 @@
     flex-flow: column wrap;
     margin-bottom: 16px;
     width: 50%;
+    padding: 0 8px;
 
     @media screen and (min-width: 768px) {
         width: 33%
@@ -32,7 +34,6 @@
     &-legend {
         font-size: 0.75rem;
         font-weight: bold;
-        margin-top: 8px;
         text-align: center;
         color: #333;
         text-transform: uppercase;

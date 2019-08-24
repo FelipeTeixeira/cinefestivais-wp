@@ -1,6 +1,8 @@
 <?php
 	require_once('header.php');
 	$category = get_queried_object();
+
+	// fazer com array, pois ele cortar as imagens
 ?>
 	<header class="post-header full bg-img bg-quemsomos" 
 		style="background-image: url(<?php if (get_field('image_background', $category)) the_field('image_background', $category); ?>)">
@@ -20,37 +22,38 @@
 			<?php
 				while (have_posts()) : the_post();
 			?>
+
 			<div class="card">
 				<a href="<?php the_permalink() ?>">
-					<figure>
-						<?php the_post_thumbnail(); ?>
-						<figcaption class="card-label">
-							<?php
-								$categories = get_the_category();
-								foreach( $categories as $category) {
-									$name = $category->name;
-									$slug = $category->slug;
-									$category_link = get_category_link( $category->term_id );
-									if (!categoryDefault($slug)) {
-							?>
-								<span class="card-label__text">
-									<?= esc_attr( $name); ?>
-								</span>
-							<?php
-									}
+					<?php the_post_thumbnail(); ?>
+					<div class="card-label">
+						<?php
+							$categories = get_the_category();
+							foreach( $categories as $category) {
+								$name = $category->name;
+								$slug = $category->slug;
+								$category_link = get_category_link( $category->term_id );
+								if (!categoryDefault($slug)) {
+						?>
+							<span class="card-label__text">
+								<?= esc_attr( $name); ?>
+							</span>
+
+						<?php
 								}
-							?>
-						</figcaption>
-					</figure>
-					<h2 class="card-text">
+							}
+						?>
+					</div>
+					<h2 class="card-title">
 						<?php the_title(); ?>
 					</h2>
-				</a>
 
-				<time>
-					<?= get_the_date('d/m/y'); ?>
-					<?= the_time('H:i'); ?>
-				</time>
+					<time class="card-time">
+						<?= get_the_date('d/m/y'); ?>
+						|
+						<?= the_time('H:i'); ?>
+					</time>
+				</a>
 			</div>
 			<?php 
 				endwhile;

@@ -7,9 +7,8 @@
 	</header>
 	<h2 class="header-banner">Cidadão Kane, Orson Welles, 1941</h2>
 
-	<section class="content bg-lightgrey">
-		<h3 class="content-title">Coberturas</h3>
-
+	<section class="content">
+	
 		<ul class="coberturas">
 			<?php
 				$categories = get_categories(array(

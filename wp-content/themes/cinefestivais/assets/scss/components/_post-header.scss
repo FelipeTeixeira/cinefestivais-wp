@@ -22,8 +22,7 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-start;
-        height: 300px;
-        padding: 0 16px;
+        height: 230px;
 
         @media screen and (min-width: 768px) {
             height: 400px;
@@ -62,16 +61,16 @@
     }
 
     &--title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         text-transform: uppercase;
         border: 2px solid #fff;
         color: #fff;
-        padding: 4px 24px;
-        margin: 24px 16px;
+        padding: 2px 12px;
+        margin: 24px;
 
         @media screen and (min-width: 1024px) {
-            bottom: 32px;
-            left: 32px;
+            font-size: 1.4rem;
+            margin: 24px 16px;
         }
     }
 
@@ -182,7 +181,8 @@
 .header-banner {
     background-color: #eeeeee;
     color: $gray;
-    font-size: 0.875rem;
+    font-size: 0.6rem;
     padding: 4px 0;
     text-align: center;
+    font-weight: normal;
 }

@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap" rel="stylesheet">
 
 
 	<?php wp_head(); ?>
@@ -50,8 +51,8 @@
 	</button>
 
 	<a href="<?php echo home_url('/'); ?>" class="navbar-logo js-navbar-logo">
-		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" class="navbar-logo-logo">
-		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50px" class="navbar-logo-icon">
+		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" width="90" class="navbar-logo-logo">
+		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50" class="navbar-logo-icon">
 	</a>
 	<button class="navbar-btn">
 		<svg class="icon icon-search">
