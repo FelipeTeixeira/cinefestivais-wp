@@ -53,14 +53,12 @@
             margin: 0 64px 8px;
             width: 70%;
         }
-
     }
 
     &--updated {
         color: $gray;
         display: block;
         font-size: 0.7rem;
-        margin-bottom: 32px;
         padding: 0 32px;
 
         @media screen and (min-width: 1024px) {
@@ -74,15 +72,16 @@
         border-top: 1px solid #ccc;
         display: block;
         height: 1px;
-        margin: 32px;
+        margin: 16px 32px;
         padding: 0;
+
         @media screen and (min-width: 768px) {
             margin: 32px 64px;
         }
     }
 
-
     &--text {
+        font-weight: 300;
         padding: 0 32px;
 
         @media screen and (min-width: 1024px) {
@@ -94,7 +93,7 @@
         }
 
         p {
-            margin: 32px 0;
+            font-size: 0.8em;
         }
     }
 
@@ -147,14 +146,20 @@
     }
 
     &--related {
-        margin: 32px 0;
+        margin: 24px 0;
+
         @media screen and (min-width: 1024px) {
             margin: 32px 64px;
             width: 70%;
         }
 
         .related-title {
+            color: $gray;
             text-align: center;
+            font-size: 0.6em;
+            font-weight: normal;
+            text-transform: uppercase;
+            margin-bottom: 4px;
 
             @media screen and (min-width: 1024px) {
                 padding: 0 32px;
@@ -171,6 +176,10 @@
             @media screen and (min-width: 1024px) {
                 justify-content: flex-start;
                 padding: 0 32px;
+            }
+
+            .tag {
+                margin-top: 8px;
             }
         }
 
@@ -192,6 +201,8 @@
         }
         .content-title {
             width: 100%;
+            font-size: 0.8em;
+
             @media screen and (min-width: 1024px) {
                 text-align: left;
 
