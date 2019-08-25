@@ -8,11 +8,15 @@
     text-align: center;
 
     &-title {
-
+        font-weight: normal;
+        font-size: 1.4rem;
     }
 
     &-text {
-        margin-bottom: 24px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        max-width: 200px;
+        margin: 4px auto 24px;
     }
 
 }

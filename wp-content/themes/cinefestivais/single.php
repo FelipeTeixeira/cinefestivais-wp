@@ -108,22 +108,7 @@
 		</q>
 				
 	</section>
-
-
 </div>
-
-<!-- 
-<figure class="postpage-body--figure">
-	<img src="https://picsum.photos/id/236/600/300" alt="Random picture">
-	<figcaption>
-		<span class="figure-title">
-			Caminhos
-		</span>
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus, ipsum temporibus
-		necessitatibus doloremque a tempore obcaecati reprehenderit
-	</figcaption>
-</figure>
--->
 
 <hr class="postpage-body--separator">
 
@@ -149,7 +134,10 @@
 
 		<img src="https://randomuser.me/api/portraits/men/12.jpg" alt="">
 		<div class="contact-author--info">
-			<h3>Adriano Garrett</h3>
+			<h3>
+	 			nome do USUARIO FALTA AQUI ---------
+				<?php nameUser(); ?>
+			</h3>
 			<span>
 				<svg class="icon icon-envelope">
 					<use xlink:href="#icon-envelope"></use>
@@ -199,30 +187,9 @@
 </div>
 
 
-
-<article class="headerArticle">
-
-
-	<time class="headerArticle-dateUser">
-		<i class="icon-time"></i>
-		Publicado em
-		<?= get_the_date('d/m/y'); ?>
-	</time>
-	<small class="headerArticle-dateUser">
-		<i class="icon-user"></i>
-		<?php nameUser(); ?>
-	</small>
-	<figure class="bannerArticle">
-		<?php
-				the_post_thumbnail( 'large', array('title' => get_the_title(), 'alt' => get_the_title() ) );
-			?>
-		<figcaption class="banner-legend">
-			legenda se tiver
-		</figcaption>
-	</figure>
-</article>
-
 <?php 
+	include 'templates/newsletter.php'; 
+
 		}
 	}
 	get_footer(); 

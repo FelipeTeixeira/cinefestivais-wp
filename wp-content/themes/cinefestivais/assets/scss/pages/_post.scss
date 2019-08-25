@@ -216,8 +216,8 @@
             align-items: center;
             display: flex;
             flex-flow: row wrap;
-            justify-content: space-between;
             margin-bottom: 32px;
+
             @media screen and (min-width: 768px) {
                 justify-content: flex-start;
                 width: 50%;
@@ -227,34 +227,34 @@
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
+                margin-right: 8px;
             }
 
             .icon {
                 fill: $pink;
-                height: 15px;
-                margin-right: 8px;
-                width: 15px;
+                height: 12px;
+                margin-right: 6px;
+                width: 12px;
             }
 
             &--info {
                 color: $pink;
                 padding-left: 8px;
                 width: 70%;
+
                 @media screen and (min-width: 1024px) {
                     padding-left: 16px;
                 }
 
                 h3 {
-                    font-size: 0.9rem;
-                    font-weight: bold;
-                    margin-bottom: 8px;
+                    font-size: 0.7rem;
                 }
 
                 span {
                     align-items: center;
                     display: inline-flex;
                     flex-flow: row nowrap;
-                    font-size: 0.7rem;
+                    font-size: 0.58rem;
                 }
             }
         }

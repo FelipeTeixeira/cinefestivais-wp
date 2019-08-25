@@ -4,7 +4,6 @@
     display: flex;
     flex-flow: row wrap;
     font-weight: bold;
-    justify-content: space-around;
     padding: 10px;
     transition: all .5s ease-in;
     text-transform: uppercase;
@@ -14,6 +13,7 @@
         fill: $white;
         height: 20px;
         width: 20px;
+        margin-right: 8px;
     }
 
     &.btn-default {
@@ -81,5 +81,9 @@
         @media screen and (min-width: 1024px) {
             width: 50%;
         }
+    }
+
+    &.btn-center {
+        justify-content: center;
     }
 }
