@@ -125,10 +125,6 @@
 <div class="flex-row-between">
 	<section class="postpage-body--text">
 		<?php the_content(); ?>
-		<q>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit.
-		</q>
-				
 	</section>
 </div>
 
