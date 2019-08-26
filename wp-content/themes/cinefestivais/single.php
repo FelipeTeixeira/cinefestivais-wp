@@ -5,6 +5,13 @@
 	if (have_posts()) : while (have_posts()) : the_post();
 	$author_id = get_the_author_meta('ID');
 	$user = 'user_'. $author_id;
+	$image_user = get_field('user_photo', $user);
+	$size = 'thumbnail'; 
+
+	// User
+	$first_name = get_the_author_meta('first_name');
+	$last_name = get_the_author_meta('last_name');
+	$user_email = get_the_author_meta('user_email');
 ?>
 
 <header class="post-header">
@@ -90,12 +97,18 @@
 <section class="postpage-body--author">
 
 	<div class="author-picture">
-		<img src="https://randomuser.me/api/portraits/men/12.jpg" class="profile-photo" alt="">
-		<img src="https://randomuser.me/api/portraits/women/28.jpg" class="profile-photo" alt="">
+		<?php 
+			if( $image_user ) 
+			{
+				echo wp_get_attachment_image( $image_user, $size, "", ["class" => "profile-photo"] );
+			}
+		?>
 	</div>
 	<div class="author-name">
-		<a href="#">Adriano Garrett</a>
-		<a href="#">Gabriela Oliveira</a>
+		<a href="#">
+			<?= $first_name ?>
+			<?= $last_name ?>
+		</a>
 	</div>
 
 </section>
@@ -158,21 +171,13 @@
 
 	<div class="contact-author">
 		<?php 
-			$image = get_field('user_photo', $user);
-			$size = 'thumbnail'; // (thumbnail, medium, large, full or custom size)
-
-			if( $image ) 
+			if( $image_user ) 
 			{
-				echo wp_get_attachment_image( $image, $size );
+				echo wp_get_attachment_image( $image_user, $size );
 			}
 		?>
 		<div class="contact-author--info">
 			<h3>
-			<?php 
-				$first_name = get_the_author_meta('first_name');
-				$last_name = get_the_author_meta('last_name');
-				$user_email = get_the_author_meta('user_email');
-			?> 
 				<?= $first_name ?>
 				<?= $last_name ?>
 			</h3>
