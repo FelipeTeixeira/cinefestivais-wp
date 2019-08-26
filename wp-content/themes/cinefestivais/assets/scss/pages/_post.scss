@@ -252,9 +252,9 @@
 
                 span {
                     align-items: center;
-                    display: inline-flex;
-                    flex-flow: row nowrap;
+                    display: flex;
                     font-size: 0.58rem;
+                    padding: 4px 0;
                 }
             }
         }

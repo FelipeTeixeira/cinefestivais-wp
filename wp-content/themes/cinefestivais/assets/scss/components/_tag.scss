@@ -18,14 +18,20 @@
     padding: 0 8px;
     text-transform: uppercase;
     display: inline-block;
+    order: 1;
 
     @media screen and (min-width: 1024px) {
         margin: 4px 8px;
     }
 
     &:first-child {
+        margin-left: 0;
+    }
+
+    &.is-active {
         background-color: $navyBlue;
         color: $white;
         margin-left: 0;
+        order: 0;
     }
 }

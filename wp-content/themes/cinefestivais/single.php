@@ -2,9 +2,9 @@
 	$pagina = "pg-article";
 	require_once('header.php');
 
-	if( have_posts() ) {
-	while( have_posts() ) {
-		the_post();
+	if (have_posts()) : while (have_posts()) : the_post();
+	$author_id = get_the_author_meta('ID');
+	$user = 'user_'. $author_id;
 ?>
 
 <header class="post-header">
@@ -16,18 +16,40 @@
 	<?php endif; ?>
 
 	<div class="post-header--social">
+
 		<div class="tags">
-			<span class="tag">Entrevistas</span>
-			<span class="tag">8º olhar de cinema</span>
+			<?php
+				$categories = get_the_category();
+				foreach( $categories as $category) {
+					$name = $category->name;
+					$slug = $category->slug;
+					$category_link = get_category_link( $category->term_id );
+					if (categoryDefault($slug)) {
+			?>
+				<span class="tag">
+					<?= esc_attr( $name); ?>
+				</span>
+				
+			<?php
+				}
+				else {
+			?>
+				<span class="tag is-active">
+					<?= esc_attr( $name); ?>
+				</span>
+			<?php
+					}
+
+				}
+			?>
 		</div>
+
 		<div class="social-icons">
 			<a class="btn-bubble">
 				<svg class="icon icon-bubble">
 					<use xlink:href="#icon-bubble"></use>
 				</svg>
 			</a>
-
-			<span></span>
 
 			<div class="social-icons--share">
 				<div class="share-icon">
@@ -116,12 +138,20 @@
 	<h2 class="related-title">
 		Assuntos Relacionados
 	</h2>
+
 	<div class="tags">
-		<span class="tag">Entrevistas</span>
-		<span class="tag">8º olhar de cinema</span>
-		<span class="tag">8º olhar de cinema</span>
-		<span class="tag">Cinema</span>
-		<span class="tag">Filme</span>
+		<?php
+			$tags = get_tags();
+			foreach ( $tags as $tag ) 
+			{
+				$tag_link = get_tag_link( $tag->term_id );
+		?>
+				<a href="<?= $tag_link ?>" class="tag">
+					<?= $tag->name ?>
+				</a>
+		<?php
+			}
+		?>
 	</div>
 
 </section>
@@ -131,46 +161,54 @@
 	<h2 class="content-title">Entre em contato</h2>
 
 	<div class="contact-author">
+		<?php 
+			$image = get_field('user_photo', $user);
+			$size = 'thumbnail'; // (thumbnail, medium, large, full or custom size)
 
-		<img src="https://randomuser.me/api/portraits/men/12.jpg" alt="">
+			if( $image ) 
+			{
+				echo wp_get_attachment_image( $image, $size );
+			}
+		?>
 		<div class="contact-author--info">
 			<h3>
-	 			nome do USUARIO FALTA AQUI ---------
-				<?php nameUser(); ?>
+			<?php 
+				$first_name = get_the_author_meta('first_name');
+				$last_name = get_the_author_meta('last_name');
+				$user_email = get_the_author_meta('user_email');
+			?> 
+				<?= $first_name ?>
+				<?= $last_name ?>
 			</h3>
 			<span>
 				<svg class="icon icon-envelope">
 					<use xlink:href="#icon-envelope"></use>
 				</svg>
-				adriano@cinefestivais.com.br
+				<?= $user_email ?>
 			</span>
-			<span>
-				<svg class="icon icon-facebook">
-					<use xlink:href="#icon-facebook"></use>
-				</svg>
-				/adrianogarrett
-			</span>
-		</div>
+			
 
-	</div>
+			<?php
+				$facebook = get_field('user_facebook', $user);
+				$twitter = get_field('user_twitter', $user);
+			?>
+			<?php if( $facebook ): ?>
+				<span>
+					<svg class="icon icon-facebook">
+						<use xlink:href="#icon-facebook"></use>
+					</svg>
+					/<?= $facebook ?>
+				</span>
+			<?php endif; ?>	
 
-	<div class="contact-author">
-
-		<img src="https://randomuser.me/api/portraits/women/28.jpg" alt="">
-		<div class="contact-author--info">
-			<h3>Gabriela Oliveira</h3>
-			<span>
-				<svg class="icon icon-envelope">
-					<use xlink:href="#icon-envelope"></use>
-				</svg>
-				gabriela@cinefestivais.com.br
-			</span>
-			<span>
-				<svg class="icon icon-facebook">
-					<use xlink:href="#icon-facebook"></use>
-				</svg>
-				/gabrielaoliveiraa
-			</span>
+			<?php if( $twitter ): ?>
+				<span>
+					<svg class="icon icon-twitter">
+						<use xlink:href="#icon-twitter"></use>
+					</svg>
+					@<?= $twitter ?>
+				</span>
+			<?php endif; ?>
 		</div>
 
 	</div>
@@ -190,7 +228,6 @@
 <?php 
 	include 'templates/newsletter.php'; 
 
-		}
-	}
+	endwhile; endif;
 	get_footer(); 
 ?>

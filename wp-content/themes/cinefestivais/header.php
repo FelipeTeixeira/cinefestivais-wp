@@ -55,7 +55,7 @@
 
 	<a href="<?php echo home_url('/'); ?>" class="navbar-logo js-navbar-logo">
 		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" width="90" class="navbar-logo-logo">
-		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="50" class="navbar-logo-icon">
+		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="44" class="navbar-logo-icon">
 	</a>
 	<button class="navbar-btn">
 		<svg class="icon icon-search">
