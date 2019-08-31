@@ -70,6 +70,11 @@
         }
     }
 
+    toggleSearch = () => {
+        document.getElementById('js-searchBar').classList.toggle('search-bar-is-active');
+        document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
+    }
+
     toggleMenu = () => document.getElementById('js-navbar-menu').classList.toggle('navbar-menu-is-active');
 
     _showProgressBar = () => {

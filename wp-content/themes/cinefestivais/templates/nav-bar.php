@@ -7,6 +7,9 @@
 	include 'progressReader.php';
 ?>
 
+<nav id="js-searchBar" class="search-bar">
+	<input type="text" placeholder="O que você procura?" class="searchbar-input">
+</nav>
 <nav class="navbar">
 	<button class="navbar-btn" onclick="toggleMenu()">
 		<svg class="icon icon-menu">
@@ -17,9 +20,9 @@
 	<a href="/">
 		<img src="assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" id="js-navbar-logo" class="navbar-logo">
 	</a>
-	<button class="navbar-btn">
-		<svg class="icon icon-search">
-			<use xlink:href="#icon-search"></use>
+	<button class="navbar-btn" id="btn-toggleSearch" onclick="toggleSearch()">
+		<svg class="icon icon-search1">
+			<use xlink:href="#icon-search1"></use>
 		</svg>
 	</button>
 
