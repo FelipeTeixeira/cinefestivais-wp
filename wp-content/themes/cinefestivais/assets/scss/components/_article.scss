@@ -6,7 +6,9 @@
 }
 
 .article {
+    display: block;
     padding: 0 0 16px;
+    
     @media screen and (min-width: 1024px) {
         display: flex;
         flex-flow: row-reverse wrap;
@@ -61,7 +63,7 @@
 
         &__author {
             color: $white;
-            font-size: 0.775rem;
+            font-size: 10px;
             text-transform: uppercase
         }
     }

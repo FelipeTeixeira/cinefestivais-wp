@@ -1,5 +1,5 @@
 <?php 
-    $argsDestaques = array( 'category_name' => 'destaques', 'posts_per_page' => 5);
+    $argsDestaques = array( 'category_name' => 'destaques', 'posts_per_page' => 6);
     query_posts($argsDestaques);
 ?>  
 
@@ -11,7 +11,7 @@
     <?php                    
         if ( have_posts() ) : while ( have_posts() ) : the_post(); 
     ?>                
-        <div class="card" href="<?php the_permalink(); ?>">
+        <a class="card" href="<?php the_permalink(); ?>">
             <?php
                 the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
             ?> 
@@ -37,7 +37,7 @@
             <p class="card-text">
                 <?php the_title(); ?>
             </p>
-        </div>
+        </a>
     <?php 
         endwhile; 
         endif; 
