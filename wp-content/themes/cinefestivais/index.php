@@ -1,14 +1,8 @@
 <?php
-    require_once('header.php');
-
-    $posts = get_posts(array(
-        'posts_per_page'	=> -1,
-        'post_type'			=> 'post',
-        'meta_key'		=> 'tipo_de_visualizacao',
-        'meta_value'	=> 'slider'
-    ));
-
-    if( $posts ): ?>
+    require_once('header.php');    
+    $args = array( 'category_name' => 'slider', 'posts_per_page' => 5);
+    query_posts($args);
+?>
         <div class="slider-container">
             <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
                 <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
@@ -24,9 +18,8 @@
             </ul>
 
             <ul class="carousel">
-                <?php 
-                    foreach( $posts as $post ): 
-                    setup_postdata( $post );
+                <?php                    
+                    if ( have_posts() ) : while ( have_posts() ) : the_post(); 
                 ?>
                     <li>           
                         <div class="teste" href="<?php the_permalink(); ?>">
@@ -37,16 +30,40 @@
                                 <img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
                             <?php endif; ?>
 
-                            <?php //the_title(); ?>           
+                            <div class="slider-legend">
+                                <?php 
+                                    $categories = get_the_category();
+                                    foreach( $categories as $category) {
+                                        $name = $category->name;
+                                        $slug = $category->slug;                                     
+                                        if (categoryDefault($slug)) {
+                                ?>
+                                    <span class="tag is-active">
+                                        <?= esc_attr( $name); ?>
+                                    </span>                                    
+                                <?php
+                                        }
+                                    }
+                                ?>
+
+
+                                <h2 class="slider-legend-title">
+                                    <?php the_title(); ?>
+                                </h2>                                
+                                <svg class="icon icon-arrow-down">
+                                    <use xlink:href="#icon-arrow-down"></use>
+                                </svg>
+                            </div>
+                            
                         </div>
                     </li>
-                <?php 
-                    endforeach; 
-                ?>
+                    <?php 
+                        endwhile; 
+                        endif; 
+                    ?>                
             </ul>    
         </div>
-    <?php 
-            wp_reset_postdata(); 
-    endif;
+<?php 
+    wp_reset_postdata();    
     get_footer(); 
 ?>
