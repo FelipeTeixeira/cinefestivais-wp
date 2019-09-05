@@ -225,7 +225,6 @@
 	</button>
 </div>
 
-
 <?php 
 	include 'templates/newsletter.php'; 
 
