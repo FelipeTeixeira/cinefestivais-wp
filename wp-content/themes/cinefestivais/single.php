@@ -12,6 +12,8 @@
 	$first_name = get_the_author_meta('first_name');
 	$last_name = get_the_author_meta('last_name');
 	$user_email = get_the_author_meta('user_email');
+
+	$post = get_post();
 ?>
 
 <header class="post-header">
@@ -104,34 +106,39 @@
 			}
 		?>
 	</div>
-	<div class="author-name">
-		<a href="#">
+
+	<div>
+
+		<a href="#" class="author-name">
 			<?= $first_name ?>
 			<?= $last_name ?>
 		</a>
+		
+		<div class="postpage-body--timehour">
+			<span class="postpage-body--timehour">
+				<?= get_the_date('d/m/y'); ?>
+				às 
+				<?= the_time('H:i'); ?>
+			</span>
+			<?php
+				if (
+					get_the_time('H:i') !== get_the_modified_time('H:i')
+				) {
+			?>
+				<span class="postpage-body--updated">
+					Atualizado em
+					<?= get_the_modified_date('d/m/y') ?>
+					as
+					<?= get_the_modified_time('H:i') ?>
+				</span>
+			<?php
+				}
+			?>
+		</div>
 	</div>
 
-</section>
 
-<span class="postpage-body--timehour">
-	<?= get_the_date('d/m/y'); ?>
-	às 
-	<?= the_time('H:i'); ?>
-</span>
-<?php
- 	if (
-		get_the_time('H:i') !== get_the_modified_time('H:i')
-	) {
-?>
-	<span class="postpage-body--updated">
-		Atualizado em
-		<?= get_the_modified_date('d/m/y') ?>
-		as
-		<?= get_the_modified_time('H:i') ?>
-	</span>
-<?php
- 	}
-?>
+</section>
 
 <hr class="postpage-body--separator">
 
@@ -150,7 +157,7 @@
 
 	<div class="tags">
 		<?php
-			$tags = get_tags();
+			$tags = get_the_tags($post->ID);
 			foreach ( $tags as $tag ) 
 			{
 				$tag_link = get_tag_link( $tag->term_id );

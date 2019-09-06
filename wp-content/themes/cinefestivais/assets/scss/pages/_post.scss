@@ -15,25 +15,23 @@
     &--author {
         padding: 0 32px;
 
+        @media screen and (min-width: 600px) {
+            display: flex;
+            align-content: center;
+        }
+
         @media screen and (min-width: 1024px) {
             margin: 0 64px;
             width: 70%;
         }
 
-        .author-picture {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: flex-start;
-        }
-
         .author-name {
             margin-bottom: 16px;
 
-            a {
-                font-size: 0.7rem;
-                text-decoration: underline;
-                font-weight: bold;
-            }
+            font-size: 0.7rem;
+            text-decoration: underline;
+            font-weight: bold;
+
 
             a:not(:last-child)::after {
                 content: ',';
@@ -43,11 +41,22 @@
     }
 
     &--timehour {
-        border-right: 2px solid $gray;
+        border-right: 1px solid $gray;
         color: $black;
         font-size: 0.7rem;
         margin-bottom: 8px;
-        padding: 0 8px 0 32px;
+        padding-right: 8px;
+
+        @media screen and (min-width: 600px) {
+            margin-right: 12px;
+        }
+
+        &-container {
+            @media screen and (min-width: 600px) {
+                display: flex;
+                align-content: center;
+            }
+        }
 
         @media screen and (min-width: 1024px) {
             margin: 0 64px 8px;
@@ -59,7 +68,7 @@
         color: $gray;
         display: block;
         font-size: 0.7rem;
-        padding: 0 32px;
+
 
         @media screen and (min-width: 1024px) {
             margin: 0 64px 32px;

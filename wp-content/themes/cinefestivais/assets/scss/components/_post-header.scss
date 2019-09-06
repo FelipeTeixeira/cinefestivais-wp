@@ -1,6 +1,11 @@
 .post-header {
     font-weight: bold;
 
+    img {
+        display: block;
+        margin: auto;
+    }
+
     @media screen and (min-width: 1024px) {
         margin: 0 64px;
     }
@@ -111,6 +116,7 @@
             .btn-bubble {
                 font-size: 24px;
                 color: $gray;
+                margin: 0 16px 0 auto;
             }
 
             &--share {
