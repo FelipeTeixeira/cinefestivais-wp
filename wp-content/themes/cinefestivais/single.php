@@ -3,6 +3,7 @@
 	require_once('header.php');
 
 	if (have_posts()) : while (have_posts()) : the_post();
+	
 	$author_id = get_the_author_meta('ID');
 	$user = 'user_'. $author_id;
 	$image_user = get_field('user_photo', $user);
@@ -109,7 +110,7 @@
 
 	<div>
 
-		<a href="#" class="author-name">
+		<a href="<?= get_author_posts_url($author_id) ?>" class="author-name">
 			<?= $first_name ?>
 			<?= $last_name ?>
 		</a>

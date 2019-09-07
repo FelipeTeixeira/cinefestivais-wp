@@ -1,57 +1,80 @@
 .author {
-    padding: 0 16px;
+    padding: 100px 16px 16px;
 
     &-info {
         display: flex;
         flex-flow: row wrap;
-        padding: 200px 0 0;
         position: relative;
-        @media screen and (min-width: 768px) {
+        max-width: 1040px;   
+        margin: auto;
+        
+        @media screen and (min-width: 600px) {
             align-items: end;
-            padding: 200px 150px 0;
+            padding-left: 80px;
+            padding-right: 80px;
         }
 
         &--column {
             @media screen and (min-width: 768px) {
                 padding: 0 32px;
-                width: 70%;
+                flex: 1;
             }
         }
     }
 
     .profile-photo {
-        width: 100px;
+        width: 60px;
+
+        @media screen and (min-width: 768px) {
+            width: 120px;
+        }
     }
 
     &-title {
-        font-size: 1.7rem;
-        margin: 16px 0 0;
+        font-size: 30px;
+        margin: 16px 0;
+        line-height: 1;
         text-transform: uppercase;
+
         @media screen and (min-width: 768px) {
-            margin: 0;
+            font-size: 38px;
+            margin-top: 0;
         }
     }
+
     &-text {
-        margin: 16px 0;
+        font-size: 15px;
+        margin-bottom: 24px;
+        line-height: 22px;
     }
-    &-contact {
+
+    &-contact {        
+        line-height: 18px;
         color: $pink;
         display: flex;
         flex-flow: column wrap;
         justify-content: center;
         margin: 16px 0;
+
         @media screen and (min-width: 768px) {
             flex-flow: row wrap;
             justify-content: flex-start;
         }
 
-        span:last-child {
+        span {
+            font-size: 13px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+
             @media screen and (min-width: 768px) {
-                padding: 0 32px;
+                margin-right: 16px;
             }
         }
 
         .icon {
+            font-size: 18px;
             margin-right: 8px;
         }
     }

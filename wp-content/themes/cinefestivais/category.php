@@ -11,7 +11,6 @@
 		</h1>
 	</header>
 
-	
 	<h2 class="header-banner">
 		<?= category_description(); ?>
 	</h2>
@@ -66,6 +65,7 @@
 			?>
 		</article>
 	</section>
+
 <?php
 	require_once('footer.php');
 ?>
