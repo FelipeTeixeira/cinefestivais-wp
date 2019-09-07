@@ -5,7 +5,7 @@
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-    padding: 48px 32px;
+    padding: 46px 32px;
     text-align: center;
 
     
@@ -14,15 +14,26 @@
     }
 
     &-title {    
+        font-size: 24px;
         font-weight: normal;
-        font-size: 1.4rem;
+
+        @media screen and (min-width: 768px) {
+            font-size: 34px;
+        }
     }
 
     &-text {
-        font-size: 12px;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: 1px;
         text-transform: uppercase;
         max-width: 240px;
         margin: 4px auto 24px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 12px;
+            max-width: 280px;
+        }
     }
 
     .btn {
@@ -30,3 +41,4 @@
         margin: auto;
     }
 }
+

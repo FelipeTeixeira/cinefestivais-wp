@@ -21,6 +21,7 @@
     border-bottom: 1px solid #bdbdbd;
     padding: 0 0 16px;
     margin-bottom: 24px;
+
     @media screen and (min-width: 768px) {
         border-bottom: none;
         display: flex;
@@ -62,12 +63,25 @@
     }
 
     &-title {
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 22px;
         margin: 16px 0 24px;
+        color: #333;
+
+        @media screen and (min-width: 768px) {
+            font-size: 22px;
+        }
     }
 
     &-datetime {
-        color: #9E9E9E;
-        font-size: .7rem;
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: #9e9e9e;
+
+        @media screen and (min-width: 768px) {
+            font-size: 12px;
+        }
 
         &::before {
             border-top: 1px solid $separatorLine;
@@ -75,7 +89,7 @@
             content: "";
             display: block;
             position: relative;
-            width: 24px;
+            width: 16px;
         }
     }
 }

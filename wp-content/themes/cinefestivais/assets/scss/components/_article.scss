@@ -18,6 +18,7 @@
 
     &-picture {
         width: 100%;
+
         @media screen and (min-width: 1024px) {
             height: 350px;
             width: 50%;
@@ -26,6 +27,7 @@
 
     &-body {
         padding: 16px 16px 0;
+
         @media screen and (min-width: 1024px) {
             display: flex;
             flex-flow: column wrap;
@@ -35,8 +37,9 @@
         }
 
         &__title {
+            font-size: 10px;
+            letter-spacing: 1px;
             color: $white;
-            font-size: 0.7rem;
             margin-bottom: 16px;
 
             &::after {
@@ -50,20 +53,32 @@
         }
 
         &__subtitle {
+            font-size: 18px;
+            line-height: 22px;
             color: $white;
-            font-size: 1.2rem;
             margin-bottom: 24px;
+
+            @media screen and (min-width: 1024px) {
+                font-size: 24px;
+                line-height: 28px;
+            }
         }
 
         &__text {
+            font-size: 10px;
+            line-height: 16px;
             color: $white;
-            font-size: 0.775rem;
-            margin-bottom: 16px
+            margin-bottom: 16px;
+
+            @media screen and (min-width: 1024px) {
+                font-size: 14px;
+                line-height: 20px;
+            }
         }
 
         &__author {
+            font-size: 9px;
             color: $white;
-            font-size: 10px;
             text-transform: uppercase
         }
     }

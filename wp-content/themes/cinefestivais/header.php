@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,700|Noto+Serif:400,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,700,900|Noto+Serif:400,700&display=swap" rel="stylesheet">
 
 	<?php wp_head(); ?>
 
