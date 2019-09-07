@@ -1,11 +1,17 @@
 .newsletter {
-    background-image: url('./../img/newsletter-bg.png');
+    background: url('./../img/newsletter-bg-mobile.png') no-repeat center center;
+    background-size: cover;
     color: $white;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-    padding: 32px;
+    padding: 48px 32px;
     text-align: center;
+
+    
+    @media (min-width: 1024px) {
+        background-image: url('./../img/newsletter-bg.png');
+    }
 
     &-title {
         font-weight: normal;
@@ -13,10 +19,14 @@
     }
 
     &-text {
-        font-size: 0.7rem;
+        font-size: 12px;
         text-transform: uppercase;
-        max-width: 200px;
+        max-width: 240px;
         margin: 4px auto 24px;
     }
 
+    .btn {
+        width: 120px;
+        margin: auto;
+    }
 }

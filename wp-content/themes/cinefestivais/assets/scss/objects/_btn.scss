@@ -1,12 +1,16 @@
 .btn {
+    font-family: $fontSerif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
     align-items: center;
     cursor: pointer;
     display: flex;
     flex-flow: row wrap;
-    font-weight: bold;
     padding: 10px;
-    transition: all .5s ease-in;
+    transition: background .2s ease, color .2s ease;
     text-transform: uppercase;
+    justify-content: center;
     width: 100%;
 
     .icon {
@@ -64,6 +68,7 @@
             width: 15%;
         }
     }
+
     &.btn-medium {
         max-width: 250px;
         width: 75%;
@@ -81,9 +86,5 @@
         @media screen and (min-width: 1024px) {
             width: 50%;
         }
-    }
-
-    &.btn-center {
-        justify-content: center;
     }
 }
