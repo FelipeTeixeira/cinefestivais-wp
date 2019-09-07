@@ -150,27 +150,34 @@
 
 <hr class="postpage-body--separator">
 
-<section class="postpage-body--related">
-	<h2 class="related-title">
-		Assuntos Relacionados
-	</h2>
+<?php
+	$tags = get_the_tags($post->ID);
+	if ($tags) 
+	{
+?>
+	<section class="postpage-body--related">
+		<h2 class="related-title">
+			Assuntos Relacionados
+		</h2>
 
-	<div class="tags">
-		<?php
-			$tags = get_the_tags($post->ID);
-			foreach ( $tags as $tag ) 
-			{
-				$tag_link = get_tag_link( $tag->term_id );
-		?>
-				<a href="<?= $tag_link ?>" class="tag">
-					<?= $tag->name ?>
-				</a>
-		<?php
-			}
-		?>
-	</div>
+		<div class="tags">
+			<?php
+				foreach ( $tags as $tag ) 
+				{
+					$tag_link = get_tag_link( $tag->term_id );
+			?>
+					<a href="<?= $tag_link ?>" class="tag">
+						<?= $tag->name ?>
+					</a>
+			<?php
+				}
+			?>
+		</div>
+	</section>
+<?php
+	}
+?>
 
-</section>
 
 <section class="postpage-body--contact content">
 
