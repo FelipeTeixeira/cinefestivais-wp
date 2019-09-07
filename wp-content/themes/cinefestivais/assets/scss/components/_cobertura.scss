@@ -41,6 +41,18 @@
     }
 
     &-name {
+        font-size: 10px;
         display: block;
+        padding: 0 24px;
+
+        @media screen and (min-width: 1024px) {
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        &:hover {
+            color: $pink;
+            text-decoration: underline;
+        }
     }
 }
