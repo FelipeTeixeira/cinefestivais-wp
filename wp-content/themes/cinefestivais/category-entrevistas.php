@@ -1,12 +1,4 @@
-<?php
-$pagina 	 	 = "pg-category";
-$body 	 	 = "header-active-main";
-$header  	 = "header-active";
-$quem_somos	 = "quem-somos";
-
-require_once('header.php');
-
-?>
+<?php require_once('header.php'); ?>
 
 <header class="post-header full bg-img bg-quemsomos">
 </header>

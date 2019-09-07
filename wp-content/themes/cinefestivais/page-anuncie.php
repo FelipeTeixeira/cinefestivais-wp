@@ -1,14 +1,10 @@
 <?php
-	$pagina 	 	 = "pg-category";
-	$body 	 	 = "header-active-main";
-	$header  	 = "header-active";
-	$quem_somos	 = "quem-somos";
-
 	require_once('header.php');
-
-	if( have_posts() ) {
-	while( have_posts() ) {
-		the_post(); 
+	if( have_posts() ) 
+	{
+		while( have_posts() ) 
+		{
+			the_post(); 
 ?>
 
 <header class="post-header full bg-img bg-quemsomos">

@@ -17,24 +17,23 @@
         }
 
         &--label {
+            font-size: 10px;
             color: $gray;
-            font-size: 0.75rem;
             margin-bottom: 8px;
             text-transform: uppercase
         }
 
         &--input {
-            border: 1px solid #424242;
-            height: 40px;
-            border-radius: 8px;
+            font-family: $fontSerif;
             font-size: 16px;
+            border: 2px solid #424242;
+            height: 40px;
+            border-radius: 4px;
             padding: 16px;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            transition: border-color .2s ease-in-out;
 
             &:focus {
                 border-color: $navyBlue;
-                box-shadow: 0 0 0 0.2rem rgba(57, 51, 130,.35);
-                color: #495057;
                 outline: 0;
             }
         }

@@ -1,5 +1,5 @@
 <?php
-	$pagina 	 	 = "pg-category";
+	
 	$body 	 	 = "header-active-main";
 	$header  	 = "header-active";
 	$quem_somos	 = "quem-somos";

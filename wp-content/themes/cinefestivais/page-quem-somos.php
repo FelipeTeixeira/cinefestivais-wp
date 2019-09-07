@@ -19,14 +19,16 @@
         <h1 class="content-card--title">
 			Quem somos
 		</h1>
-		<article class="content-card-text">
+		<article class="content-container content-card-text">
 			<?php the_content(); ?>
 		</article>
 	</section>
 </article>
-<?php 
+
+<?php
+    include 'templates/newsletter.php';
 		}
 	} 
-	
+	wp_reset_postdata();    
 	require_once('footer.php');
 ?>
