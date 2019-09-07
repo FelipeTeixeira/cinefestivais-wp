@@ -76,12 +76,12 @@
         Textos Publicados
     </h2>
 
-    <article class="categoryText article-text">
+    <ul class="container-card">
         <?php
             while (have_posts()) : the_post();
         ?>
 
-        <div class="card">
+        <li class="card">
             <a href="<?php the_permalink() ?>">
 
                 <?php
@@ -94,16 +94,17 @@
                 <div class="card-label">
                     <?php
                         $categories = get_the_category();
-                        foreach( $categories as $category) {
+                        foreach( $categories as $category) 
+                        {
                             $name = $category->name;
                             $slug = $category->slug;
                             $category_link = get_category_link( $category->term_id );
-                            if (!categoryDefault($slug)) {
+                            if (!categoryDefault($slug)) 
+                            {
                     ?>
                         <span class="card-label__text">
                             <?= esc_attr( $name); ?>
                         </span>
-
                     <?php
                             }
                         }
@@ -119,11 +120,11 @@
                     <?= the_time('H:i'); ?>
                 </time>
             </a>
-        </div>
+        </li>
         <?php 
             endwhile;
         ?>
-    </article>
+    </ul>
 </section>
 
 <?php 
