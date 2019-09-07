@@ -78,9 +78,9 @@
 			<li><a href="<?= $menu_noticias ?>" class="navbar-menu-item">Notícias</a></li>
 			<li><a href="<?= $menu_reportagens ?>" class="navbar-menu-item">Reportagens</a></li>
 			<li><a href="<?= $menu_podcasts ?>" class="navbar-menu-item">Podcasts</a></li>
-			<li><a href="<?= $menu_quem_somos ?>" class="navbar-menu-item teste">Quem Somos</a></li>
-			<li><a href="<?= $menu_anuncie ?>" class="navbar-menu-item teste">Anuncie</a></li>
-			<li><a href="<?= $menu_contato ?>" class="navbar-menu-item teste">Contato</a></li>
+			<li><a href="<?= $menu_quem_somos ?>" class="navbar-menu-item navbar-menu-item-gray">Quem Somos</a></li>
+			<li><a href="<?= $menu_anuncie ?>" class="navbar-menu-item navbar-menu-item-gray">Anuncie</a></li>
+			<li><a href="<?= $menu_contato ?>" class="navbar-menu-item navbar-menu-item-gray">Contato</a></li>
 			<li>
 				<a href="" class="navbar-menu-social">
 					<svg class="icon icon-facebook">
