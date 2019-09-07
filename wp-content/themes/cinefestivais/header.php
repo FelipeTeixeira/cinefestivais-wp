@@ -58,9 +58,9 @@
 		<img src="<?= $url ?>/assets/img/logo-cine-festivais.svg" alt="Logo Cine Festivais" width="90" class="navbar-logo-logo">
 		<img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" width="44" class="navbar-logo-icon">
 	</a>
-	<button class="navbar-btn">
-		<svg class="icon icon-search">
-			<use xlink:href="#icon-search"></use>
+	<button class="navbar-btn" id="btn-toggleSearch" onclick="toggleSearch()">
+		<svg class="icon icon-search1">
+			<use xlink:href="#icon-search1"></use>
 		</svg>
 	</button>
 
