@@ -3,7 +3,9 @@
 ?>
 
 	<header class="post-header full bg-img bg-cobertura">
-		<h1 class="post-header--title">Coberturas</h1>
+		<div class="post-header-container">
+			<h1 class="post-header--title">Coberturas</h1>
+		</div>
 	</header>
 	<h2 class="header-banner">Cidadão Kane, Orson Welles, 1941</h2>
 

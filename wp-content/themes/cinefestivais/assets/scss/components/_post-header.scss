@@ -1,6 +1,18 @@
 .post-header {
     font-weight: bold;
 
+    &-container {
+        text-align: center;
+        max-width: $container + 36;
+        width: 100%;
+
+        @media screen and (min-width: 600px) {
+            text-align: left;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+    }
+
     img {
         display: block;
         margin: auto;
@@ -28,9 +40,7 @@
 
         @media screen and (min-width: 768px) {
             height: 350px;
-            padding: 0 32px;
         }
-
     }
     
     &.bg-cobertura {
@@ -72,11 +82,13 @@
         border: 2px solid #fff;
         color: #fff;
         padding: 2px 12px;
-        margin: 24px;
+        margin: 24px auto;
+        display: inline-block;
 
-        @media screen and (min-width: 1024px) {
-            font-size: 22px;
-            margin: 34px;
+        @media screen and (min-width: 600px) {
+            font-size: 26px;
+            letter-spacing: 2px;
+            margin: 62px 0;
         }
     }
 

@@ -4,9 +4,11 @@
 ?>
 	<header class="post-header full bg-img bg-quemsomos" 
 		style="background-image: url(<?php if (get_field('image_background', $category)) the_field('image_background', $category); ?>)">
-		<h1 class="post-header--title">
-			<?php single_cat_title(''); ?>
-		</h1>
+		<div class="post-header-container">
+			<h1 class="post-header--title">
+				<?php single_cat_title(''); ?>
+			</h1>
+		</div>
 	</header>
 
 	<h2 class="header-banner">
