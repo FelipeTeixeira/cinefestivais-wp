@@ -3,7 +3,20 @@
         padding: $paddingSides $paddingSides 16px;
     }
 
+    &-date {
+        @media screen and (min-width: 767px) {
+            display: flex;
+            align-items: baseline;
+        }
+    }
+
     &-imgFeatured {
-        margin-bottom: 24px;
+        margin: 0 auto 24px;
+        display: block;
+    }
+
+    &-container {
+        max-width: 790px;
+        margin: auto;
     }
 }

@@ -1,4 +1,4 @@
-<div class="socialShared-container">
+<div class="socialShared-container singlePg-container">
     <ul class="socialShared">
         <li>
             <a href="" class="socialShared-item">
@@ -9,10 +9,13 @@
         </li>
 
         <li class="socialShared-divisor">
-            <a href="" class="socialShared-item">
+            <a href="" class="socialShared-item socialShared-item--shared">
                 <svg class="icon icon-share-alt">
                     <use xlink:href="#icon-share-alt"></use>
                 </svg>
+                <span class="socialShared-item--shared-text">
+                    COMPARTILHE
+                </span>
             </a>
         </li>
 

@@ -1,12 +1,18 @@
 .socialShared {
     display: flex;
-    padding: 24px 0;
     max-width: 340px;
-    border-top: 1px solid #ccc;
-    margin-top: 24px;
 
     &-container {
-        padding: 0 $paddingSides;
+        &.singlePg-container {
+            padding: 24px 0;
+            border-top: 1px solid #ccc;
+            margin-top: 24px;
+            width: calc(100% - 64px);
+
+            @media screen and (min-width: 600px) {
+                margin-bottom: 32px;
+            }
+        }
     }
 
     &-divisor {
@@ -52,9 +58,26 @@
             border-radius: 50%;
         }
 
+        &--shared {
+            @media screen and (min-width: 767px) {
+                width: auto;
+            }
+
+            &-text {
+                display: none;
+
+                @media screen and (min-width: 767px) {
+                    font-size: 12px;
+                    padding-left: 8px;
+                    margin-right: 12px;
+                    display: block;
+                }
+            }            
+        }
+
         .icon-bubble {
             font-size: 20px;
-            
+
             @media screen and (min-width: 360px) {
                 font-size: 24px;
             }

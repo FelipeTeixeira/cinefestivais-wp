@@ -1,9 +1,17 @@
 .postpage-body {
     &--title {
-        font-size: 1.5rem;
-        font-weight: 900;
+        font-size: 30px;
+        line-height: 40px;
         margin-bottom: 32px;
         padding: 0 32px;
+        color: #000;
+
+        // É uma escolha pelas pessoas, não pelo rótulo: uma conversa com Maíra Buhler
+
+        @media screen and (min-width: 767px) {
+            font-size: 36px;
+            line-height: 46px;
+        }
     }
 
     &--author {
@@ -14,18 +22,11 @@
             align-content: center;
         }
 
-        @media screen and (min-width: 1024px) {
-            margin: 0 64px;
-            width: 70%;
-        }
-
         .author-name {
-            margin-bottom: 16px;
-
             font-size: 0.7rem;
-            text-decoration: underline;
             font-weight: bold;
-
+            margin-bottom: 16px;
+            text-decoration: underline;
 
             a:not(:last-child)::after {
                 content: ',';
@@ -35,7 +36,7 @@
     }
 
     &--timehour {
-        border-right: 1px solid $gray;
+        border-right: 1px solid #999;
         color: $black;
         font-size: 0.7rem;
         margin-bottom: 8px;
@@ -51,23 +52,13 @@
                 align-content: center;
             }
         }
-
-        @media screen and (min-width: 1024px) {
-            margin: 0 64px 8px;
-            width: 70%;
-        }
     }
 
     &--updated {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
         color: $gray;
         display: block;
-        font-size: 0.7rem;
-
-
-        @media screen and (min-width: 1024px) {
-            margin: 0 64px 32px;
-            width: 70%;
-        }
     }
 
     &--separator {
@@ -86,14 +77,6 @@
     &--text {
         font-weight: 300;
         padding: 0 32px;
-
-        @media screen and (min-width: 1024px) {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            margin: 0 64px;
-            width: 60%;
-        }
 
         p {
             font-size: 0.8em;
@@ -147,10 +130,10 @@
     q {
         margin: 0 0 32px;
         padding: 0 32px;
+
         @media screen and (min-width: 1024px) {
             margin: 16px 112px;
             text-align: left;
-            width: 70%;
         }
     }
 
@@ -159,7 +142,6 @@
 
         @media screen and (min-width: 1024px) {
             margin: 32px 64px;
-            width: 70%;
         }
 
         .related-title {
@@ -198,16 +180,7 @@
         display: flex;
         flex-flow: column wrap;
         padding: 0 32px;
-        @media screen and (min-width: 768px) {
-            flex-direction: row;
-            justify-content: flex-start;
-        }
-        @media screen and (min-width: 1024px) {
-            flex-direction: row;
-            justify-content: flex-start;
-            margin: 32px 64px;
-            width: 70%;
-        }
+
         .content-title {
             width: 100%;
             font-size: 0.8em;
@@ -249,7 +222,6 @@
             &--info {
                 color: $pink;
                 padding-left: 8px;
-                width: 70%;
 
                 @media screen and (min-width: 1024px) {
                     padding-left: 16px;
