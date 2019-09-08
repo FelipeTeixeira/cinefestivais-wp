@@ -2,7 +2,7 @@
     // Compressor HTML
     ob_start();
 
-    $pagina         = (!isset($pagina )) ? '' : $pagina ;
+    $pageClass         = (!isset($pageClass )) ? '' : $pageClass ;
     $body           = (!isset($body)) ? '' : $body;
     $header         = (!isset($header)) ? '' : $header;
     $current_user   = wp_get_current_user();
@@ -41,11 +41,11 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->	
 </head>
-<body>
-
+<body class="<?= $pageClass ?>">
 <?php 
 	include 'templates/svg.php'; 
 	include 'templates/progressReader.php';
+	echo $pagina;
 ?>
 <nav class="navbar">
 	<button class="navbar-btn" onclick="toggleMenu()">

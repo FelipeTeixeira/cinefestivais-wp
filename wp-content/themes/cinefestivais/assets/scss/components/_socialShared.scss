@@ -1,0 +1,63 @@
+.socialShared {
+    display: flex;
+    padding: 24px 0;
+    max-width: 340px;
+    border-top: 1px solid #ccc;
+    margin-top: 24px;
+
+    &-container {
+        padding: 0 $paddingSides;
+    }
+
+    &-divisor {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 16px;
+        padding-left: 16px;
+
+        @media screen and (min-width: 360px) {
+            margin-left: 32px;
+            padding-left: 32px;
+        }
+
+        &::before {
+            border-left: 1px solid #999;
+            position: absolute;
+            left: 0;
+            height: 16px;
+            content: "";
+        }
+    }
+
+    &-item {
+        font-size: 16px;
+        color: #999;
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 4px;
+
+        @media screen and (min-width: 360px) {
+            font-size: 18px;
+            width: 34px;
+            height: 34px;
+        }
+
+        &-circle {
+            color: #fff;
+            background-color: #999;
+            border-radius: 50%;
+        }
+
+        .icon-bubble {
+            font-size: 20px;
+            
+            @media screen and (min-width: 360px) {
+                font-size: 24px;
+            }
+        }
+    }
+}
