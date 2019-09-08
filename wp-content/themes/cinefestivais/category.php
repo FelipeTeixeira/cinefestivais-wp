@@ -1,8 +1,6 @@
 <?php
 	require_once('header.php');
 	$category = get_queried_object();
-
-	// fazer com array, pois ele cortar as imagens
 ?>
 	<header class="post-header full bg-img bg-quemsomos" 
 		style="background-image: url(<?php if (get_field('image_background', $category)) the_field('image_background', $category); ?>)">
@@ -16,7 +14,7 @@
 	</h2>
 
 	<section class="content bg-lightgrey">
-		<article class="categoryText article-text">
+		<ul class="container-card">
 			<?php
 				while (have_posts()) : the_post();
 			?>
@@ -25,7 +23,7 @@
 				<a href="<?php the_permalink() ?>">
 
 					<?php
-						the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
+						the_post_thumbnail('medium', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
 					?> 
 					<?php if( get_field('image_mobile') ): ?>
 						<img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
@@ -63,7 +61,7 @@
 			<?php 
 				endwhile;
 			?>
-		</article>
+		</ul>
 	</section>
 
 <?php

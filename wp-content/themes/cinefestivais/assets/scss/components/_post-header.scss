@@ -18,9 +18,9 @@
 
     &.bg-img {
         align-items: flex-end;
-        background-position: bottom;
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-start;
@@ -59,7 +59,6 @@
 
     &.bg-contato {
         background-image: url('./../img/contato-mobile-bg.png');
-        background-position: unset;
 
         @media screen and (min-width: 768px) {
             background-image: url('./../img/contato-bg.png');
