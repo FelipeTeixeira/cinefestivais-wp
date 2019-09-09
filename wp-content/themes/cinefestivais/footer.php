@@ -59,6 +59,36 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/min/tiny-slider.js"></script>
 <script>
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this,
+                args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
+    // HOME
+    var scrollLocation = debounce(function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var progressbar = document.getElementById('js-progressbar');
+
+        if (scrollTop >= 50) {
+            progressbar.classList.add('is-active');
+        } else {
+            progressbar.classList.remove('is-active');
+        }
+    }, 100);
+
+    window.addEventListener('scroll', scrollLocation);
+
     _toggleLogo = () => {
         const imgNavbar = document.querySelector('.js-navbar-logo');
 
@@ -83,35 +113,8 @@
         document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
     }
 
-    _showProgressBar = () => {
-        const postHeaderHeight = document.getElementById('js-postheader').offsetHeight;
-        const progressBar = document.getElementById('js-progressbar');
-        const post = document.getElementById('js-postpage');
-
-        window.pageYOffset > postHeaderHeight - 200 ? progressBar.classList.add('progress-container-is-active') : progressBar.classList.remove('progress-container-is-active');
-
-        const winScroll = (document.body.scrollTop || document.documentElement.scrollTop) - postHeaderHeight;
-        const height = post.clientHeight - postHeaderHeight;
-        const scrolled = (winScroll / height) * 100;
-
-        document.getElementById('myBar').style.width = `${scrolled}%`;
-    }
-
-    showMenuOptions = () => {
-        document.getElementById('js-showMenu').classList.add('is-hidden');
-        document.getElementById('js-closeMenu').classList.remove('is-hidden');
-        document.getElementById('js-shareOptions').classList.remove('is-hidden');
-    }
-
-    hideMenuOptions = () => {
-        document.getElementById('js-showMenu').classList.remove('is-hidden');
-        document.getElementById('js-closeMenu').classList.add('is-hidden');
-        document.getElementById('js-shareOptions').classList.add('is-hidden');
-    }
-
     window.onscroll = () => {
         _toggleLogo();
-        _showProgressBar();
     };
 
     var slider = tns({
@@ -125,8 +128,8 @@
         autoplayButtonOutput: false,
         mouseDrag: true,
         lazyload: true,
-        controlsContainer: "#customize-controls"    
-    });
+        controlsContainer: "#customize-controls"
+    });    
 </script>
 </body>
 

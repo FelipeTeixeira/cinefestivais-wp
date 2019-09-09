@@ -1,42 +1,54 @@
-.progress-container {
-    background: #fff;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-between;
-    height: auto;
-    left: 0;
-    max-width: 100vw;
+.progress {
     position: fixed;
-    transform: translateY(-105%);
-    transition: transform .2s ease;
     top: 0;
-    width: 100%;
+    left: 0;
     will-change: transform;
-    z-index: 5;
+    z-index: 6;
+    background-color: #fff;
 
-    &.progress-container-is-active {
+    height: 52px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(-100%);
+    transition: transform .2s ease;
+
+    &::after {
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        background-color: $pink;
+        transition: width .2s ease;
+        display: block;
+        content: "";
+    }
+
+    &.is-active {
         transform: translateY(0);
     }
-}
 
-.progress-container--content {
-    align-items: center;
-    display: flex;
-    font-weight: bold;
-    font-size: 0.875rem;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    margin: 4px 16px;
-
-    img {
-        width: 40px;
+    &-title {
+        padding: 4px 0;
+        flex: 1;
     }
 
-    .progress-title {
+    &-logo {
+        width: 40px;
+        margin: 12px 12px 0;
+    }
+
+    &-btnOptions {
+        color: $pink;
+        font-size: 20px;
+        width: 40px;
+        display: inline-block;
+        height: 50px;
         margin-left: 8px;
-        @media screen and (min-width: 1024px) {
-            width: 70%;
-        }
     }
 }
 
@@ -45,96 +57,4 @@
     background: $pink;
     max-width: 100%;
     width: 0%;
-}
-
-.mobile-options {
-    @media screen and (min-width: 1024px) {
-        display: none;
-    }
-}
-.progress-options {
-    display: none;
-    @media screen and (min-width: 1024px) {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
-
-    span:empty {
-        background-color: $gray;
-        width: 1px;
-
-        @media screen and (min-width: 1024px) {
-            margin: 0 16px;
-        }
-    }
-
-    .progress-share {
-        align-items: center;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-
-        .share-link {
-            align-items: center;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-around;
-            .icon-share-alt {
-                margin: 0 16px;
-            }
-        }
-
-        &:hover {
-            .progress-share-hover {
-                align-items: center;
-                display: flex;
-                flex-flow: row wrap;
-            } 
-            .share-link {
-                span {
-                    display: none;
-                }
-            } 
-        }
-
-        .progress-share-hover {
-            display: none;
-
-            .icon {
-                background-color: $gray;
-                border-radius: 50%;
-                fill: $white;
-                height: 20px;
-                margin: 0 4px;
-                padding: 5px;
-                width: 25px;
-            }
-        }
-    }
-}
-
-.menu-reader-options {
-    background-color: #eee;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding: 16px;
-    width: 100%;
-
-    span:empty {
-        background-color: $gray;
-        width: 1px;
-
-        @media screen and (min-width: 1024px) {
-            margin: 0 16px;
-        }
-    }
-
-    .reader-option {
-        align-items: center;
-        color: $gray;
-        display: flex;
-        flex-flow: row wrap;
-    }
 }

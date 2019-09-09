@@ -2,6 +2,8 @@
 $pageClass = "singlePg";
 require_once('header.php');
 
+include 'templates/reader-bar.php';
+
 if (have_posts()) : while (have_posts()) : the_post();
 
 		$author_id = get_the_author_meta('ID');
@@ -46,7 +48,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 		<?php the_title(); ?>
 	</h1>
 
-	<section class="postpage-body--author singlePg-container">
+	<section id="js-postheader" class="postpage-body--author singlePg-container">
 
 		<div class="author-picture">
 			<?php
@@ -86,14 +88,13 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 
 	</section>
-					
-	<?php include 'templates/single/socialShared.php'; ?>
 
 	<?php
+		include 'templates/single/socialShared.php'; 
 		the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured' ) ); 
 	?>
 
-	<article class="postpage-body--text">
+	<article id="box" class="postpage-body--text">
 		<?php the_content(); ?>
 	</article>
 
