@@ -1,4 +1,12 @@
 .singlePg {
+    .navbar-logo-logo {
+        display: none !important;
+    } 
+
+    .navbar-logo-icon {
+        display: inline-block;
+    }
+
     .tags {
         padding: $paddingSides $paddingSides 16px;
     }
