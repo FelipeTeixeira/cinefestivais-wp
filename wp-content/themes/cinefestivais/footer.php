@@ -1,4 +1,3 @@
-
 </main>
 <footer class="footer">
 
@@ -70,12 +69,19 @@
         }
     }
 
+    toggleMenu = () => {
+        if (window.innerWidth <= 768) {
+            document.getElementById('js-navbar-menu').classList.toggle('navbar-menu-is-active')
+        } else {
+            document.getElementById('js-navbar-lg').classList.toggle('navbar-menu-lg-is-active')
+            document.getElementById('btn-toggle').classList.toggle('is-active');
+        }
+    };
+
     toggleSearch = () => {
         document.getElementById('js-searchBar').classList.toggle('search-bar-is-active');
         document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
     }
-
-    toggleMenu = () => document.getElementById('js-navbar-menu').classList.toggle('navbar-menu-is-active');
 
     _showProgressBar = () => {
         const postHeaderHeight = document.getElementById('js-postheader').offsetHeight;
@@ -106,8 +112,8 @@
     window.onscroll = () => {
         _toggleLogo();
         _showProgressBar();
-    };	
-		
+    };
+
     var slider = tns({
         container: '.carousel',
         loop: true,
