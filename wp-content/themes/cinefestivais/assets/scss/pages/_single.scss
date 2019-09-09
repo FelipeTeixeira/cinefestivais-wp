@@ -19,4 +19,17 @@
         max-width: 790px;
         margin: auto;
     }
+
+    .postpage-body--text {
+        p {
+            max-width: 790px;
+            margin: auto;
+            padding: 0 $paddingSides
+        }
+
+        img {
+            display: block;
+            margin: $paddingSides auto;
+        }
+    }
 }

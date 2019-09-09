@@ -79,13 +79,25 @@
         padding: 0 32px;
 
         p {
-            font-size: 0.8em;
+            font-size: 15px;
+            line-height: 22px;
+            margin-bottom: 24px;
+
+            @media screen and (min-width: 768px) {
+                font-size: 16px;
+                line-height: 26px;
+            }
         }
 
         .wp-block-quote {
             font-size: 1.5rem;
             text-align: center;
             margin: 32px auto;
+        }
+
+        a {
+            text-decoration: underline;
+            color: $pink;
         }
     }
 

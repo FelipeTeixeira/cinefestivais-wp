@@ -93,7 +93,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 		the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured' ) ); 
 	?>
 
-	<article class="postpage-body--text singlePg-container">
+	<article class="postpage-body--text">
 		<?php the_content(); ?>
 	</article>
 
