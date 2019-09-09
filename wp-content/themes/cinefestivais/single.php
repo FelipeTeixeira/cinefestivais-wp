@@ -175,7 +175,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 	</section>
 		
-	<button type="button" class="btn btn-primary btn-medium mb-24 singlePg-container">
+	<button type="button" class="singlePg-btnComments btn btn-primary">
 		<svg class="icon icon-chevron-down">
 			<use xlink:href="#icon-chevron-down"></use>
 		</svg>
