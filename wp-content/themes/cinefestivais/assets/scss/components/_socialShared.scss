@@ -2,15 +2,26 @@
     display: flex;
     max-width: 340px;
 
+    @media screen and (min-width: 767px) {
+        padding-left: 24px;
+    }
+
     &-container {
         &.singlePg-container {
             padding: 24px 0;
-            border-top: 1px solid #ccc;
-            margin-top: 24px;
             width: calc(100% - 64px);
+            margin-bottom: 12px;
 
-            @media screen and (min-width: 600px) {
-                margin-bottom: 32px;
+            &::before {
+                height: 1px;
+                background-color: #ccc;
+                content: "";
+                display: block;
+                margin: 0 auto 24px;
+
+                @media screen and (min-width: 767px) {
+                    width: calc(100% - 64px);
+                }
             }
         }
     }
@@ -72,7 +83,7 @@
                     margin-right: 12px;
                     display: block;
                 }
-            }            
+            }
         }
 
         .icon-bubble {
