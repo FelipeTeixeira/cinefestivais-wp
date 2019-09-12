@@ -40,7 +40,7 @@
 
                 <p class="article-body__text">
                     <?php 
-                        echo get_excerpt(200); 
+                        the_excerpt(); 
                     ?>
                 </p>
                 <p class="article-body__author">

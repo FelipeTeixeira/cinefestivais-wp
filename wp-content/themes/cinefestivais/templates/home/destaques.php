@@ -8,39 +8,40 @@
         Destaques
     </h2>
     
-    <?php                    
-        if ( have_posts() ) : while ( have_posts() ) : the_post(); 
-    ?>                
-        <a class="card" href="<?php the_permalink(); ?>">
-            <?php
-                the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
-            ?> 
-            <?php if( get_field('image_mobile') ): ?>
-                <img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
-            <?php endif; ?>
-            <div class="card-label">
-                <?php 
-                    $categories = get_the_category();
-                    foreach( $categories as $category) {
-                        $name = $category->name;
-                        $slug = $category->slug;                                     
-                    if ($slug !== 'destaques') {
-                ?>
-                    <span class="card-label__text">
-                        <?= esc_attr( $name); ?>
-                    </span>                                    
-                <?php
-                        }
-                    }
-                ?>
-            </div>
-            <p class="card-text">
-                <?php the_title(); ?>
-            </p>
-        </a>
-    <?php 
-        endwhile; 
-        endif; 
-    ?>                
+    <ul class="container-card">
+        <?php                    
+            if ( have_posts() ) : while ( have_posts() ) : the_post(); 
+        ?>                
+            <li class="card">
+                <a href="<?php the_permalink(); ?>">
+                    <?php
+                        the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
+                    ?> 
+                    <div class="card-label">
+                        <?php 
+                            $categories = get_the_category();
+                            foreach( $categories as $category) {
+                                $name = $category->name;
+                                $slug = $category->slug;                                     
+                            if ($slug !== 'destaques') {
+                        ?>
+                            <span class="card-label__text">
+                                <?= esc_attr( $name); ?>
+                            </span>                                    
+                        <?php
+                                }
+                            }
+                        ?>
+                    </div>
+                    <p class="card-text">
+                        <?= mb_strimwidth(get_the_title(), 0, 58, '...'); ?>
+                    </p>
+                </a>
+            </li>
+        <?php 
+            endwhile; 
+            endif; 
+        ?>       
+    </ul>         
     
 </section>

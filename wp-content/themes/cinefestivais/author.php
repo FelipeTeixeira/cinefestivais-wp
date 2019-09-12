@@ -85,11 +85,8 @@
             <a href="<?php the_permalink() ?>">
 
                 <?php
-                    the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
+                    the_post_thumbnail('medium', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
                 ?> 
-                <?php if( get_field('image_mobile') ): ?>
-                    <img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
-                <?php endif; ?>
 
                 <div class="card-label">
                     <?php
