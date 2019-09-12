@@ -1,0 +1,25 @@
+.searchPg {
+
+    .content {
+        text-align: center;
+    }
+
+    .content-title {
+        padding-top: 100px;
+        margin-bottom: 12px;
+    }
+
+    &-result {
+        font-size: 22px;
+        font-weight: normal;
+        color: $pink;
+    }
+
+    &-total {
+        font-size: 10px;
+        font-weight: normal;
+        color: #9e9e9e;
+        letter-spacing: 1px;
+        margin: 2px 0 40px;
+    }
+}

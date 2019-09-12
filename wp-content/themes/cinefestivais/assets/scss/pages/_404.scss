@@ -1,0 +1,58 @@
+.pg-404 {
+    text-align: center;
+    padding: 100px 10px;
+
+    .title {
+        font-size: 32px;
+        font-weight: 800;
+        padding: 0 10px 10px;
+        max-width: 270px;
+        margin: auto;
+
+        @media (min-width: $screen-tablet-min) {
+            font-size: 34px;
+            max-width: 360px;
+        }
+    }
+
+    &-input {
+        background-color: $pink;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        border-bottom: 1px solid #bfbfbf;
+        width: 100%;
+        height: 50px;
+        border-radius: 4px;
+        padding: 24px;
+
+        &::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: #fff;
+        }
+        &::-moz-placeholder {
+            /* Firefox 19+ */
+            color: #fff;
+        }
+        &:-ms-input-placeholder {
+            /* IE 10+ */
+            color: #fff;
+        }
+        &:-moz-placeholder {
+            /* Firefox 18- */
+            color: #fff;
+        }
+    }
+
+    .form {
+        max-width: 432px;
+        margin: 24px auto 34px;
+        padding: 0 16px;
+    }
+
+    .btn {
+        font-size: 16px;
+        max-width: 200px;
+        margin: 16px auto;
+    }
+}

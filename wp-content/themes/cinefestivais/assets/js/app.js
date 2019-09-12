@@ -31,11 +31,13 @@ var scrollLocation = debounce(function () {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     var progressbar = document.getElementById('js-progressbar-header');
 
-    if (scrollTop >= 50) {
-        progressbar.classList.add('is-active');
-    } else {
-        progressbar.classList.remove('is-active');
-    }
+    if (progressbar) {
+        if (scrollTop >= 50) {
+            progressbar.classList.add('is-active');
+        } else {
+            progressbar.classList.remove('is-active');
+        }
+    }    
 }, 100);
 
 window.addEventListener('scroll', scrollLocation);
@@ -85,7 +87,10 @@ var slider = tns({
 window.onscroll = function (event) {
     var pageHeight = window.innerHeight;
     var container = document.getElementById('js-progressbar-container');
-    var adjustedHeight = container.clientHeight - pageHeight;
-    var progress = ((window.pageYOffset / adjustedHeight) * 100);
-    document.querySelector('#js-progressbar').style.width = progress + "%";
+
+    if (container) {
+        var adjustedHeight = container.clientHeight - pageHeight;
+        var progress = ((window.pageYOffset / adjustedHeight) * 100);
+        document.querySelector('#js-progressbar').style.width = progress + "%";
+    }    
 }

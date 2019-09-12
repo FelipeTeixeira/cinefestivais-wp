@@ -47,7 +47,9 @@
 ?>
 
 <nav id="js-searchBar" class="search-bar">
-    <input type="text" placeholder="O que você procura?" class="searchbar-input">
+    <form action="<?php echo esc_url( home_url( '/' ) );?>" method="GET" accept-charset="utf-8">
+        <input type="text" placeholder="O que você procura?" name="s" id="s" class="searchbar-input" required>
+    </form>
 </nav>
 <nav class="navbar">
     <div class="navbar-lg">

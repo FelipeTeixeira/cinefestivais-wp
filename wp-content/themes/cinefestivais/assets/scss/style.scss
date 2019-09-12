@@ -1,3 +1,4 @@
+@import "helpers/_var-media-queries";
 @import "settings/settings";
 
 @import "tools/tools";
@@ -29,6 +30,8 @@
 @import "pages/single";
 @import "pages/author";
 @import "pages/post";
+@import "pages/search";
+@import "pages/_404";
 
 @import "trumps/trumps";
 
