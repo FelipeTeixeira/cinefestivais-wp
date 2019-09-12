@@ -5,7 +5,7 @@
     <img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" class="progress-logo">
 
     <strong class="progress-title">
-        <?= wp_trim_words(get_the_title(), 12); ?>
+        <?php the_title(); ?>
     </strong>
 
     <button class="progress-btnOptions">
