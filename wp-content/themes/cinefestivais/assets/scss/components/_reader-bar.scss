@@ -17,15 +17,14 @@
     transform: translateY(-100%);
     transition: transform .2s ease;
 
-    &::after {
-        width: 100%;
+    &-bar {
+        width: 0;
         height: 2px;
         position: absolute;
         bottom: 0;
         background-color: $pink;
         transition: width .2s ease;
         display: block;
-        content: "";
     }
 
     &.is-active {
@@ -50,11 +49,4 @@
         height: 50px;
         margin-left: 8px;
     }
-}
-
-.progress-bar {
-    height: 3px;
-    background: $pink;
-    max-width: 100%;
-    width: 0%;
 }

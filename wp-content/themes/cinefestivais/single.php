@@ -19,6 +19,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 		$post = get_post();
 ?>
 
+<section id="js-progressbar-container">
 	<div class="tags singlePg-container">
 		<?php
 				$categories = get_the_category();
@@ -48,7 +49,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 		<?php the_title(); ?>
 	</h1>
 
-	<section id="js-postheader" class="postpage-body--author singlePg-container">
+	<section class="postpage-body--author singlePg-container">
 
 		<div class="author-picture">
 			<?php
@@ -125,6 +126,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	<?php
 		}
 	?>
+</section>
 
 	<section class="postpage-body--contact content singlePg-container">
 
