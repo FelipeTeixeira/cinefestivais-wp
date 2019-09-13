@@ -37,10 +37,11 @@
         }
 
         &__title {
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 1px;
             color: $white;
             margin-bottom: 16px;
+            text-transform: uppercase;
 
             &::after {
                 border-bottom: 1px solid $separatorLine;

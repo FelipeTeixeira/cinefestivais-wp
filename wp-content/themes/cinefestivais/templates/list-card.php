@@ -28,8 +28,9 @@
                     }
                 ?>
             </div>
+            
             <h2 class="card-title">
-                <?php the_title(); ?>
+                <?= mb_strimwidth(get_the_title(), 0, 58, '...'); ?>
             </h2>
 
             <time class="card-time">

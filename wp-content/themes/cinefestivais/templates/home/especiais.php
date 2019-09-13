@@ -39,14 +39,12 @@
                 </h4>
 
                 <p class="article-body__text">
-                    <?php 
-                        the_excerpt(); 
-                    ?>
+                    <?= get_the_excerpt(); ?>
                 </p>
                 <p class="article-body__author">
                     Por
                     <?= $first_name ?>
-				<?= $last_name ?>
+				    <?= $last_name ?>
                 </p>
             </div>
         </a>
