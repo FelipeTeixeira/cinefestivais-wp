@@ -36,22 +36,22 @@
 
     </nav>
     <nav class="footer-social">
-        <a href="">
+        <a href="https://www.facebook.com/cinefestivais" target="_blank">
             <svg class="icon icon-facebook">
                 <use xlink:href="#icon-facebook"></use>
             </svg>
         </a>
-        <a href="">
+        <a href="https://www.instagram.com/cinefestivais/" target="_blank">
             <svg class="icon icon-instagram">
                 <use xlink:href="#icon-instagram"></use>
             </svg>
         </a>
-        <a href="">
+        <a href="https://twitter.com/cinefestivais" target="_blank">
             <svg class="icon icon-twitter">
                 <use xlink:href="#icon-twitter"></use>
             </svg>
         </a>
-        <a href="">
+        <a href="https://www.youtube.com/channel/UCRW7TglJNAH_2dAuNtbuzGw" target="_blank">
             <svg class="icon icon-youtube">
                 <use xlink:href="#icon-youtube"></use>
             </svg>
