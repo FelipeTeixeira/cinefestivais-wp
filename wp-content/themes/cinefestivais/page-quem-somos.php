@@ -1,34 +1,29 @@
 <?php
-	$pagina 	 	 = "pg-category";
-	$body 	 	 = "header-active-main";
-	$header  	 = "header-active";
-	$quem_somos	 = "quem-somos";
+require_once('header.php');
 
-	require_once('header.php');
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		?>
 
-	if( have_posts() ) {
-	while( have_posts() ) {
-		the_post(); 
-?>
+		<header class="post-header full bg-img bg-quemsomos">
+		</header>
 
-<header class="post-header full bg-img bg-quemsomos">
-</header>
-
-<article class="content">
-    <section class="content-card">
-        <h1 class="content-card--title">
-			Quem somos
-		</h1>
-		<article class="content-container content-card-text">
-			<?php the_content(); ?>
+		<article class="content">
+			<section class="content-card">
+				<h1 class="content-card--title">
+					Quem somos
+				</h1>
+				<article class="content-container content-card-text">
+					<?php the_content(); ?>
+				</article>
+			</section>
 		</article>
-	</section>
-</article>
 
 <?php
-    include 'templates/newsletter.php';
-		}
-	} 
-	wp_reset_postdata();    
-	require_once('footer.php');
+		include 'templates/newsletter.php';
+	}
+}
+wp_reset_postdata();
+require_once('footer.php');
 ?>
