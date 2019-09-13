@@ -1,4 +1,5 @@
-@import "helpers/_var-media-queries";
+@import "helpers/var-media-queries";
+@import "helpers/properties";
 @import "settings/settings";
 
 @import "tools/tools";
@@ -49,3 +50,5 @@
 		display: none !important;
 	}
 }
+
+
