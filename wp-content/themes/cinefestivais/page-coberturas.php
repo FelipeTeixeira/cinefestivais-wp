@@ -10,13 +10,13 @@
 	<h2 class="header-banner">Cidadão Kane, Orson Welles, 1941</h2>
 
 	<section class="content coberturas-container">
-
 		<ul class="coberturas">
 			<?php
 				$categories = get_categories(array(
 					'taxonomy'   => 'category',
 					'orderby'    => 'name',
 					'parent'     => 0,
+					'exclude'    => ignoreCategories(),
 					'hide_empty' => 0, // change to 1 to hide categores not having a single post
 				));
 

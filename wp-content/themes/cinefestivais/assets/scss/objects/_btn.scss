@@ -8,7 +8,7 @@
     display: flex;
     flex-flow: row wrap;
     padding: 10px;
-    transition: background .2s ease, color .2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
     text-transform: uppercase;
     justify-content: center;
     width: 100%;
@@ -34,16 +34,16 @@
     &.btn-primary {
         background-color: $pink;
         color: #fff;
-        transition: ease .5s all;
+        transition: ease 0.5s all;
 
         &:hover {
-            background-color:darken($pink, 3);
+            background-color: darken($pink, 3);
         }
 
         &.blue {
             background-color: $navyBlue;
             &:hover {
-                background-color:darken($navyBlue, 3);
+                background-color: darken($navyBlue, 3);
             }
         }
     }
@@ -52,14 +52,13 @@
         background-color: #fff;
         border: 1px solid $pink;
         color: $pink;
-        transition: ease .5s all;
+        transition: ease 0.5s all;
 
         &:hover {
             color: #fff;
             background-color: $pink;
         }
     }
-    
 
     &.btn-small {
         max-width: 200px;
@@ -67,5 +66,13 @@
 
     &.btn-large {
         width: 100%;
+    }
+
+    &.btn-centerPage {
+        margin: auto;
+        max-width: 200px;
+        display: inline-flex;
+        width: auto;
+        min-width: 130px;
     }
 }
