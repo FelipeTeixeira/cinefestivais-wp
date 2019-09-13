@@ -1,10 +1,6 @@
 <?php
-	
-	$body 	 	 = "header-active-main";
-	$header  	 = "header-active";
-	$quem_somos	 = "quem-somos";
 
-	require_once('header.php');
+	get_header();
 
     if( have_posts() ) 
     {

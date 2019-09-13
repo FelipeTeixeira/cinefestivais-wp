@@ -1,10 +1,11 @@
 <?php
+
     // Compressor HTML
     ob_start();
-
-    $pageClass         = (!isset($pageClass )) ? '' : $pageClass ;
-    $body           = (!isset($body)) ? '' : $body;
-    $header         = (!isset($header)) ? '' : $header;
+    global $pageClass;
+    $pageClass      = (!isset($pageClass )) ? '' : $pageClass;
+    global $url;
+    $url = get_template_directory_uri();
     $current_user   = wp_get_current_user();
 
     // LINKS PAGES
@@ -24,7 +25,6 @@
 <head>
 	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 	<meta charset="UTF-8">
-	<?php $url = get_template_directory_uri(); ?>
 	<title>
 		<?php get_title(); ?>
 	</title>
@@ -43,7 +43,7 @@
 </head>
 <body class="<?= $pageClass ?>">
 <?php 
-	include 'templates/svg.php'; 
+    include 'templates/svg.php'; 
 ?>
 
 <nav id="js-searchBar" class="search-bar">

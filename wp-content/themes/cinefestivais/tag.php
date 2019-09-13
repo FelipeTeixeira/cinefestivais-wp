@@ -1,6 +1,7 @@
 <?php
+    global $pageClass;
     $pageClass = "searchPg";
-    require_once('header.php');
+    get_header();
 
     if (have_posts()) :
 ?>

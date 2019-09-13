@@ -1,5 +1,5 @@
 <?php
-	require_once('header.php');
+	get_header();
 ?>
 
 	<header class="post-header full bg-img bg-cobertura">

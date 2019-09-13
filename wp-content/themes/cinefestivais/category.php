@@ -1,5 +1,5 @@
 <?php
-	require_once('header.php');
+	get_header();
 	$category = get_queried_object();
 ?>
 	<header class="post-header full bg-img" 

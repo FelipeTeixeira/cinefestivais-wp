@@ -67,6 +67,7 @@ function ignoreCategories()
 	);
 }
 
-function currentYear(){
+function currentYear()
+{
 	return date('Y');
 }

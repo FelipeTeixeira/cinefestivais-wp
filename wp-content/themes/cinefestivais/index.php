@@ -1,5 +1,5 @@
 <?php
-    require_once('header.php');
+    get_header();
     include 'templates/home/slider.php';
     include 'templates/home/destaques.php';
     include 'templates/home/especiais.php';

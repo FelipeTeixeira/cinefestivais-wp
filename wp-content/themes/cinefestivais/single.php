@@ -1,6 +1,7 @@
 <?php
+global $pageClass;
 $pageClass = "singlePg";
-require_once('header.php');
+get_header();
 
 include 'templates/reader-bar.php';
 

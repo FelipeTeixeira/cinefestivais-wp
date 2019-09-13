@@ -1,6 +1,7 @@
 <?php
+global $pageClass;
 $pageClass = "advertisePg";
-require_once('header.php');
+get_header();
 
 if (have_posts()) {
 	while (have_posts()) {
