@@ -15,14 +15,15 @@ function get_title()
 	}
 }
 
-function nameUser() {
+function nameUser()
+{
 	$fname = get_the_author_meta('first_name');
 	$lname = get_the_author_meta('last_name');
 	$full_name = '';
 
-	if( empty($fname)){
+	if (empty($fname)) {
 		$full_name = $lname;
-	} elseif( empty( $lname )){
+	} elseif (empty($lname)) {
 		$full_name = $fname;
 	} else {
 		$full_name = "{$fname} {$lname}";
@@ -31,21 +32,37 @@ function nameUser() {
 	echo $full_name;
 }
 
-function categoryDefault($slug) {
-	return $slug !== 'criticas' && 
-	$slug !== 'noticias' && 
-	$slug !== 'reportagens' && 
-	$slug !== 'podcasts' &&
-	$slug !== 'entrevistas';
+function categoryDefault($slug)
+{
+	return $slug !== 'criticas' &&
+		$slug !== 'noticias' &&
+		$slug !== 'reportagens' &&
+		$slug !== 'podcasts' &&
+		$slug !== 'destaques' &&
+		$slug !== 'especiais' &&
+		$slug !== 'slider' &&
+		$slug !== 'entrevistas';
 }
 
-function get_excerpt(){
-	$excerpt = get_the_content();
-	$excerpt = preg_replace(" ([.*?])",'',$excerpt);
-	$excerpt = strip_shortcodes($excerpt);
-	$excerpt = strip_tags($excerpt);
-	$excerpt = substr($excerpt, 0, 50);
-	$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
-	$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
-	return $excerpt;
-}	
+function ignoreCategories()
+{
+	$criticas 		= get_category_by_slug('criticas');
+	$noticias 		= get_category_by_slug('noticias');
+	$reportagens 	= get_category_by_slug('reportagens');
+	$podcasts 		= get_category_by_slug('podcasts');
+	$destaques 		= get_category_by_slug('destaques');
+	$especiais 		= get_category_by_slug('especiais');
+	$slider 		= get_category_by_slug('slider');
+	$entrevistas 	= get_category_by_slug('entrevistas');
+
+	return array(
+		$criticas->term_id,
+		$noticias->term_id,
+		$reportagens->term_id,
+		$podcasts->term_id,
+		$destaques->term_id,
+		$especiais->term_id,
+		$slider->term_id,
+		$entrevistas->term_id
+	);
+}

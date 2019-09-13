@@ -7,24 +7,19 @@
     <h2 class="content-title">
         Notícias
     </h2>
-    <div class="news">
-        <div class="news-left">
-            <?php                    
-                if ( have_posts() ) : while ( have_posts() ) : the_post(); 
-                // TO DO
-                // fazer funcao para imagem mobile destkop
-                // fazer funcao para listar categorias
-            ?>                
-                <a class="new" href="<?php the_permalink(); ?>">
-                    <div class="new-picture">
-                        <?php
-                            the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
-                        ?> 
-                        <?php if( get_field('image_mobile') ): ?>
-                            <img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
-                        <?php endif; ?>
-                    </div>
-                    <div class="new-content">
+
+    <ul class="container-card">
+        <?php                    
+            if ( have_posts() ) : while ( have_posts() ) : the_post(); 
+        ?>                
+            <li class="card">
+                <a href="<?php the_permalink() ?>">
+
+                    <?php
+                        the_post_thumbnail('medium', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
+                    ?> 
+
+                    <div class="card-label">
                         <?php 
                             $categories = get_the_category();
                             foreach( $categories as $category) {
@@ -32,28 +27,30 @@
                                 $slug = $category->slug;                                     
                             if ($slug !== 'noticias') {
                         ?>
-                            <span class="tag">
+                            <span class="tag is-active">
                                 <?= esc_attr( $name); ?>
                             </span>                                    
                         <?php
                                 }
                             }
                         ?>
-                        <h4 class="new-title">
-                            <?php the_title(); ?>
-                        </h4>
-                        <time class="new-datetime">
-                            <?= get_the_date('d/m/y'); ?>
-                            |
-                            <?= the_time('H:i'); ?>
-                        </time>
-                    </div>            
+                    </div>
+                    
+                    <h2 class="card-title">
+                        <?= mb_strimwidth(get_the_title(), 0, 58, '...'); ?>
+                    </h2>
+
+                    <time class="card-time">
+                        <?= get_the_date('d/m/y'); ?>
+                        |
+                        <?= the_time('H:i'); ?>
+                    </time>
                 </a>
-            <?php 
-                endwhile; 
-                endif; 
-            ?>
-        </div>
-    </div>
+            </li>
+        <?php 
+            endwhile; 
+            endif; 
+        ?>
+    </ul>
     
 </section>
