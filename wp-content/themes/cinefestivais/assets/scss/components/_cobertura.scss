@@ -1,13 +1,17 @@
 .coberturas {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0 -8px;
 }
 
 .coberturas-container {
     max-width: 1170px;
     margin: auto;
+
+    .btn-primary {
+        margin: 32px auto;
+    }
 }
 
 .cobertura {

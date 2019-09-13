@@ -5,6 +5,7 @@
             'orderby'    => 'name',
             'parent'     => 0,
             'exclude'    => ignoreCategories(),
+            'number'     => 6,
             'hide_empty' => 0, // change to 1 to hide categores not having a single post
         ));
 
