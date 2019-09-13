@@ -6,7 +6,7 @@ if (have_posts()) {
 		the_post();
 		?>
 
-		<header class="post-header full bg-img bg-quemsomos">
+		<header class="post-header full bg-img">
 		</header>
 
 		<article class="content">
