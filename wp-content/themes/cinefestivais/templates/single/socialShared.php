@@ -50,8 +50,17 @@
             </a>
         </li>
         
-        <li>
+        <li class="is-tablet">
             <a class="socialShared-item socialShared-item-circle" href="https://wa.me/?text=<?php the_title(); echo " "; the_permalink()?>" target="_blank" data-action="share/whatsapp/share">	    
+                <svg class="icon icon-whatsapp">
+                    <use xlink:href="#icon-whatsapp"></use>
+                </svg>
+            </a>
+        </li>
+
+        <li class="is-mobile">
+            <a class="socialShared-item socialShared-item-circle"  href="whatsapp://send?text=<?php the_title(); echo " "; the_permalink()?>" target="_blank" title="Compartilhar via Whatsapp" 
+                data-href="whatsapp://send?text=<?php the_title(); echo " "; the_permalink()?>">	    
                 <svg class="icon icon-whatsapp">
                     <use xlink:href="#icon-whatsapp"></use>
                 </svg>
