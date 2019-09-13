@@ -63,7 +63,7 @@
         Todos os direitos reservados
     </p>
     <div class="footer-logo">
-        <img src="<?= $url ?>/assets/img/logo-instinto.png" alt="Logo Instinto">
+        <img src="<?= $url ?>/assets/img/logo-instinto.svg" alt="Logo Instinto">
     </div>
 </footer>
 

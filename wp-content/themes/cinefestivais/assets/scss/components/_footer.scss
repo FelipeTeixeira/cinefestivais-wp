@@ -23,7 +23,7 @@
                 flex-direction: row;
             }
 
-            >a {
+            > a {
                 font-size: 0.875rem;
                 font-weight: bold;
                 line-height: 24px;
@@ -34,11 +34,11 @@
                 }
             }
 
-            &:first-child>a {
+            &:first-child > a {
                 color: $white;
             }
 
-            &:last-child>a {
+            &:last-child > a {
                 color: $gray;
             }
         }
@@ -83,7 +83,6 @@
         justify-content: center;
         padding: 8px 0;
         text-align: center;
-        width: 100%;
-
+        width: 60px;
     }
 }
