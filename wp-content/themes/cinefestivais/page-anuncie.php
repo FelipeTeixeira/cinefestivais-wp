@@ -54,5 +54,5 @@ if (have_posts()) {
 	}
 }
 wp_reset_postdata();
-require_once('footer.php');
+get_footer(); 
 ?>

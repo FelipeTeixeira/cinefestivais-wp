@@ -66,3 +66,7 @@ function ignoreCategories()
 		$entrevistas->term_id
 	);
 }
+
+function currentYear(){
+	return date('Y');
+}

@@ -81,5 +81,5 @@
 
 <?php 
 	}
-	require_once('footer.php');
+	get_footer(); 
 ?>

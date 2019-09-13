@@ -17,5 +17,5 @@
 
 <?php
 	include 'templates/newsletter.php';
-	require_once('footer.php');
+	get_footer(); 
 ?>

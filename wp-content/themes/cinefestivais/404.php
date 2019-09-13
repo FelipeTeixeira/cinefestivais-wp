@@ -4,4 +4,4 @@
 	// TEMPLATE ERROR
 	require_once('templates/error.php');
 
-	require_once('footer.php');
+	get_footer(); 
