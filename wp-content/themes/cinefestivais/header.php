@@ -109,22 +109,22 @@ $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
                 <li><a href="<?= $menu_anuncie ?>" class="navbar-menu-item navbar-menu-item-gray">Anuncie</a></li>
                 <li><a href="<?= $menu_contato ?>" class="navbar-menu-item navbar-menu-item-gray">Contato</a></li>
                 <li>
-                    <a href="" class="navbar-menu-social">
+                    <a href="https://www.facebook.com/cinefestivais" target="_blank" class="navbar-menu-social">
                         <svg class="icon icon-facebook">
                             <use xlink:href="#icon-facebook"></use>
                         </svg>
                     </a>
-                    <a href="" class="navbar-menu-social">
+                    <a href="https://www.instagram.com/cinefestivais/" target="_blank" class="navbar-menu-social">
                         <svg class="icon icon-instagram">
                             <use xlink:href="#icon-instagram"></use>
                         </svg>
                     </a>
-                    <a href="" class="navbar-menu-social">
+                    <a href="https://twitter.com/cinefestivais" target="_blank" class="navbar-menu-social">
                         <svg class="icon icon-twitter">
                             <use xlink:href="#icon-twitter"></use>
                         </svg>
                     </a>
-                    <a href="" class="navbar-menu-social">
+                    <a href="https://www.youtube.com/channel/UCRW7TglJNAH_2dAuNtbuzGw" target="_blank" class="navbar-menu-social">
                         <svg class="icon icon-youtube">
                             <use xlink:href="#icon-youtube"></use>
                         </svg>
@@ -140,23 +140,24 @@ $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
                 <a href="<?= $menu_anuncie ?>" class="navbar-menu-item">Anuncie</a>
                 <a href="<?= $menu_contato ?>" class="navbar-menu-item">Contato</a>
             </div>
+
             <div class="menu-lg--links">
-                <a href="" class="navbar-menu-social">
+                <a href="https://www.facebook.com/cinefestivais" target="_blank" class="navbar-menu-social">
                     <svg class="icon icon-facebook">
                         <use xlink:href="#icon-facebook"></use>
                     </svg>
                 </a>
-                <a href="" class="navbar-menu-social">
+                <a href="https://www.instagram.com/cinefestivais/" target="_blank" class="navbar-menu-social">
                     <svg class="icon icon-instagram">
                         <use xlink:href="#icon-instagram"></use>
                     </svg>
                 </a>
-                <a href="" class="navbar-menu-social">
+                <a href="https://twitter.com/cinefestivais" target="_blank" class="navbar-menu-social">
                     <svg class="icon icon-twitter">
                         <use xlink:href="#icon-twitter"></use>
                     </svg>
                 </a>
-                <a href="" class="navbar-menu-social">
+                <a href="https://www.youtube.com/channel/UCRW7TglJNAH_2dAuNtbuzGw" target="_blank" class="navbar-menu-social">
                     <svg class="icon icon-youtube">
                         <use xlink:href="#icon-youtube"></use>
                     </svg>
