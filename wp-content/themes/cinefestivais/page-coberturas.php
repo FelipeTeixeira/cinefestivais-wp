@@ -11,7 +11,7 @@
 
 	<section class="content coberturas-container">
 		<?php
-			include get_template_directory().'//templates/list-coberturas.php';
+			include get_template_directory().'/templates/list-coberturas.php';
 		?>
 	</section>
 

@@ -17,14 +17,33 @@
                         $name = $category->name;
                         $slug = $category->slug;
                         $category_link = get_category_link( $category->term_id );
-                        if (!categoryDefault($slug)) 
-                        {
+
+
+                        if ($ignoreCategory) {
+                            if ($slug !== $ignoreCategory) 
+                            {
                 ?>
-                    <span class="card-label__text">
-                        <?= esc_attr( $name); ?>
-                    </span>
+                                <span class="card-label__text">
+                                    <?= esc_attr( $name); ?>
+                                </span>
                 <?php
+                            }
+                        } else 
+                        {
+                            if (!categoryDefault($slug))    
+                            {
+                        ?>
+                                <span class="card-label__text">
+                                    <?= esc_attr( $name); ?>
+                                </span>
+                        <?php
+                            } 
                         }
+
+                ?>
+                    
+                <?php
+                        
                     }
                 ?>
             </div>
