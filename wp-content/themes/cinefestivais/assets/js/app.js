@@ -71,7 +71,7 @@ function toggleSearch() {
 };
 
 function goToComments() {
-    var commentsPos = document.getElementById('js-singlePg-btnComments').offsetTop;
+    var commentsPos = document.getElementById('js-disqusContainer').offsetTop;
     window.scrollTo({top: commentsPos - 200, behavior: 'smooth'});
 };
 
