@@ -78,7 +78,7 @@ function currentYear()
 function disqus_embed() {
 	$disqus_shortname = 'cinefestivais';
     global $post;
-    wp_enqueue_script('disqus_embed','http://'.$disqus_shortname.'.disqus.com/embed.js');
+    wp_enqueue_script('disqus_embed','https://'.$disqus_shortname.'.disqus.com/embed.js');
     echo '<div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = "'.$disqus_shortname.'";
