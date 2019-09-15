@@ -1,24 +1,21 @@
 <?php
+    global $pageClass;
+    $pageClass      = (!isset($pageClass)) ? '' : $pageClass;
+    global $url;
+    $url = get_template_directory_uri();
+    $current_user   = wp_get_current_user();
 
-// Compressor HTML
-ob_start();
-global $pageClass;
-$pageClass      = (!isset($pageClass)) ? '' : $pageClass;
-global $url;
-$url = get_template_directory_uri();
-$current_user   = wp_get_current_user();
-
-// LINKS PAGES
-$menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
-$menu_autor			= esc_url( home_url( '/' ) )."autor";
-$menu_contato		= esc_url( home_url( '/' ) )."contato";
-$menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
-$menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
-$menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
-$menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
-$menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
-$menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
-$menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
+    // LINKS PAGES
+    $menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
+    $menu_autor			= esc_url( home_url( '/' ) )."autor";
+    $menu_contato		= esc_url( home_url( '/' ) )."contato";
+    $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
+    $menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
+    $menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
+    $menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
+    $menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
+    $menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
+    $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,7 +28,12 @@ $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
 
     <link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css?v=7">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">
+    <?php 
+        if ($pageClass === 'homePg') {
+            echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">';
+        }
+    ?>
+    
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,700,900|Noto+Serif:400,700&display=swap" rel="stylesheet">
 
     <?php wp_head(); ?>

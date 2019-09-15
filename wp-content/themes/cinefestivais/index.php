@@ -1,4 +1,6 @@
 <?php
+    global $pageClass;
+    $pageClass = "homePg";
     get_header();
     include 'templates/home/slider.php';
     include 'templates/home/destaques.php';

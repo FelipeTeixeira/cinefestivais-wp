@@ -1,4 +1,7 @@
 <?php 
+    global $pageClass;
+    $pageClass      = (!isset($pageClass)) ? '' : $pageClass;
+    
     // LINKS PAGES
     $menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
     $menu_autor			= esc_url( home_url( '/' ) )."autor";
@@ -15,7 +18,7 @@
 </main>
 <footer class="footer">
 
-    <img src="https://i.imgur.com/sGFajGu.png" alt="" class="footer-picture">
+    <img src="<?= $url ?>/assets/img/icone-cine-festivais.svg" alt="Icone Cine Festivais" class="footer-logo">
 
     <nav class="footer-links">
 
@@ -62,14 +65,38 @@
         <?php echo currentYear(); ?> Cine festivais <br>
         Todos os direitos reservados
     </p>
-    <div class="footer-logo">
+    <div class="footer-logoInstinto">
         <img src="<?= $url ?>/assets/img/logo-instinto.svg" alt="Logo Instinto" width="60">
     </div>
 </footer>
 
-<?php wp_footer(); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/min/tiny-slider.js"></script>
-<script src="<?= $url ?>/assets/js/app.js"></script>
+<?php 
+    wp_footer();
+    if ($pageClass === 'homePg') {
+?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/min/tiny-slider.js"></script>
+    <script>
+        if (document.querySelector('.carousel')) {
+            var slider = tns({
+                container: '.carousel',
+                loop: true,
+                items: 1,
+                slideBy: 'page',
+                nav: false,
+                autoplay: true,
+                speed: 400,
+                autoplayButtonOutput: false,
+                mouseDrag: true,
+                lazyload: true,
+                controlsContainer: "#customize-controls"
+            });
+        }
+    </script>
+<?php
+    }
+?>
+
+<script async src="<?= $url ?>/assets/js/app.js"></script>
 </body>
 
 </html>

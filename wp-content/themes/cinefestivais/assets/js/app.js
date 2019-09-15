@@ -75,22 +75,6 @@ function goToComments() {
     window.scrollTo({top: commentsPos - 200, behavior: 'smooth'});
 };
 
-if (document.querySelector('.carousel')) {
-    var slider = tns({
-        container: '.carousel',
-        loop: true,
-        items: 1,
-        slideBy: 'page',
-        nav: false,
-        autoplay: true,
-        speed: 400,
-        autoplayButtonOutput: false,
-        mouseDrag: true,
-        lazyload: true,
-        controlsContainer: "#customize-controls"
-    });
-}
-
 window.onscroll = function (event) {
     progressbar();
 
