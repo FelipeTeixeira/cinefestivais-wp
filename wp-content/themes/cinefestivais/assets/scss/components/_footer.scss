@@ -5,8 +5,9 @@
     flex-flow: column wrap;
     padding: 16px 24px 0;
 
-    &-picture {
+    &-logo {
         margin-bottom: 8px;
+        width: 40px;
     }
 
     &-links {
@@ -75,7 +76,7 @@
         text-align: center;
     }
 
-    &-logo {
+    &-logoInstinto {
         align-items: center;
         border-top: 1px solid #666;
         display: flex;
