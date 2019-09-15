@@ -179,7 +179,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 	</section>
 		
-	<button type="button" class="singlePg-btnComments btn btn-primary  ">
+	<button id="js-singlePg-btnComments" type="button" class="singlePg-btnComments btn btn-primary  ">
 		<svg class="icon icon-chevron-down">
 			<use xlink:href="#icon-chevron-down"></use>
 		</svg>

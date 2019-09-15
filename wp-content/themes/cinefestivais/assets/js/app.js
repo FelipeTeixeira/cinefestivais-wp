@@ -38,6 +38,9 @@ var scrollLocation = debounce(function () {
         if (scrollTop >= 50) {
             progressbar.classList.add('is-active');
         } else {
+            document.getElementById('js-progress-socialShared').classList.remove('is-active');
+            document.getElementById('js-closeMenu').classList.add('is-hidden');
+            document.getElementById('js-showMenu').classList.remove('is-hidden');
             progressbar.classList.remove('is-active');
         }
     }
@@ -65,6 +68,11 @@ function toggleMenu() {
 function toggleSearch() {
     document.getElementById('js-searchBar').classList.toggle('search-bar-is-active');
     document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
+};
+
+function goToComments() {
+    var commentsPos = document.getElementById('js-singlePg-btnComments').offsetTop;
+    window.scrollTo({top: commentsPos - 200, behavior: 'smooth'});
 };
 
 if (document.querySelector('.carousel')) {
