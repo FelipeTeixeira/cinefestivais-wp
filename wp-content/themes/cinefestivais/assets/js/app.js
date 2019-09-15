@@ -90,3 +90,7 @@ window.onscroll = function (event) {
 
     scrollLocation();
 };
+
+function openDisqus() {    
+    document.getElementById('js-disqusContainer').classList.toggle('is-active');
+}

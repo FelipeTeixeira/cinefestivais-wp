@@ -68,7 +68,7 @@
         letter-spacing: 1px;
         height: 56px;
         justify-content: end;
-        max-width: calc(790px - #{$paddingSides * 2});
+        width: calc(100% - #{$paddingSides * 2});
         margin: auto auto 32px;
 
         @media screen and (min-width: 767px) {
@@ -79,5 +79,13 @@
     .wp-caption {
         display: block;
         margin: auto;
+    }
+
+    &-disqusContainer {
+        display: none;
+        
+        &.is-active {
+            display: block;
+        }
     }
 }
