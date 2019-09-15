@@ -1,4 +1,6 @@
 <?php
+	global $pageClass;
+	$pageClass = "coberturasPg";
 	get_header();
 ?>
 
@@ -9,7 +11,7 @@
 	</header>
 	<h2 class="header-banner">Cidadão Kane, Orson Welles, 1941</h2>
 
-	<section class="content coberturas-container">
+	<section class="content">
 		<?php
 			include get_template_directory().'/templates/list-coberturas.php';
 		?>

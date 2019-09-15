@@ -1,11 +1,11 @@
 <?php
-global $pageClass;
-$pageClass = "singlePg";
-get_header();
+	global $pageClass;
+	$pageClass = "singlePg";
+	get_header();
 
-include 'templates/reader-bar.php';
+	include 'templates/reader-bar.php';
 
-if (have_posts()) : while (have_posts()) : the_post();
+	if (have_posts()) : while (have_posts()) : the_post();
 
 		$author_id = get_the_author_meta('ID');
 		$user = 'user_' . $author_id;

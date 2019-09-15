@@ -2,25 +2,17 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    margin: 0 -8px;
-}
-
-.coberturas-container {
-    max-width: 1170px;
+    max-width: 1150px;
     margin: auto;
-
-    .btn-primary {
-        margin: 32px auto;
-    }
 }
 
 .cobertura {
     align-items: center;
     display: flex;
     flex-flow: column wrap;
-    margin-bottom: 16px;
     width: 50%;
     padding: 0 8px;
+    margin-bottom: 24px;
 
     @media screen and (min-width: 768px) {
         width: 33%
@@ -28,6 +20,7 @@
 
     @media screen and (min-width: 1024px) {
         width: 16.66%;
+        margin-bottom: 0;
     }
 
 
