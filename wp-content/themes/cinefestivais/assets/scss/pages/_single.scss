@@ -29,6 +29,8 @@
     }
 
     .postpage-body--text {
+        font-family: $fontSerifPost;
+
         @media screen and (min-width: 768px) {
             padding: 0 32px;
         }
@@ -37,10 +39,12 @@
             max-width: 790px;
             margin: 0 auto 32px;
             padding: 0 $paddingSides;
+            font-size: 16px;
+            line-height: 24px;
 
             @media screen and (min-width: 768px) {
-                font-size: 16px;
-                line-height: 26px;
+                font-size: 20px;
+                line-height: 30px;
             }
         }
 

@@ -28,21 +28,23 @@
 
     <link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css?v=7">
 
-    <?php 
+    <?php
         if ($pageClass === 'homePg') {
             echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/tiny-slider.css">';
         }
-    ?>
-    
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,700,900|Noto+Serif:400,700&display=swap" rel="stylesheet">
 
+        if ($pageClass === 'singlePg') {
+            echo '<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,700&display=swap" rel="stylesheet">';
+        }
+    ?>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700,900&display=swap" rel="stylesheet">
     <?php wp_head(); ?>
 
     <!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php $urlFavicon = $url. '/assets/img/favicon'; ?>
+    <?php $urlFavicon = $url . '/assets/img/favicon'; ?>
     <link rel="apple-touch-icon" sizes="180x180" href="<?= $urlFavicon; ?>/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= $urlFavicon; ?>/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= $urlFavicon; ?>/favicon-16x16.png">
