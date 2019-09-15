@@ -17,7 +17,15 @@
 			margin: auto;
 			max-width: inherit;
 			display: block;
-			max-height: 460px;
+			max-height: calc(100vh - 120px);
+			width: 100vw;
+			height: 100vh;
+			object-fit: cover;
+
+			@media screen and (min-width: $screen-tablet-min) {
+				max-height: calc(100vh - 240px);
+			}
+			
 		}
 	}
 }
@@ -35,7 +43,7 @@
 		font-weight: normal;
 		max-width: 670px;
 		
-		@media screen and (min-width: 1024px) {
+		@media screen and (min-width: $screen-tablet-min) {
 			font-size: 46px;
 			line-height: 50px;
 		}

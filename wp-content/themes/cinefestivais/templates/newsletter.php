@@ -3,7 +3,7 @@
         Newsletter
     </h3>
     <p class="newsletter-text">
-        Receba as coberturas do Cine Festivais na sua caixa de entrada
+        Receba as novidades do cine festivais na sua caixa de entrada
     </p>
-    <button type="button" class="btn btn-default">Assinar</button>
+    <a href="https://mailchi.mp/aedbb5482c46/cinefestivais" target="_blank" class="btn btn-default">Assinar</a>
 </section>

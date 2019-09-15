@@ -129,62 +129,70 @@ if (have_posts()) : while (have_posts()) : the_post();
 	?>
 </section>
 
-	<section class="postpage-body--contact content singlePg-container">
+<section class="postpage-body--contact content singlePg-container">
 
-		<h2 class="content-title">Entre em contato</h2>
+	<h2 class="content-title">Entre em contato</h2>
 
-		<div class="contact-author">
+	<div class="contact-author">
+		<?php
+				if ($image_user) {
+					echo wp_get_attachment_image($image_user, $size);
+				}
+				?>
+		<div class="contact-author--info">
+			<h3>
+				<?= $first_name ?>
+				<?= $last_name ?>
+			</h3>
+			<span>
+				<svg class="icon icon-envelope">
+					<use xlink:href="#icon-envelope"></use>
+				</svg>
+				<?= $user_email ?>
+			</span>
+
+
 			<?php
-					if ($image_user) {
-						echo wp_get_attachment_image($image_user, $size);
-					}
+					$facebook = get_field('user_facebook', $user);
+					$twitter = get_field('user_twitter', $user);
 					?>
-			<div class="contact-author--info">
-				<h3>
-					<?= $first_name ?>
-					<?= $last_name ?>
-				</h3>
+			<?php if ($facebook) : ?>
 				<span>
-					<svg class="icon icon-envelope">
-						<use xlink:href="#icon-envelope"></use>
+					<svg class="icon icon-facebook">
+						<use xlink:href="#icon-facebook"></use>
 					</svg>
-					<?= $user_email ?>
+					/<?= $facebook ?>
 				</span>
+			<?php endif; ?>
 
-
-				<?php
-						$facebook = get_field('user_facebook', $user);
-						$twitter = get_field('user_twitter', $user);
-						?>
-				<?php if ($facebook) : ?>
-					<span>
-						<svg class="icon icon-facebook">
-							<use xlink:href="#icon-facebook"></use>
-						</svg>
-						/<?= $facebook ?>
-					</span>
-				<?php endif; ?>
-
-				<?php if ($twitter) : ?>
-					<span>
-						<svg class="icon icon-twitter">
-							<use xlink:href="#icon-twitter"></use>
-						</svg>
-						@<?= $twitter ?>
-					</span>
-				<?php endif; ?>
-			</div>
-
+			<?php if ($twitter) : ?>
+				<span>
+					<svg class="icon icon-twitter">
+						<use xlink:href="#icon-twitter"></use>
+					</svg>
+					@<?= $twitter ?>
+				</span>
+			<?php endif; ?>
 		</div>
 
-	</section>
-		
-	<button id="js-singlePg-btnComments" type="button" class="singlePg-btnComments btn btn-primary  ">
+	</div>
+
+</section>
+
+<section class="singlePg-container singlePg-disqus postpage-body--contact " id="js-disqusContainer">
+	<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
 		<svg class="icon icon-chevron-down">
 			<use xlink:href="#icon-chevron-down"></use>
 		</svg>
 		Ver Comentários
 	</button>
+
+	<div class="singlePg-disqus-container">
+		<?php disqus_embed(); ?>
+	</div>
+</section>
+
+
 
 <?php
 	include 'templates/newsletter.php';

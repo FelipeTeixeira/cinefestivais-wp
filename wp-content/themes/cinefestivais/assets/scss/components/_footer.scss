@@ -77,12 +77,12 @@
 
     &-logo {
         align-items: center;
-        border-top: 1px solid $gray;
+        border-top: 1px solid #666;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
         padding: 8px 0;
         text-align: center;
-        width: 60px;
+        width: 100%;
     }
 }
