@@ -179,8 +179,8 @@
 
 </section>
 
-<section class="singlePg-container singlePg-disqus postpage-body--contact " id="js-disqusContainer">
-	<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
+<section class="singlePg-container singlePg-disqus postpage-body--contact">
+	<button onclick="openDisqus()" type="button" id="js-disqusContainer" class="singlePg-disqus-btnComments btn btn-primary">
 		<svg class="icon icon-chevron-down">
 			<use xlink:href="#icon-chevron-down"></use>
 		</svg>

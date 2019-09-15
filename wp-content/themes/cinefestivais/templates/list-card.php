@@ -49,7 +49,7 @@
             </div>
             
             <h2 class="card-title">
-                <?= mb_strimwidth(get_the_title(), 0, 58, '...'); ?>
+                <?php the_title(); ?>
             </h2>
 
             <time class="card-time">

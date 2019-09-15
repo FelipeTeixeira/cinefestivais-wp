@@ -72,7 +72,7 @@ function toggleSearch() {
 
 function goToComments() {
     var commentsPos = document.getElementById('js-disqusContainer').offsetTop;
-    window.scrollTo({top: commentsPos - 200, behavior: 'smooth'});
+    window.scrollTo({top: commentsPos - 104 - 32, behavior: 'smooth'});
 };
 
 window.onscroll = function (event) {

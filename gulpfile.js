@@ -8,7 +8,8 @@ gulp.task("serve", ["sass"], function() {
     browserSync.init({
         // Configurar aqui de acordo com o PATH localhost do XAMPP
         // proxy: "http://192.168.64.2/dev/cinefestivais-wp"
-        proxy: "http://localhost/dev/cinefestivais-wp"
+        proxy: "http://localhost/dev/cinefestivais-wp",
+		notify: false
     });
 
     gulp.watch("./wp-content/themes/cinefestivais/assets/scss/**/*.scss", ["sass"]);
