@@ -1,11 +1,11 @@
 <div class="socialShared-container singlePg-container">
     <ul class="socialShared">
         <li>
-            <span class="socialShared-item" onclick="goToComments()">
+            <button type="button" class="socialShared-item" onclick="goToComments()">
                 <svg class="icon icon-bubble">
                     <use xlink:href="#icon-bubble"></use>
                 </svg>
-            </span>
+            </button>
         </li>
 
         <li class="socialShared-divisor">

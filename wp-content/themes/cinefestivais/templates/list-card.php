@@ -20,30 +20,26 @@
 
 
                         if ($ignoreCategory) {
-                            if ($slug !== $ignoreCategory) 
+                            if ($slug !== $ignoreCategory && !$isHome) 
                             {
-                ?>
-                                <span class="card-label__text">
-                                    <?= esc_attr( $name); ?>
-                                </span>
-                <?php
+                                if (categoryDefault($slug))    
+                                {
+                                    echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+                                }
+                            } 
+                            
+                            if ($isHome && !categoryDefault($slug) && $ignoreCategory !== $slug) {
+                                echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
                             }
-                        } else 
+                        } 
+
+                        else 
                         {
                             if (!categoryDefault($slug))    
-                            {
-                        ?>
-                                <span class="card-label__text">
-                                    <?= esc_attr( $name); ?>
-                                </span>
-                        <?php
+                            {  
+                                echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
                             } 
                         }
-
-                ?>
-                    
-                <?php
-                        
                     }
                 ?>
             </div>

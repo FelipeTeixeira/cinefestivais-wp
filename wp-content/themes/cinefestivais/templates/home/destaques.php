@@ -9,7 +9,7 @@
     </h2>
 
     <?php
-		$ignoreCategory = 'destaques';
+        $ignoreCategory = 'destaques';
 		include get_template_directory().'/templates/list-card.php';
 	?>    
     

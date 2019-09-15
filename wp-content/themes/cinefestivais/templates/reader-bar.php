@@ -20,14 +20,14 @@
     <div class="progress-socialShared" id="js-progress-socialShared">
         <ul class="progress-socialShared-list">
             <li>
-                <span class="progress-socialShared-item" onClick="goToComments()">
+                <button type="button" class="progress-socialShared-item" onClick="goToComments()">
                     <svg class="icon">
                         <use xlink:href="#icon-bubble"></use>
                     </svg>
                     <span class="progress-socialShared-item-text">
                         COMENTÁRIOS
                     </span>
-                </span>
+                </button>
             </li>
 
             <li class="socialShared-divisor">
