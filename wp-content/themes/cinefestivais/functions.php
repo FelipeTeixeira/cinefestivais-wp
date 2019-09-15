@@ -41,6 +41,7 @@ function categoryDefault($slug)
 		$slug !== 'destaques' &&
 		$slug !== 'especiais' &&
 		$slug !== 'slider' &&
+		$slug !== 'area-nobre' &&
 		$slug !== 'entrevistas';
 }
 
@@ -54,6 +55,7 @@ function ignoreCategories()
 	$especiais 		= get_category_by_slug('especiais');
 	$slider 		= get_category_by_slug('slider');
 	$entrevistas 	= get_category_by_slug('entrevistas');
+	$area_nobre 	= get_category_by_slug('area-nobre');
 
 	return array(
 		$criticas->term_id,
@@ -63,7 +65,8 @@ function ignoreCategories()
 		$destaques->term_id,
 		$especiais->term_id,
 		$slider->term_id,
-		$entrevistas->term_id
+		$entrevistas->term_id,
+		$area_nobre->term_id
 	);
 }
 
