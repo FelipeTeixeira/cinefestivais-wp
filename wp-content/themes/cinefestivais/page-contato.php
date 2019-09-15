@@ -6,7 +6,17 @@ get_header();
 if (have_posts()) {
     while (have_posts()) {
         the_post();
-        ?>
+?>
+
+<?php
+    if ( function_exists( 'wpcf7_enqueue_scripts' ) ) {
+        wpcf7_enqueue_scripts();
+    }
+ 
+    if ( function_exists( 'wpcf7_enqueue_styles' ) ) {
+        wpcf7_enqueue_styles();
+    }
+?>
 
         <header class="post-header full bg-img bg-contato"></header>
 
@@ -17,9 +27,6 @@ if (have_posts()) {
                 </h1>
 
                 <?php echo do_shortcode('[contact-form-7 id="219" title="Formulário de Contato"]'); ?>
-                <div class="wpcf7-mail-sent-ok">
-                    dassd
-                </div>
 
             </section>
         </article>
