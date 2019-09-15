@@ -1,7 +1,7 @@
 .singlePg {
     .navbar-logo-logo {
         display: none !important;
-    } 
+    }
 
     .navbar-logo-icon {
         display: inline-block;
@@ -32,8 +32,7 @@
         @media screen and (min-width: 768px) {
             padding: 0 32px;
         }
-
-
+        
         p {
             max-width: 790px;
             margin: 0 auto 32px;
@@ -62,30 +61,42 @@
         }
     }
 
-    &-btnComments {
-        font-size: 10px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        height: 56px;
-        justify-content: end;
-        width: calc(100% - #{$paddingSides * 2});
-        margin: auto auto 32px;
-
-        @media screen and (min-width: 767px) {
-            font-size: 12px;
-        }
-    }
-
     .wp-caption {
         display: block;
         margin: auto;
     }
 
-    &-disqusContainer {
-        display: none;
-        
+    &-disqus {
+        &-btnComments {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            height: 56px;
+            justify-content: end;
+            margin: auto auto 32px;
+
+            @media screen and (min-width: 767px) {
+                font-size: 12px;
+            }
+        }
+
+        &-container {
+            display: none;
+        }
+
         &.is-active {
-            display: block;
+            .singlePg-disqus-container {
+                display: block;
+                margin-bottom: 32px;
+            }
+
+            .singlePg-disqus-btnComments {
+                background-color: rgba($pink, .8);
+
+                .icon {
+                    transform: rotate(180deg);
+                }
+            }
         }
     }
 }

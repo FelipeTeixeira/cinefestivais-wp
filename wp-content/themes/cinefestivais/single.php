@@ -179,16 +179,18 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 </section>
 
-<button onclick="openDisqus()" type="button" class="singlePg-btnComments btn btn-primary">
-	<svg class="icon icon-chevron-down">
-		<use xlink:href="#icon-chevron-down"></use>
-	</svg>
-	Ver Comentários
-</button>
+<section class="singlePg-container singlePg-disqus postpage-body--contact " id="js-disqusContainer">
+	<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
+		<svg class="icon icon-chevron-down">
+			<use xlink:href="#icon-chevron-down"></use>
+		</svg>
+		Ver Comentários
+	</button>
 
-<div id="js-disqusContainer" class="singlePg-disqusContainer">
-	<?php disqus_embed(); ?>
-</div>
+	<div class="singlePg-disqus-container">
+		<?php disqus_embed(); ?>
+	</div>
+</section>
 
 
 
