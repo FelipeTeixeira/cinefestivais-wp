@@ -21,7 +21,7 @@
             if ( have_posts() ) : while ( have_posts() ) : the_post(); 
         ?>
             <li>           
-                <div class="carousel-item" href="<?php the_permalink(); ?>">
+                <a class="carousel-item" href="<?php the_permalink(); ?>">
                     <?php
                         the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
                     ?> 
@@ -54,7 +54,7 @@
                         </svg>
                     </div>
                     
-                </div>
+                </a>
             </li>
             <?php 
                 endwhile; 

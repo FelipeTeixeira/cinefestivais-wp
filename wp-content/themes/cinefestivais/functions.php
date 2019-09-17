@@ -75,19 +75,20 @@ function currentYear()
 	return date('Y');
 }
 
-function disqus_embed() {
+function disqus_embed()
+{
 	$disqus_shortname = 'cinefestivais';
-    global $post;
-    wp_enqueue_script('disqus_embed','https://'.$disqus_shortname.'.disqus.com/embed.js');
-    echo '<div id="disqus_thread"></div>
+	global $post;
+	wp_enqueue_script('disqus_embed', 'https://' . $disqus_shortname . '.disqus.com/embed.js');
+	echo '<div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_shortname = "'.$disqus_shortname.'";
-        var disqus_title = "'.$post->post_title.'";
-        var disqus_url = "'.get_permalink($post->ID).'";
-        var disqus_identifier = "'.$disqus_shortname.'-'.$post->ID.'";
+        var disqus_shortname = "' . $disqus_shortname . '";
+        var disqus_title = "' . $post->post_title . '";
+        var disqus_url = "' . get_permalink($post->ID) . '";
+        var disqus_identifier = "' . $disqus_shortname . '-' . $post->ID . '";
     </script>';
 }
 
 // CONTACT 7
-add_filter( 'wpcf7_load_js', '__return_false' );
-add_filter( 'wpcf7_load_css', '__return_false' );
+add_filter('wpcf7_load_js', '__return_false');
+add_filter('wpcf7_load_css', '__return_false');
