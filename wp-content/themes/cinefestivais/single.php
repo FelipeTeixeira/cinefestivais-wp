@@ -34,7 +34,7 @@
 					echo "<span class='tag is-active'>". esc_attr($name) ."</span>"; 
 				}
 
-				if (categoryDefaultView($slug)) 
+				if (categoryDefault($slug)) 
 				{
 					echo "<span class='tag'>". esc_attr($name) ."</span>"; 
 				} 

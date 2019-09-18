@@ -57,20 +57,6 @@ function categoryDefault($slug, $isIgnoreCategorySpecif = false)
 	}
 }
 
-function categoryDefaultView($slug)
-{
-	return 
-		$slug !== 'criticas' &&
-		$slug !== 'noticias' &&
-		$slug !== 'reportagens' &&
-		$slug !== 'podcasts' &&
-		$slug !== 'destaques' &&
-		$slug !== 'especiais' &&
-		$slug !== 'slider' &&		
-		$slug !== 'area-nobre' &&
-		$slug !== 'entrevistas';
-}
-
 function ignoreCategories()
 {
 	$criticas 		= get_category_by_slug('criticas');
