@@ -23,27 +23,23 @@
 <section id="js-progressbar-container">
 	<div class="tags singlePg-container">
 		<?php
-				$categories = get_the_category();
-				foreach ($categories as $category) {
-					$name = $category->name;
-					$slug = $category->slug;
-					$category_link = get_category_link($category->term_id);
-					if (categoryDefault($slug)) {
-						?>
-				<span class="tag">
-					<?= esc_attr($name); ?>
-				</span>
+			$categories = get_the_category();
+			foreach ($categories as $category) {
+				$name = $category->name;
+				$slug = $category->slug;
+				$category_link = get_category_link($category->term_id);
 
-			<?php
-						} else {
-							?>
-				<span class="tag is-active">
-					<?= esc_attr($name); ?>
-				</span>
-		<?php
-					}
+				if (!categoryDefault($slug, true))
+				{
+					echo "<span class='tag is-active'>". esc_attr($name) ."</span>"; 
 				}
-				?>
+
+				if (categoryDefaultView($slug)) 
+				{
+					echo "<span class='tag'>". esc_attr($name) ."</span>"; 
+				} 
+			}
+		?>
 	</div>
 
 	<h1 class="postpage-body--title singlePg-container">
