@@ -59,11 +59,11 @@
     ?>
 
     <nav id="js-searchBar" class="search-bar">
-        <form action="<?php echo esc_url(home_url('/')); ?>" method="GET" accept-charset="utf-8">
+        <form action="<?php echo esc_url(home_url('/')); ?>" class="searchbar" method="GET" accept-charset="utf-8">
             <input type="text" placeholder="O que você procura?" name="s" id="s" class="searchbar-input" required>
         </form>
     </nav>
-    <nav class="navbar">
+    <nav id="js-navbar" class="navbar">
         <div class="navbar-lg">
             <button class="navbar-btn" id="btn-toggle" onclick="toggleMenu()">
                 <svg class="icon icon-menu">

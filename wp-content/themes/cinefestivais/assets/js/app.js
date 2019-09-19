@@ -62,13 +62,34 @@ function toggleMenu() {
     } else {
         document.getElementById('js-navbar-lg').classList.toggle('navbar-menu-lg-is-active');
         document.getElementById('btn-toggle').classList.toggle('is-active');
+
+        if (document.getElementById('btn-toggle').classList.contains('is-active')) {
+            document.getElementById('js-navbar').classList.add('is-active');
+        }else {
+            document.getElementById('js-navbar').classList.remove('is-active');
+        }
     }
 };
+
+function closeMenu() {
+    document.getElementById('js-navbar-menu').classList.remove('navbar-menu-is-active');
+    document.getElementById('js-navbar-lg').classList.remove('navbar-menu-lg-is-active');
+    document.getElementById('btn-toggle').classList.remove('is-active');
+}
 
 function toggleSearch() {
     document.getElementById('js-searchBar').classList.toggle('search-bar-is-active');
     document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
+
+    document.getElementById('js-navbar').classList.add('is-active');
+
+    closeMenu();
 };
+
+function closeSearch() {
+    document.getElementById('js-searchBar').classList.remove('search-bar-is-active');
+    document.getElementById('btn-toggleSearch').classList.remove('is-active-search');
+}
 
 function goToComments() {
     var commentsPos = document.getElementById('js-disqusContainer').offsetTop;
@@ -86,3 +107,17 @@ window.onscroll = function (event) {
 function openDisqus() {    
     document.getElementById('js-disqusContainer').classList.toggle('is-active');
 }
+
+document.addEventListener('click', function(event) {
+    var isSearchBarOpen = document.getElementById('js-searchBar').classList.contains('search-bar-is-active');
+    
+    if(isSearchBarOpen) {
+        var isSearchBar = document.getElementById('js-searchBar').contains(event.target);
+        var isSearchButton = document.getElementById('btn-toggleSearch').contains(event.target);
+
+        if (!isSearchBar && !isSearchButton) {
+            closeSearch();
+            document.getElementById('js-navbar').classList.remove('is-active');
+        }
+    }
+});
