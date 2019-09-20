@@ -70,3 +70,19 @@
 .bg-blue {
     background: $navyBlue;
 }
+
+.bg-grey,
+.bg-lightgrey {
+    img {
+        margin: 0 auto;
+
+        @media screen and (min-width: 1024px) {
+            margin: 0;
+        }
+    }
+
+    .article-body {
+        flex: 1;
+        min-width: 270px;
+    }
+}
