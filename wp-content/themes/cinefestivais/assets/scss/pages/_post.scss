@@ -133,7 +133,6 @@
             font-size: 0.6em;
             font-weight: normal;
             text-transform: uppercase;
-            margin-bottom: 4px;
 
             @media screen and (min-width: 1024px) {
                 padding: 0 32px;
@@ -183,7 +182,7 @@
             align-items: center;
             display: flex;
             flex-flow: row wrap;
-            margin-bottom: 32px;
+            margin-bottom: 46px;
 
             @media screen and (min-width: 768px) {
                 justify-content: flex-start;
@@ -214,13 +213,14 @@
 
                 h3 {
                     font-size: 0.7rem;
+                    margin-bottom: 4px;
                 }
 
                 span {
                     align-items: center;
                     display: flex;
                     font-size: 0.58rem;
-                    padding: 4px 0;
+                    padding: 6px 0;
                 }
             }
         }

@@ -114,6 +114,8 @@ document.addEventListener('click', function(event) {
     if(isSearchBarOpen) {
         var isSearchBar = document.getElementById('js-searchBar').contains(event.target);
         var isSearchButton = document.getElementById('btn-toggleSearch').contains(event.target);
+        
+        document.getElementById('input-search').focus();
 
         if (!isSearchBar && !isSearchButton) {
             closeSearch();

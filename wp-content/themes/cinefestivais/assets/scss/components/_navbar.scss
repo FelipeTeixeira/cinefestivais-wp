@@ -20,6 +20,7 @@
         height: 100%;
 
         &-input {
+            font-size: 16px;
             background-color: $pink;
             color: #fff;
             padding: 0 16px;
@@ -28,6 +29,10 @@
 
             &::placeholder {
                 color: #fff;
+            }
+
+            @media screen and (min-width: 1024px) {
+                font-size: 20px;
             }
         }
     }

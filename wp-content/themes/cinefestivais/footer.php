@@ -62,8 +62,11 @@
     </nav>
     <p class="footer-copyright">
         © 
-        <?php echo currentYear(); ?> Cine festivais <br>
-        Todos os direitos reservados
+        <?php echo currentYear(); ?> Cine festivais 
+        
+        <span>
+            Todos os direitos reservados
+        </span>
     </p>
     <div class="footer-logoInstinto">
         <img src="<?= $url ?>/assets/img/logo-instinto.svg" alt="Logo Instinto" width="60">
