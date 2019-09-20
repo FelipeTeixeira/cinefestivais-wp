@@ -1,5 +1,5 @@
 <?php 
-    $argsDestaques = array( 'category_name' => 'destaques', 'posts_per_page' => 6);
+    $argsDestaques = array( 'category_name' => 'destaques', 'posts_per_page' => 4 );
     query_posts($argsDestaques);
 ?>  
 
