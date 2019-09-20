@@ -1,4 +1,8 @@
 .newsPg {
+    &.container-card {
+        max-width: 1230px;
+    }
+
     .card-label,
     .card-title,
     .card-time {
