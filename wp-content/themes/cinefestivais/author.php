@@ -70,8 +70,16 @@
         Textos Publicados
     </h2>
 
-    <?php 
-        require_once('templates/list-card.php');
+
+    <?php
+        $author = get_the_author_meta('ID');
+        echo do_shortcode('		[ajax_load_more 
+                                transition_container="false" 
+                                posts_per_page="4" 
+                                transition="fade" 
+                                scroll="false" 
+                                button_label="Ver mais" 
+                                author="'.$author.'"]' ); 
     ?>
 </section>
 

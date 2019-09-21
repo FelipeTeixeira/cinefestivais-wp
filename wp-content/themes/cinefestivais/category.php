@@ -17,7 +17,14 @@
 
 	<section class="content bg-lightgrey">
 		<?php
-			echo do_shortcode( '[ajax_load_more transition_container="false" post_type="post" posts_per_page="4" transition="fade" scroll="false" button_label="Ver mais" category="'.$category->slug.'"]' ); 
+			echo do_shortcode('		 [ajax_load_more 
+									transition_container="false" 
+									post_type="post" 
+									posts_per_page="4" 
+									transition="fade" 
+									scroll="false" 
+									button_label="Ver mais" 
+									category="'.$category->slug.'"]' ); 
 		?>
 	</section>
 

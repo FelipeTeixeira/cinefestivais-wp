@@ -11,9 +11,18 @@
             <?php single_tag_title(); ?>
         </h1>
 
-       <?php 
-            require_once('templates/list-card.php');
-       ?>
+        <?php
+            $tag = get_query_var('tag'); 
+
+			echo do_shortcode('		[ajax_load_more 
+									transition_container="false"
+									posts_per_page="4" 
+									transition="fade" 
+									scroll="false" 
+                                    button_label="Ver mais" 
+                                    tag="'.$tag.'"]' ); 
+		?>
+
     </section>    
   
 <?php
