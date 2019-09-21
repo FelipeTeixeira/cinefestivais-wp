@@ -23,9 +23,17 @@
               RESULTADOS
         </strong>
 
-        <?php 
-            require_once('templates/list-card.php');
-        ?>
+        <?php
+			echo do_shortcode('		[ajax_load_more 
+									transition_container="false" 
+									post_type="post" 
+									posts_per_page="4" 
+									transition="fade" 
+									scroll="false" 
+                                    button_label="Ver mais" 
+                                    search="'. $term .'"
+                                    orderby="relevance"]' ); 
+		?>
 
     </section>
 
