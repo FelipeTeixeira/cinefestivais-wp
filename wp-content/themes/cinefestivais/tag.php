@@ -15,7 +15,6 @@
             $tag = get_query_var('tag'); 
 
             echo do_shortcode('		[ajax_load_more 
-                                    seo="true"
 									transition_container="false"
 									posts_per_page="4" 
 									transition="fade" 
