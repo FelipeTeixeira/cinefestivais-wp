@@ -2,7 +2,7 @@
     <a href="<?php the_permalink() ?>">
 
         <?php
-            the_post_thumbnail('medium', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
+            the_post_thumbnail('medium_large', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
         ?> 
 
         <div class="card-label">

@@ -15,7 +15,7 @@
 		<?= category_description(); ?>
 	</h2>
 
-	<section class="content bg-lightgrey">
+	<section class="content bg-lightgrey <?= $category->slug ?>Pg">
 		<?php
 			echo do_shortcode('		 [ajax_load_more
 									transition_container="false" 

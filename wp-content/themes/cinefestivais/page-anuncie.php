@@ -1,7 +1,7 @@
 <?php
-global $pageClass;
-$pageClass = "advertisePg";
-get_header();
+	global $pageClass;
+	$pageClass = "advertisePg";
+	get_header();
 
 if (have_posts()) {
 	while (have_posts()) {

@@ -18,6 +18,16 @@
 		$user_email = get_the_author_meta('user_email');
 
 		$post = get_post();
+
+		$partnerAuthor = get_field('partner_author');
+		if ($partnerAuthor) {
+			$partnerAuthorId = $partnerAuthor['ID'];
+
+
+			$partnerUser = 'user_' . $partnerAuthorId;
+			$partnerImage_user = get_field('user_photo', $partnerUser);
+		}
+		
 ?>
 
 <section id="js-progressbar-container">
@@ -45,7 +55,7 @@
 	<h1 class="postpage-body--title singlePg-container">
 		<?php the_title(); ?>
 	</h1>
-
+		
 	<section class="postpage-body--author singlePg-container">
 
 		<div class="author-picture">
@@ -54,14 +64,29 @@
 				{
 					echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
 				}
+
+				if ($partnerImage_user) 
+				{
+					echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
+				}
 			?>
+
 		</div>
 
-		<div>
+		<div class="author-names">
 			<a href="<?= get_author_posts_url($author_id) ?>" class="author-name">
 				<?= $first_name ?>
 				<?= $last_name ?>
 			</a>
+
+			<?php if($partnerAuthor): ?>
+				,
+				<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>" class="author-name">
+					<?= $partnerAuthor['user_firstname'] ?>
+					<?= $partnerAuthor['user_lastname'] ?>
+				</a>
+			<?php endif; ?>
+
 
 			<div class="singlePg-date">
 				<span class="postpage-body--timehour">
@@ -130,11 +155,8 @@
 	<h2 class="content-title">Entre em contato</h2>
 
 	<div class="contact-author">
-		<?php
-				if ($image_user) {
-					echo wp_get_attachment_image($image_user, $size);
-				}
-				?>
+		<?php if ($image_user) { echo wp_get_attachment_image($image_user, $size); } ?>
+		
 		<div class="contact-author--info">
 			<h3>
 				<?= $first_name ?>
@@ -147,11 +169,10 @@
 				<?= $user_email ?>
 			</span>
 
-
 			<?php
-					$facebook = get_field('user_facebook', $user);
-					$twitter = get_field('user_twitter', $user);
-					?>
+				$facebook = get_field('user_facebook', $user);
+				$twitter = get_field('user_twitter', $user);
+			?>
 			<?php if ($facebook) : ?>
 				<span>
 					<svg class="icon icon-facebook">
@@ -172,6 +193,53 @@
 		</div>
 
 	</div>
+
+	<?php if($partnerAuthor): ?>
+		
+		<div class="contact-author">
+
+
+			<?php if ($partnerImage_user) { echo wp_get_attachment_image($partnerImage_user, $size); } ?>
+			
+			<div class="contact-author--info">
+				<h3>
+					<?= $partnerAuthor['user_firstname'] ?>
+					<?= $partnerAuthor['user_lastname'] ?>
+				</h3>
+				<span>
+					<svg class="icon icon-envelope">
+						<use xlink:href="#icon-envelope"></use>
+					</svg>
+					<?= $partnerAuthor['user_email'] ?>
+				</span>
+
+				<?php
+					$facebookPartner = get_field('user_facebook', $partnerUser);
+					$twitterPartner = get_field('user_twitter', $partnerUser);
+				?>
+				<?php if ($facebookPartner) : ?>
+					<span>
+						<svg class="icon icon-facebook">
+							<use xlink:href="#icon-facebook"></use>
+						</svg>
+						/<?= $facebookPartner ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ($twitterPartner) : ?>
+					<span>
+						<svg class="icon icon-twitter">
+							<use xlink:href="#icon-twitter"></use>
+						</svg>
+						@<?= $twitterPartner ?>
+					</span>
+				<?php endif; ?>
+			</div>
+
+		</div>
+		
+	<?php endif; ?>
+	
 
 </section>
 

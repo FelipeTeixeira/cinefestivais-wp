@@ -159,8 +159,7 @@
     }
 
     &--contact {
-        display: flex;
-        flex-flow: column wrap;
+        display: block;
         padding: 0 32px;
 
         .content-title {
@@ -180,13 +179,13 @@
 
         .contact-author {
             align-items: center;
-            display: flex;
+            display: inline-flex;
             flex-flow: row wrap;
             margin-bottom: 46px;
 
             @media screen and (min-width: 768px) {
                 justify-content: flex-start;
-                width: 50%;
+                width: calc(50% - 8px);
             }
 
             img {
@@ -194,6 +193,11 @@
                 height: 60px;
                 border-radius: 50%;
                 margin-right: 8px;
+
+                @media screen and (min-width: 768px) {
+                    width: 70px;
+                    height: 70px;
+                }
             }
 
             .icon {

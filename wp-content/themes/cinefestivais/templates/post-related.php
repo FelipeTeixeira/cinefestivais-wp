@@ -32,10 +32,8 @@
 
                         <?php
                             the_post_thumbnail('medium', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
-                        ?> 
-
-                        <div class="card-label">
-                            <?php
+                        
+                            echo '<div class="card-label">';
                                 $categories = get_the_category();
                                 foreach( $categories as $category) 
                                 {
@@ -48,8 +46,9 @@
                                         echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
                                     } 
                                 }
-                            ?>
-                        </div>
+                            echo '</div>';
+                        ?>
+                        
                         
                         <h2 class="card-title">
                             <?php the_title(); ?>

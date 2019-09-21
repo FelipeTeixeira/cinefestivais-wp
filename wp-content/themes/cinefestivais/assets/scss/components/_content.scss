@@ -65,10 +65,16 @@
         }
 
         &-text {
-            font-size: 14px;
-            line-height: 22px;
-            
-            
+            p {
+                margin: 0 auto 32px;
+                font-size: 16px;
+                line-height: 24px;
+    
+                @media screen and (min-width: 768px) {
+                    font-size: 20px;
+                    line-height: 32px;
+                }
+            }
         }
     }
 

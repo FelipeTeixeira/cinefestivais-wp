@@ -1,0 +1,13 @@
+.reportagensPg {
+    .card {
+        @media screen and (min-width: 600px) {
+            width: 50% !important;
+            max-width: inherit;
+        }
+    }
+
+    .card-title {
+        max-width: 400px;
+        margin: auto;
+    }
+}
