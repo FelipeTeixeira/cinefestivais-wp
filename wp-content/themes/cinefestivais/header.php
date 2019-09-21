@@ -62,7 +62,7 @@
         <form action="<?php echo esc_url(home_url('/')); ?>" class="searchbar" method="GET" accept-charset="utf-8">
             <input type="text" placeholder="O que você procura?" name="s" id="input-search" class="searchbar-input" required>
         </form>
-    </nav>
+    </nav>    
     <nav id="js-navbar" class="navbar">
         <div class="navbar-lg">
             <button class="navbar-btn" id="btn-toggle" onclick="toggleMenu()">

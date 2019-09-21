@@ -57,7 +57,8 @@ function _toggleLogo() {
 };
 
 function toggleMenu() {
-    if (window.innerWidth <= 768) {
+    // $screen-monitor-min: 1200
+    if (window.innerWidth <= 1200) {
         document.getElementById('js-navbar-menu').classList.toggle('navbar-menu-is-active');
     } else {
         document.getElementById('js-navbar-lg').classList.toggle('navbar-menu-lg-is-active');

@@ -31,7 +31,7 @@
                 color: #fff;
             }
 
-            @media screen and (min-width: 1024px) {
+            @media screen and (min-width: $screen-monitor-min) {
                 font-size: 20px;
             }
         }
@@ -74,7 +74,7 @@
     }
 
     &-lg {
-        @media screen and (min-width: 1024px) {
+        @media screen and (min-width: $screen-monitor-min) {
             align-items: center;
             display: flex;
             flex-flow: row wrap;
@@ -142,7 +142,7 @@
     
     &-links {
         padding: 86px 0 0;
-        @media screen and (min-width: 1024px) {
+        @media screen and (min-width: $screen-monitor-min) {
             padding: 0;
         }
     }
@@ -150,7 +150,7 @@
     &-links-lg {
         display: none;
         
-        @media screen and (min-width: 1024px) {
+        @media screen and (min-width: $screen-monitor-min) {
             display: flex;
             justify-content: space-around;
             width: 80%;
@@ -215,7 +215,7 @@
             transition: all ease 0.5s;
             text-transform: uppercase;
 
-            @media screen and (min-width: 1024px) {
+            @media screen and (min-width: $screen-monitor-min) {
                 display: inline;
             }
 
