@@ -49,6 +49,7 @@
 
         &.blue {
             background-color: $navyBlue;
+            
             &:hover {
                 background-color: darken($navyBlue, 3);
             }

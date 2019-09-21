@@ -37,23 +37,23 @@ function categoryDefault($slug, $isIgnoreCategorySpecif = false)
 	// isIgnoreCategorySpecif = especiais && slider && area-nobre && destaques
 
 	if ($isIgnoreCategorySpecif) {
-		return 
+		return
 			$slug !== 'criticas' &&
 			$slug !== 'noticias' &&
 			$slug !== 'reportagens' &&
 			$slug !== 'podcasts' &&
-			$slug !== 'entrevistas';	
+			$slug !== 'entrevistas';
 	} else {
-		return 
-		$slug !== 'criticas' &&
-		$slug !== 'noticias' &&
-		$slug !== 'reportagens' &&
-		$slug !== 'podcasts' &&
-		$slug !== 'destaques' &&
-		$slug !== 'especiais' &&
-		$slug !== 'slider' &&
-		$slug !== 'area-nobre' &&
-		$slug !== 'entrevistas';	
+		return
+			$slug !== 'criticas' &&
+			$slug !== 'noticias' &&
+			$slug !== 'reportagens' &&
+			$slug !== 'podcasts' &&
+			$slug !== 'destaques' &&
+			$slug !== 'especiais' &&
+			$slug !== 'slider' &&
+			$slug !== 'area-nobre' &&
+			$slug !== 'entrevistas';
 	}
 }
 

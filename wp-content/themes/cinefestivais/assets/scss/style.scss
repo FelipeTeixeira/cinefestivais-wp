@@ -27,6 +27,7 @@
 @import "components/reader-bar";
 @import "components/tag";
 @import "components/socialShared";
+@import "components/alm-btn-wrap";
 
 @import "pages/author";
 @import "pages/post";
@@ -40,17 +41,16 @@
 
 @import "trumps/trumps";
 
-
 .is-tablet {
-	display: none !important;
+    display: none !important;
 
-	@media (min-width: 600px) {
-		display: block !important;
-	}
+    @media (min-width: 600px) {
+        display: block !important;
+    }
 }
 
 .is-mobile {
-	@media (min-width: 599px) {
-		display: none !important;
-	}
+    @media (min-width: 599px) {
+        display: none !important;
+    }
 }
