@@ -18,6 +18,7 @@
 	<section class="content bg-lightgrey">
 		<?php
 			echo do_shortcode('		 [ajax_load_more 
+									seo="true"
 									transition_container="false" 
 									post_type="post" 
 									posts_per_page="4" 

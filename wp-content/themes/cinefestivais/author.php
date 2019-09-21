@@ -70,10 +70,10 @@
         Textos Publicados
     </h2>
 
-
     <?php
         $author = get_the_author_meta('ID');
         echo do_shortcode('		[ajax_load_more 
+                                seo="true"
                                 transition_container="false" 
                                 posts_per_page="4" 
                                 transition="fade" 
