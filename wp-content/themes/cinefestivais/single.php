@@ -188,10 +188,9 @@
 	</div>
 </section>
 
-
-
 <?php
-	include 'templates/newsletter.php';
+	include get_template_directory().'/templates/newsletter.php';
+	include get_template_directory().'/templates/post-related.php';
 
 	endwhile;
 endif;

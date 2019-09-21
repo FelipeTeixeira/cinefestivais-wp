@@ -119,10 +119,13 @@
         position: absolute;
         transition: cubic-bezier(0.215, 0.610, 0.355, 1) width 0.3s;
         top: 0;
-        width: 100px;
 
         &-icon {
             display: none;
+        }
+
+        &-logo {
+            height: 168px;
         }
 
         &.is-active {
