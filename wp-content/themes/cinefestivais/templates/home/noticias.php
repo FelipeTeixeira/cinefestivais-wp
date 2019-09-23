@@ -1,6 +1,7 @@
 <?php 
-    $argsDestaques = array( 'category_name' => 'noticias', 'posts_per_page' => 4 );
-    query_posts($argsDestaques);
+    $argsNews = array( 'category_name' => 'noticias', 'posts_per_page' => 4 );
+    query_posts($argsNews);
+    $page_news	= esc_url( home_url( '/' ) )."noticias";
 ?>  
 
 <section class="content">
@@ -103,5 +104,8 @@
         ?>
     </ul>
 
-    
+    <a href="<?= $page_news ?>" class="btn btn-primary btn-centerPage p-margin-bottom-32">
+        Ver Todas
+    </a>
+
 </section>

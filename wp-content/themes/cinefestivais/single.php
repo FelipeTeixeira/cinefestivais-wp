@@ -31,7 +31,7 @@
 ?>
 
 <section id="js-progressbar-container">
-	<div class="tags singlePg-container">
+	<div class="tags singlePg-container singleTagsHeader">
 		<?php
 			$categories = get_the_category();
 			foreach ($categories as $category) {
@@ -52,7 +52,7 @@
 		?>
 	</div>
 
-	<h1 class="postpage-body--title singlePg-container">
+	<h1 class="singlePg-container singlePg-title">
 		<?php the_title(); ?>
 	</h1>
 		
@@ -108,7 +108,6 @@
 						?>
 			</div>
 		</div>
-
 
 	</section>
 

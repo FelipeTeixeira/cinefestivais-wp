@@ -12,6 +12,7 @@
 
 .card {
     margin: 0 auto 36px;
+    max-width: 340px;
 
     @media screen and (min-width: 600px) {
         width: 50%;

@@ -11,11 +11,11 @@
     $menu_contato		= esc_url( home_url( '/' ) )."contato";
     $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
     $menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
-    $menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
-    $menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
-    $menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
-    $menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
-    $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
+    $menu_entrevistas	= esc_url( home_url( '/' ) )."entrevistas";
+    $menu_criticas		= esc_url( home_url( '/' ) )."criticas";
+    $menu_noticias		= esc_url( home_url( '/' ) )."noticias";
+    $menu_reportagens	= esc_url( home_url( '/' ) )."reportagens";
+    $menu_podcasts		= esc_url( home_url( '/' ) )."podcasts";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -59,8 +59,18 @@
     ?>
 
     <nav id="js-searchBar" class="search-bar">
-        <form action="<?php echo esc_url(home_url('/')); ?>" class="searchbar" method="GET" accept-charset="utf-8">
-            <input type="text" placeholder="O que você procura?" name="s" id="input-search" class="searchbar-input" required>
+        <form action="<?php echo esc_url(home_url('/')); ?>" class="search-bar-form" method="GET" accept-charset="utf-8">
+            <button onclick="closeSearch()" type="button" class="search-bar-form-btnBack search-bar-form-btn navbar-btn">
+                <svg class="icon icon-back">
+                    <use xlink:href="#icon-back"></use>
+                </svg>
+            </button>
+            <input type="text" placeholder="O que você procura?" name="s" id="input-search" class="search-bar-form-input" required>
+            <button type="submit" class="search-bar-form-btnSubmit search-bar-form-btn navbar-btn">
+                <svg class="icon icon-search">
+                    <use xlink:href="#icon-search"></use>
+                </svg>
+            </button>
         </form>
     </nav>    
     <nav id="js-navbar" class="navbar">

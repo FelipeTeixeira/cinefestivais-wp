@@ -15,15 +15,15 @@
         }
 
         &.done {
-            text-indent: -9999px;
+            // text-indent: -9999px;
 
-            &::after {
-                content: "teste";
-                position: absolute;
-                text-indent: 0;
-                left: 0;
-                right: 0;
-            }
+            // &::after {
+            //     content: "teste";
+            //     position: absolute;
+            //     text-indent: 0;
+            //     left: 0;
+            //     right: 0;
+            // }
         }
 
         &:disabled {

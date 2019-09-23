@@ -1,4 +1,10 @@
 .singlePg {
+
+    &-container {
+        max-width: 790px;
+        margin: auto;
+    }
+
     .navbar-logo-logo {
         display: none !important;
     }
@@ -10,6 +16,23 @@
     .tags {
         padding: 0 $paddingSides 8px;
         margin-top: 4px;
+
+        &.singleTagsHeader {
+            padding: 24px $paddingSides 20px;
+            margin: 0;
+        }
+
+        .tag {
+            margin-right: 8px;
+        }
+    }
+
+    &-title {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 32px;
+        padding: 0 32px;
+        color: #000;
     }
 
     &-date {
@@ -26,11 +49,6 @@
     &-imgFeatured {
         margin: 0 auto 24px;
         display: block;
-    }
-
-    &-container {
-        max-width: 790px;
-        margin: auto;
     }
 
     .postpage-body--text {

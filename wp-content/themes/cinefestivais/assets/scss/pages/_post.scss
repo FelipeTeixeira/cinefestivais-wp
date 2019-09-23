@@ -8,7 +8,7 @@
 
         @media screen and (min-width: 767px) {
             font-size: 46px;
-            line-height: 46px;
+            line-height: 56px;
         }
     }
 
@@ -96,6 +96,7 @@
             font-size: 0.750rem;
             padding: 0 32px;
             text-align: justify; 
+
             @media screen and (min-width: 1024px) {
                 left: calc(100% - 250px);
                 margin-top: 16px;
@@ -110,9 +111,12 @@
         }
     }
 
-    q {
+    q,
+    blockquote {
+        font-family: $fontSerifPost;
         margin: 0 0 32px;
         padding: 0 32px;
+        font-style: normal;
 
         @media screen and (min-width: 1024px) {
             margin: 16px 112px;

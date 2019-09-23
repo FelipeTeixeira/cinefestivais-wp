@@ -72,10 +72,11 @@
 
     &-copyright {
         color: $gray;
-        font-size: 12px;
-        line-height: 12px;
+        font-size: 11px;
+        line-height: 16px;
         margin-bottom: 16px;
         text-align: center;
+        text-transform: uppercase;
 
         span {
             display: block;
