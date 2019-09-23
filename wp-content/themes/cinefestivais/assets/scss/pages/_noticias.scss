@@ -1,6 +1,7 @@
 .newsPg {
     &.container-card {
         max-width: 1230px;
+        margin-bottom: 24px;
     }
 
     .card-label,
@@ -42,13 +43,18 @@
         .list-1,
         .list-2,
         .js-noticesCol {
-            width: 33.3%;
+            width: 50% !important;
             padding: 0 20px;
             margin-bottom: 0;
+
+            @media screen and (min-width: $screen-desktop-min) {
+                width: 33.3% !important;
+            }
         }
     }
 
     .js-noticesCol {
+        margin-top: 24px;
         width: 100%;
         max-width: $limitWidthMobile;
         display: flex;
@@ -57,33 +63,36 @@
         justify-content: space-between;
         position: relative;
 
+        @media screen and (min-width: $screen-desktop-min) {
+            margin: 0;
+        }
+
         &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            height: 2px;
-            width: 100%;
-            display: block;
-            background-color: #dedede;
-            max-width: calc(#{$limitWidthMobile} - 60px);
+            @media screen and (min-width: $screen-desktop-min) {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                height: 2px;
+                width: 100%;
+                display: block;
+                background-color: #dedede;
+                max-width: calc(#{$limitWidthMobile} - 60px);
+            }
         }
 
         .card-noticesSmall {
             margin: 0;
-            // padding: 53px 0;            
             width: 100%;
+            padding: 24px 0;
+            border-top: 1px solid #dedede;
 
-            &:first-child {
-                padding-top: 0;
-            }
-
-            &:last-child {
-                padding-bottom: 0;
-                // border-top: 1px solid #dedede;
+            @media screen and (min-width: $screen-desktop-min) {
+                border: none;
+                padding: 0;
             }
 
             .card-label {
