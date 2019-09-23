@@ -1,6 +1,6 @@
 .socialShared {
     display: flex;
-    max-width: 340px;
+    max-width: $limitWidthMobile;
 
     @media screen and (min-width: 767px) {
         padding-left: 24px;

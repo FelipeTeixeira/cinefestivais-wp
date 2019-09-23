@@ -43,20 +43,47 @@
         .list-2,
         .js-noticesCol {
             width: 33.3%;
+            padding: 0 20px;
+            margin-bottom: 0;
         }
     }
 
     .js-noticesCol {
         width: 100%;
-        max-width: 340px;
+        max-width: $limitWidthMobile;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            height: 2px;
+            width: 100%;
+            display: block;
+            background-color: #dedede;
+            max-width: calc(#{$limitWidthMobile} - 60px);
+        }
 
         .card-noticesSmall {
-            margin: 16px 0;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #dedede;
+            margin: 0;
+            // padding: 53px 0;            
             width: 100%;
 
-            @media screen and (min-width: $screen-phone-large-min) {
+            &:first-child {
+                padding-top: 0;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+                // border-top: 1px solid #dedede;
             }
 
             .card-label {
