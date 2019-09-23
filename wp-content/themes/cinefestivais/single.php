@@ -41,13 +41,13 @@
 
 				if (!categoryDefault($slug, true))
 				{
-					echo "<span class='tag is-active'>". esc_attr($name) ."</span>"; 
+					echo "<a href=".$category_link." class='tag is-active'>". esc_attr($name) ."</a>"; 
 				}
 
 				if (categoryDefault($slug)) 
 				{
-					echo "<span class='tag'>". esc_attr($name) ."</span>"; 
-				} 
+					echo "<a href=".$category_link." class='tag'>". esc_attr($name) ."</a>"; 
+				}
 			}
 		?>
 	</div>

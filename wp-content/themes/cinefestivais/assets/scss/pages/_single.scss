@@ -1,5 +1,4 @@
 .singlePg {
-
     &-container {
         max-width: 790px;
         margin: auto;
@@ -18,8 +17,8 @@
         margin-top: 4px;
 
         &.singleTagsHeader {
-            padding: 24px $paddingSides 20px;
-            margin: 0;
+            padding: 74px $paddingSides 2px;
+            margin: 0 auto;
         }
 
         .tag {
@@ -30,9 +29,14 @@
     &-title {
         font-size: 30px;
         line-height: 40px;
-        margin-bottom: 32px;
+        margin-bottom: 22px;
         padding: 0 32px;
         color: #000;
+
+        @media screen and (min-width: 767px) {
+            font-size: 46px;
+            line-height: 56px;
+        }
     }
 
     &-date {
@@ -49,6 +53,10 @@
     &-imgFeatured {
         margin: 0 auto 24px;
         display: block;
+
+        @media screen and (min-width: 767px) {
+            margin: 0 auto 76px;
+        }
     }
 
     .postpage-body--text {
@@ -57,7 +65,7 @@
         @media screen and (min-width: 768px) {
             padding: 0 32px;
         }
-        
+
         p {
             max-width: 790px;
             margin: 0 auto 32px;
@@ -119,7 +127,7 @@
             }
 
             .singlePg-disqus-btnComments {
-                background-color: rgba($pink, .8);
+                background-color: rgba($pink, 0.8);
 
                 .icon {
                     transform: rotate(180deg);

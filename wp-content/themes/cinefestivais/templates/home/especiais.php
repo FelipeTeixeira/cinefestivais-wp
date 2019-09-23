@@ -13,10 +13,6 @@
     <?php
 		$ignoreCategory = 'especiais';
 		include get_template_directory().'/templates/list-card.php';
-    ?>    
-    
-    <a href="<?= $page_especiais ?>" class="btn btn-primary btn-centerPage p-margin-bottom-32">
-        Ver Todas
-    </a>
+    ?> 
     
 </section>

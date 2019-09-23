@@ -1,16 +1,4 @@
 .postpage-body {
-    &--title {
-        font-size: 30px;
-        line-height: 40px;
-        margin-bottom: 32px;
-        padding: 0 32px;
-        color: #000;
-
-        @media screen and (min-width: 767px) {
-            font-size: 46px;
-            line-height: 56px;
-        }
-    }
 
     &--author {
         padding: 0 32px;
@@ -164,7 +152,7 @@
 
     &--contact {
         display: block;
-        padding: 0 32px;
+        padding: 24px 32px 0 32px;
 
         .content-title {
             font-size: 14px;
@@ -220,15 +208,15 @@
                 }
 
                 h3 {
-                    font-size: 0.7rem;
+                    font-size: 14px;
                     margin-bottom: 4px;
                 }
 
                 span {
+                    font-size: 11px;
                     align-items: center;
                     display: flex;
-                    font-size: 0.58rem;
-                    padding: 6px 0;
+                    padding: 2px 0;
                 }
             }
         }

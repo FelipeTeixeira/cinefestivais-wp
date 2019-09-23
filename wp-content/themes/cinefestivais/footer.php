@@ -4,7 +4,6 @@
     
     // LINKS PAGES
     $menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
-    $menu_autor			= esc_url( home_url( '/' ) )."autor";
     $menu_contato		= esc_url( home_url( '/' ) )."contato";
     $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
 	$menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
@@ -24,7 +23,7 @@
 
         <div class="footer-links__link">
             <a href="<?= $menu_quem_somos ?>">Quem somos</a>
-            <a href="<?= $menu_autor ?>">Anuncie</a>
+            <a href="<?= $menu_anuncie ?>">Anuncie</a>
             <a href="<?= $menu_contato ?>">Contato</a>
         </div>
 

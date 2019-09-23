@@ -1,13 +1,13 @@
 <?php
     global $pageClass;
-    $pageClass = "searchPg";
+    $pageClass = "tagsPg";
     get_header();
 
     if (have_posts()) :
 ?>
   
     <section class="content">
-        <h1 class="content-title p-margin-bottom-24">
+        <h1 class="content-title">
             <?php single_tag_title(); ?>
         </h1>
 

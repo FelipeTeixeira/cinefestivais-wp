@@ -8,10 +8,14 @@
 
     &-container {
         &.singlePg-container {
-            padding: 24px 0;
+            padding: 14px 0;
             width: calc(100% - 64px);
             margin-bottom: 12px;
 
+            @media screen and (min-width: 767px) {
+                margin-bottom: 34px;
+            }
+            
             &::before {
                 height: 1px;
                 background-color: #ccc;
