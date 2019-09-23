@@ -8,4 +8,12 @@
             margin: 20px 0 0;
         }
     }    
+    
+    &-img {
+        margin: 16px auto;
+
+        @media (min-width: 600px) {
+            max-width: 1200px;
+        }
+    }
 }

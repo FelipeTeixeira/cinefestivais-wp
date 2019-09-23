@@ -47,7 +47,11 @@ if (have_posts()) {
 					</div>
 
 				</form>
+
 			</section>
+
+			<img src="<?= $url ?>/assets/img/numeros-cinematograficos-mobile.jpg" alt="Números Cinematográficos" class="is-mobile advertisePg-img">
+			<img src="<?= $url ?>/assets/img/numeros-cinematograficos-desktop.jpg" alt="Números Cinematográficos" class="is-tablet advertisePg-img">
 		</article>
 
 <?php
