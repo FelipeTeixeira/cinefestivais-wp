@@ -45,10 +45,10 @@
     }
     
     &.bg-cobertura {
-        background-image: url('./../img/cobertura-mobile-header.png');
+        background-image: url('./../img/cobertura-mobile-header.jpg');
 
         @media screen and (min-width: 768px) {
-            background-image: url('./../img/cobertura-header.png');
+            background-image: url('./../img/cobertura-header.jpg');
         }
     }
 
@@ -69,10 +69,18 @@
     }
 
     &.bg-contato {
-        background-image: url('./../img/contato-mobile-bg.png');
+        background-image: url('./../img/contato-mobile-bg.jpg');
 
         @media screen and (min-width: 768px) {
-            background-image: url('./../img/contato-bg.png');
+            background-image: url('./../img/contato-bg.jpg');
+        }
+    }
+
+    &.bg-anuncie {
+        background-image: url('./../img/anuncie-mobile-bg.jpg');
+
+        @media screen and (min-width: 768px) {
+            background-image: url('./../img/anuncie-bg.jpg');
         }
     }
 
