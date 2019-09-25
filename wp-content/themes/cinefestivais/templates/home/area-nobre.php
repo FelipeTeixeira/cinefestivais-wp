@@ -2,24 +2,20 @@
     $argsDestaques = array( 'category_name' => 'area-nobre', 'posts_per_page' => 2);
     query_posts($argsDestaques);	
 ?>  
-<section class="content full articles">
+<section class="nobleArea-container">
 
     <?php                    
         if ( have_posts() ) : while ( have_posts() ) : the_post(); 
         $count++;
         $first_name = get_the_author_meta('first_name');
-	    $last_name = get_the_author_meta('last_name');
+        $last_name = get_the_author_meta('last_name');
     ?>  
-
-        <a href="<?php the_permalink(); ?>" class="article <?php echo ($count === 1) ? "bg-grey" : "bg-blue"; ?>">
+        <div class="nobleArea">
             <?php
-                the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'is-tablet' ) ); 
+                the_post_thumbnail( 'full', array('title' => get_the_title(), 'alt' => get_the_title() ) ); 
             ?> 
-            <?php if( get_field('image_mobile') ): ?>
-                <img src="<?php the_field('image_mobile'); ?>" class="is-mobile"/>
-            <?php endif; ?>
-            <div class="article-body">
-                <h3 class="article-body__title">
+            <div class="nobleArea-bg">
+                <h3 class="nobleArea-categoryName">
                     <?php 
                         $categories = get_the_category();
                         foreach( $categories as $category) 
@@ -34,20 +30,25 @@
                         }
                     ?>
                 </h3>
-                <h4 class="article-body__subtitle">
+                <h4 class="nobleArea-title">
                     <?php the_title(); ?>
                 </h4>
-
-                <p class="article-body__text">
-                    <?= get_the_excerpt(); ?>
-                </p>
-                <p class="article-body__author">
-                    Por
-                    <?= $first_name ?>
-				    <?= $last_name ?>
-                </p>
+                
+                <a href="<?php the_permalink() ?>" class="nobleArea-bgRed">
+                    <span class="nobleArea-bgRed-author">
+                        Por
+                        <?= $first_name ?>
+                        <?= $last_name ?>
+                    </span>
+                    <p class="nobleArea-bgRed-text">
+                        <?= get_the_excerpt(); ?>
+                    </p>
+                    <strong class="nobleArea-bgRed-readMore">
+                        Leia Mais
+                    </strong>
+                </a>
             </div>
-        </a>
+        </div>
     <?php 
         endwhile; 
         endif; 

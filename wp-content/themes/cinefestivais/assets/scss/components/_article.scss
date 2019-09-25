@@ -1,87 +1,118 @@
-.articles {
-    @media screen and (min-width: 1024px) {
-        display: flex!important;
-        flex-flow: row wrap!important;
-    }
+.nobleArea-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.article {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 0 16px;
-    
-    @media screen and (min-width: 1024px) {
-        display: flex;
-        flex-flow: row-reverse wrap;
-        padding: 0;
+.nobleArea {
+    text-align: center;
+    position: relative;
+
+    @media screen and (min-width: $screen-monitor-min) {
         width: 50%;
     }
 
-    &-picture {
-        width: 100%;
+    img {
+        display: block;
+    }
 
-        @media screen and (min-width: 1024px) {
-            height: 350px;
-            width: 50%;
+    &-categoryName {
+        font-size: 10px;
+        font-weight: 900;
+        text-transform: uppercase;
+        position: relative;
+        padding-bottom: 32px;
+
+        &::before {
+            top: 26px;
+            border-top: 1px solid #fff;
+            content: "";
+            display: block;
+            left: 0;
+            right: 0;
+            width: 24px;
+            position: relative;
+            margin: auto;
+
+            @media screen and (min-width: 1024px) {
+                border-top: 2px solid $pink;
+            }
         }
     }
 
-    &-body {
-        padding: 16px 16px 0;
+    &-title {
+        font-size: 22px;
+        line-height: 26px;
+        font-weight: 700;
+        max-width: 270px;
 
         @media screen and (min-width: 1024px) {
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: space-around;
-            padding: 16px;
-            width: 50%;
+            font-size: 24px;
+            line-height: 28px;
+            max-width: inherit;
         }
+    }
 
-        &__title {
-            font-size: 9px;
+    &-bg {
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(51, 51, 51, 0.4);
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+
+        &:hover {
+            .nobleArea-bgRed {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    &-bgRed {
+        color: #fff;
+        background-color: rgba($pink, 0.8);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateY(100%);
+        width: 100%;
+        height: 100%;
+        transition: transform 0.2s ease;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &-author {
+            font-size: 12px;
             letter-spacing: 1px;
-            color: $white;
-            margin-bottom: 16px;
             text-transform: uppercase;
+            display: block;
+        }
 
-            &::after {
-                border-bottom: 1px solid $separatorLine;
-                content: "";
-                display: block;
-                position: relative;
-                top: 8px;
-                width: 24px;
+        &-text {
+            font-size: 13px;
+            line-height: 20px;
+            max-width: 440px;
+            margin: 12px auto;
+
+            @media screen and (min-width: $screen-monitor-min) {
+                margin: 24px auto;
             }
         }
 
-        &__subtitle {
-            font-size: 18px;
-            line-height: 22px;
-            color: $white;
-            margin-bottom: 24px;
-
-            @media screen and (min-width: 1024px) {
-                font-size: 24px;
-                line-height: 28px;
-            }
-        }
-
-        &__text {
-            font-size: 10px;
-            line-height: 16px;
-            color: $white;
-            margin-bottom: 16px;
-
-            @media screen and (min-width: 1024px) {
-                font-size: 14px;
-                line-height: 20px;
-            }
-        }
-
-        &__author {
-            font-size: 9px;
-            color: $white;
-            text-transform: uppercase
+        &-readMore {
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: 900;
+            text-transform: uppercase;
         }
     }
 }

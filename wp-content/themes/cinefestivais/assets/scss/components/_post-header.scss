@@ -53,18 +53,18 @@
     }
 
     &.bg-quemsomos {
-        background-image: url('./../img/quem-somos-mobile-bg.png');
+        background-image: url('./../img/quem-somos-mobile-bg.jpg');
 
         @media screen and (min-width: 768px) {
-            background-image: url('./../img/quem-somos-bg.png');
+            background-image: url('./../img/quem-somos-bg.jpg');
         }
     }
 
     &.bg-entrevistas {
-        background-image: url('./../img/entrevistas-mobile-bg.png');
+        background-image: url('./../img/entrevistas-mobile-bg.jpg');
 
         @media screen and (min-width: 768px) {
-            background-image: url('./../img/entrevistas-bg.png');
+            background-image: url('./../img/entrevistas-bg.jpg');
         }
     }
 

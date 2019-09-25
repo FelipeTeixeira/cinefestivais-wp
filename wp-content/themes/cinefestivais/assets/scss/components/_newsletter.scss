@@ -1,5 +1,5 @@
 .newsletter {
-    background: url('./../img/newsletter-bg-mobile.png') no-repeat center center;
+    background: url('./../img/newsletter-bg-mobile.jpg') no-repeat center center;
     background-size: cover;
     color: $white;
     display: flex;
@@ -10,7 +10,7 @@
 
     
     @media (min-width: 1024px) {
-        background-image: url('./../img/newsletter-bg.png');
+        background-image: url('./../img/newsletter-bg.jpg');
     }
 
     &-title {    
