@@ -158,8 +158,10 @@
 		
 		<div class="contact-author--info">
 			<h3>
-				<?= $first_name ?>
-				<?= $last_name ?>
+				<a href="<?= get_author_posts_url($author_id) ?>">
+					<?= $first_name ?>
+					<?= $last_name ?>
+				</a>
 			</h3>
 			<span>
 				<svg class="icon icon-envelope">
@@ -202,8 +204,10 @@
 			
 			<div class="contact-author--info">
 				<h3>
-					<?= $partnerAuthor['user_firstname'] ?>
-					<?= $partnerAuthor['user_lastname'] ?>
+					<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>">
+						<?= $partnerAuthor['user_firstname'] ?>
+						<?= $partnerAuthor['user_lastname'] ?>
+					</a>
 				</h3>
 				<span>
 					<svg class="icon icon-envelope">

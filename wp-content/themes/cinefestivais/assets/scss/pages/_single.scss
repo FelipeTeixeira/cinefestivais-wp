@@ -17,8 +17,12 @@
         margin-top: 4px;
 
         &.singleTagsHeader {
-            padding: 74px $paddingSides 2px;
+            padding: 50px 32px 10px;
             margin: 0 auto;
+            
+            @media screen and (min-width: 767px) {
+                padding: 74px $paddingSides 2px;
+            }
         }
 
         .tag {
@@ -40,6 +44,8 @@
     }
 
     &-date {
+        line-height: 1;
+
         @media screen and (min-width: 767px) {
             display: flex;
             align-items: baseline;
@@ -70,8 +76,8 @@
             max-width: 790px;
             margin: 0 auto 32px;
             padding: 0 $paddingSides;
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 18px;
+            line-height: 26px;
 
             @media screen and (min-width: 768px) {
                 font-size: 20px;

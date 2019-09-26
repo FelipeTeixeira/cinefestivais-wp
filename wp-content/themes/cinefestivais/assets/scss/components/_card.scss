@@ -68,6 +68,11 @@
         color: #333;
         padding: 0 6px;
         min-height: 74px;
+
+        &:hover {
+            color: $pink;
+            text-decoration: underline;
+        }
     }
 
     &-text {
