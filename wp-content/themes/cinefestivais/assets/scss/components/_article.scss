@@ -67,10 +67,14 @@
         flex-direction: column;
         justify-content: center;
         overflow: hidden;
+        transition: color 0.2 ease;
 
         &:hover {
+            color: transparent;
+
             .nobleArea-bgRed {
                 transform: translateY(0);
+                text-indent: inherit;
             }
         }
     }

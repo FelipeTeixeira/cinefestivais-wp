@@ -5,11 +5,11 @@
 
         @media screen and (min-width: 600px) {
             display: flex;
-            align-content: center;
+            align-items: center;
         }
 
         .author-name {
-            font-size: 0.7rem;
+            font-size: 12px;
             font-weight: bold;
             margin-bottom: 16px;
             text-decoration: underline;
@@ -19,17 +19,23 @@
                 font-family: 'Noto Sans', sans-serif;
             }
         }
+
+        .profile-photo + .profile-photo {
+            margin-right: 12px;
+        }
     }
 
     &--timehour {
-        border-right: 1px solid #999;
         color: $black;
         font-size: 0.7rem;
         margin-bottom: 8px;
-        padding-right: 8px;
+        margin-right: 8px;
+        letter-spacing: 1px;
 
         @media screen and (min-width: 600px) {
             margin-right: 12px;
+            margin-bottom: 0;
+            margin-top: 2px;
         }
 
         &-container {
@@ -45,6 +51,13 @@
         letter-spacing: 1px;
         color: $gray;
         display: block;
+        margin-top: 4px;
+
+        @media screen and (min-width: 600px) {
+            margin-top: 0;
+            border-left: 1px solid #999;
+            padding-left: 12px;
+        }
     }
 
     &--separator {
@@ -155,12 +168,10 @@
         padding: 24px 32px 0 32px;
 
         .content-title {
-            font-size: 14px;
             width: 100%;
             margin-top: 46px;
 
             @media screen and (min-width: 1024px) {
-                font-size: 16px;
                 text-align: left;
 
                 &::before {

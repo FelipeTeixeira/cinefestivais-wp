@@ -61,11 +61,7 @@
     </nav>
     <p class="footer-copyright">
         © 
-        <?php echo currentYear(); ?> Cine festivais 
-        
-        <span>
-            Todos os direitos reservados
-        </span>
+        <?php echo currentYear(); ?> Cine festivais - Todos os direitos reservados
     </p>
     <a href="https://instinto.me/" target="_blank" class="footer-logoInstinto">
         <img src="<?= $url ?>/assets/img/logo-instinto.svg" alt="Logo Instinto" width="60">
@@ -99,6 +95,7 @@
 ?>
 
 <script async src="<?= $url ?>/assets/js/app.js"></script>
+<script async src="<?= $url ?>/assets/js/header-scroll.js"></script>
 </body>
 
 </html>

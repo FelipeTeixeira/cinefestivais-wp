@@ -26,6 +26,10 @@ if (have_posts()) {
                     Contato
                 </h1>
 
+                <article class="content-container content-card-text">
+					<?php the_content(); ?>
+				</article>
+
                 <?php echo do_shortcode('[contact-form-7 id="219" title="Formulário de Contato"]'); ?>
 
             </section>

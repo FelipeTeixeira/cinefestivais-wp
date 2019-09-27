@@ -88,7 +88,16 @@
     position: fixed;
     width: 100%;
     border-bottom: 1px solid #eee;
+    transition: transform .2s ease;
     z-index: $z-indexHeader;
+
+    &.header-unpin {
+        transform: translateY(-100%);
+    }
+      
+    &.header-pin {
+        transform: translateY(0);
+    }
 
     &.is-active {
         .navbar-logo {

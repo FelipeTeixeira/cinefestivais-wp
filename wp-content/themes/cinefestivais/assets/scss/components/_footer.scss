@@ -3,7 +3,11 @@
     align-items: center;
     display: flex;
     flex-flow: column wrap;
-    padding: 16px 24px 0;
+    padding: 16px 0;
+
+    @media (min-width: $screen-phone-small-min) {
+        padding: 16px 24px 0;    
+    }
 
     &-logo {
         margin: 16px 0;

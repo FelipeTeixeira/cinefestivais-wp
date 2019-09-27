@@ -27,6 +27,10 @@
 
         .tag {
             margin-right: 8px;
+
+            + .tag {
+                margin-bottom: 8px;
+            }
         }
     }
 
@@ -54,6 +58,10 @@
 
     .author-names {
         color: $pink;
+
+        @media screen and (min-width: 600px) {
+            padding-bottom: 4px;
+        }
     }
 
     &-imgFeatured {
@@ -63,6 +71,10 @@
         @media screen and (min-width: 767px) {
             margin: 0 auto 76px;
         }
+    }
+
+    .author-picture {
+        display: flex;
     }
 
     .postpage-body--text {
@@ -83,6 +95,12 @@
                 font-size: 20px;
                 line-height: 32px;
             }
+        }
+
+        > * {
+            max-width: 790px;
+            margin: 0 auto 32px;
+            padding: 0 32px;
         }
 
         .wp-block-quote {

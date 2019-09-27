@@ -95,8 +95,9 @@
 					<?= the_time('H:i'); ?>
 				</span>
 				<?php
-						if (get_the_time('H:i') !== get_the_modified_time('H:i')) {
-							?>
+						if (get_the_time('H:i') !== get_the_modified_time('H:i')) 
+						{
+				?>
 					<span class="postpage-body--updated">
 						Atualizado em
 						<?= get_the_modified_date('d/m/y') ?>
@@ -105,14 +106,17 @@
 					</span>
 				<?php
 						}
-						?>
+				?>
 			</div>
 		</div>
 
 	</section>
 
+	<div class="socialShared-container singlePg-container">
+		<?php include 'templates/single/socialShared.php'; ?>					
+	</div>	
+
 	<?php
-		include 'templates/single/socialShared.php'; 
 		the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured' ) ); 
 	?>
 
