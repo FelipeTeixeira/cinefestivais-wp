@@ -103,6 +103,10 @@
             padding: 0 32px;
         }
 
+        iframe {
+            width: 100%;
+        }
+
         .wp-block-quote {
             font-family: $fontSerif;
             font-size: 1.5rem;
