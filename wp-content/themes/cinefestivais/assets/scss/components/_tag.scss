@@ -13,13 +13,14 @@
 .tag {
     border: 1px solid $navyBlue;
     color: $navyBlue;
-    font-size: 0.6rem;
+    font-size: 10px;
     margin: 0 4px;
-    font-weight: bold;
-    padding: 0 8px;
+    font-weight: 900;
+    padding: 2px 8px;
     text-transform: uppercase;
     display: inline-block;
     order: 1;
+    letter-spacing: 2px;
 
     @media screen and (min-width: 1024px) {
         margin: 4px 8px;
