@@ -104,3 +104,12 @@ function disqus_embed()
 // CONTACT 7
 add_filter('wpcf7_load_js', '__return_false');
 add_filter('wpcf7_load_css', '__return_false');
+
+// SEARCH
+function myprefix_search_posts_per_page($query) {
+    if ( $query->is_search ) {
+        $query->set( 'posts_per_page', '20' );
+    }
+    return $query;
+}
+add_filter( 'pre_get_posts','myprefix_search_posts_per_page' );

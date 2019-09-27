@@ -17,23 +17,17 @@
         
         <strong class="searchPg-total">
             <?php 
-                $allsearch = new WP_Query("s=$s&showposts=0"); 
-                echo $allsearch ->found_posts;
+                global $wp_query;
+                $total_results = $wp_query->found_posts;
+
+                echo $total_results;
               ?>
               RESULTADOS
         </strong>
 
         <?php
-            echo do_shortcode('		[ajax_load_more 
-									transition_container="false" 
-									post_type="post" 
-									posts_per_page="4" 
-									transition="fade" 
-									scroll="false" 
-                                    button_label="Ver mais" 
-                                    search="'. $term .'"
-                                    orderby="relevance"]' ); 
-		?>
+		    include get_template_directory().'/templates/list-card.php';
+	    ?>    
 
     </section>
 
