@@ -23,7 +23,7 @@
                             $name = $category->name;
                             $slug = $category->slug;                                     
 
-                            if (categoryDefault($slug))    
+                            if (!categoryDefault($slug) && $slug !== 'area-nobre')    
                             {
                                 echo esc_attr( $name);                    
                             }
