@@ -26,6 +26,7 @@
         </strong>
 
         <?php
+            $isIgnoreCategorySpecif = true;
 		    include get_template_directory().'/templates/list-card.php';
 	    ?>    
 

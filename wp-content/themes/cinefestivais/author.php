@@ -34,32 +34,33 @@
         
 
         <div class="author-contact">
-            <span>
-                <svg class="icon icon-envelope">
-                    <use xlink:href="#icon-envelope"></use>
-                </svg>
-                <?= $user_email ?>
-            </span>
-            <?php
+            <a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
+				<svg class="icon icon-envelope">
+					<use xlink:href="#icon-envelope"></use>
+				</svg>
+				<?= $user_email ?>
+			</a>
+
+			<?php
 				$facebook = get_field('user_facebook', $user);
 				$twitter = get_field('user_twitter', $user);
 			?>
-			<?php if( $facebook ): ?>
-				<span>
+			<?php if ($facebook) : ?>
+				<a href="https://www.facebook.com/<?= $facebook ?>" target="_blank">
 					<svg class="icon icon-facebook">
 						<use xlink:href="#icon-facebook"></use>
 					</svg>
 					/<?= $facebook ?>
-				</span>
-			<?php endif; ?>	
+				</a>
+			<?php endif; ?>
 
-			<?php if( $twitter ): ?>
-				<span>
+			<?php if ($twitter) : ?>
+				<a href="https://www.twitter.com/<?= $twitter ?>" target="_blank">
 					<svg class="icon icon-twitter">
 						<use xlink:href="#icon-twitter"></use>
 					</svg>
 					@<?= $twitter ?>
-				</span>
+				</a>
 			<?php endif; ?>
         </div>
     </div>

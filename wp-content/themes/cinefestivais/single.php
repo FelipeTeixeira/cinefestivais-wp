@@ -167,33 +167,34 @@
 					<?= $last_name ?>
 				</a>
 			</h3>
-			<span>
+			
+			<a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
 				<svg class="icon icon-envelope">
 					<use xlink:href="#icon-envelope"></use>
 				</svg>
 				<?= $user_email ?>
-			</span>
+			</a>
 
 			<?php
 				$facebook = get_field('user_facebook', $user);
 				$twitter = get_field('user_twitter', $user);
 			?>
 			<?php if ($facebook) : ?>
-				<span>
+				<a href="https://www.facebook.com/<?= $facebook ?>" target="_blank">
 					<svg class="icon icon-facebook">
 						<use xlink:href="#icon-facebook"></use>
 					</svg>
 					/<?= $facebook ?>
-				</span>
+				</a>
 			<?php endif; ?>
 
 			<?php if ($twitter) : ?>
-				<span>
+				<a href="https://www.twitter.com/<?= $twitter ?>" target="_blank">
 					<svg class="icon icon-twitter">
 						<use xlink:href="#icon-twitter"></use>
 					</svg>
 					@<?= $twitter ?>
-				</span>
+				</a>
 			<?php endif; ?>
 		</div>
 
@@ -213,33 +214,33 @@
 						<?= $partnerAuthor['user_lastname'] ?>
 					</a>
 				</h3>
-				<span>
+				<a href="mailto:<?= $partnerAuthor['user_email'] ?>?Subject=Cinefestivais" target="_top">
 					<svg class="icon icon-envelope">
 						<use xlink:href="#icon-envelope"></use>
 					</svg>
 					<?= $partnerAuthor['user_email'] ?>
-				</span>
+				</a>
 
 				<?php
 					$facebookPartner = get_field('user_facebook', $partnerUser);
 					$twitterPartner = get_field('user_twitter', $partnerUser);
 				?>
 				<?php if ($facebookPartner) : ?>
-					<span>
+					<a href="https://www.facebook.com/<?= $facebookPartner ?>" target="_blank">
 						<svg class="icon icon-facebook">
 							<use xlink:href="#icon-facebook"></use>
 						</svg>
 						/<?= $facebookPartner ?>
-					</span>
+					</a>
 				<?php endif; ?>
 
 				<?php if ($twitterPartner) : ?>
-					<span>
+					<a href="https://www.twitter.com/<?= $twitterPartner ?>" target="_blank">
 						<svg class="icon icon-twitter">
 							<use xlink:href="#icon-twitter"></use>
 						</svg>
 						@<?= $twitterPartner ?>
-					</span>
+					</a>
 				<?php endif; ?>
 			</div>
 

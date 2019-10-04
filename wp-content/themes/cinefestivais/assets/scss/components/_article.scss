@@ -68,7 +68,8 @@
         flex-direction: column;
         justify-content: center;
         overflow: hidden;
-        transition: color 0.2 ease;
+        transition: color 0.2s ease;
+        cursor: pointer;
 
         &:hover {
             color: transparent;

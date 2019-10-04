@@ -18,27 +18,36 @@
                         $slug = $category->slug;
                         $category_link = get_category_link( $category->term_id );
 
-
-                        if ($ignoreCategory) {
-                            if ($slug !== $ignoreCategory && !$isHome) 
+                        if ($isIgnoreCategorySpecif) 
+                        {
+                            if (!categoryDefault($slug, true))    
                             {
-                                if (categoryDefault($slug))    
-                                {
-                                    echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
-                                }
-                            } 
-                            
-                            if ($isHome && !categoryDefault($slug) && $ignoreCategory !== $slug) {
                                 echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
                             }
                         } 
-
                         else 
                         {
-                            if (!categoryDefault($slug))    
-                            {  
-                                echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+                            if ($ignoreCategory) {
+                                if ($slug !== $ignoreCategory && !$isHome) 
+                                {
+                                    if (categoryDefault($slug))    
+                                    {
+                                        echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+                                    }
+                                } 
+                                
+                                if ($isHome && !categoryDefault($slug) && $ignoreCategory !== $slug) {
+                                    echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+                                }
                             } 
+    
+                            else 
+                            {
+                                if (!categoryDefault($slug))    
+                                {  
+                                    echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+                                } 
+                            }
                         }
                     }
                 ?>
