@@ -179,57 +179,7 @@
                 }
             }
         }
-
-        .contact-author {
-            align-items: center;
-            display: inline-flex;
-            flex-flow: row wrap;
-            margin-bottom: 46px;
-
-            @media screen and (min-width: 768px) {
-                justify-content: flex-start;
-                width: calc(50% - 8px);
-            }
-
-            img {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                margin-right: 8px;
-
-                @media screen and (min-width: 768px) {
-                    width: 70px;
-                    height: 70px;
-                }
-            }
-
-            .icon {
-                fill: $pink;
-                height: 14px;
-                width: 14px;
-                margin-right: 6px;
-            }
-
-            &--info {
-                color: $pink;
-                padding-left: 8px;
-
-                @media screen and (min-width: 1024px) {
-                    padding-left: 16px;
-                }
-
-                h3 {
-                    font-size: 14px;
-                    margin-bottom: 4px;
-                }
-
-                a {
-                    font-size: 11px;
-                    align-items: center;
-                    display: flex;
-                    padding: 2px 0;
-                }
-            }
-        }
     }
 }
+
+

@@ -1,0 +1,14 @@
+.whoWeArePg {
+    .content-title {
+        width: 100%;
+        margin-top: 46px;
+
+        @media screen and (min-width: 1024px) {
+            text-align: left;
+
+            &::before {
+                left: 0;
+            }
+        }
+    }
+}

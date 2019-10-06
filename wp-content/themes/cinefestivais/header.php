@@ -26,7 +26,7 @@
         <?php get_title(); ?>
     </title>
 
-    <link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css?v=10">
+    <link rel="stylesheet" href="<?= $url; ?>/assets/css/style.css?v=11">
 
     <?php
         if ($pageClass === 'homePg') {

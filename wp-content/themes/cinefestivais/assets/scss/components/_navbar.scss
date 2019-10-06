@@ -11,6 +11,7 @@
     animation: slideIn 0.3s linear;
 
     &-is-active {
+        transform: translate3d(0,0,0);
         transform: translateY(0);
         display: flex;
     }
@@ -74,6 +75,7 @@
         to {
             opacity: 1;
             transform: translateX(0);
+            transform: translate3d(0,0,0);
         }
     }
 }
@@ -97,6 +99,7 @@
       
     &.header-pin {
         transform: translateY(0);
+        transform: translate3d(0,0,0);
     }
 
     &.is-active {
@@ -221,6 +224,7 @@
 
         &-is-active {
             transform: translateX(0);
+            transform: translate3d(0,0,0);
         }
 
         &-logo {
@@ -292,6 +296,7 @@
 
         &-is-active {
             transform: translateX(0);
+            transform: translate3d(0,0,0);
         }
 
         .menu-lg--links {
