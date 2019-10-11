@@ -22,58 +22,54 @@ if (have_posts()) {
 
 				<?php
 					$user_email = "adriano@cinefestivais.com.br";
-
-					$user = get_user_by('login','agarrett1105');
-					if($user)
-					{
-					echo $user->ID;
-					}
 				?>
 
-				<h2 class="content-title">
-					Idealizador e editor
-				</h2>
+				<section class="content-author">
+					<h2 class="content-title">
+						Idealizador e editor
+					</h2>
 
-				<div class="contact-author">
-					<img src="<?= $url ?>/assets/img/adriano-garrett.jpg" alt="Adriano Garrett">	
-					
-					<div class="contact-author--info">
-						<h3>
-							<a href="<?= esc_url( home_url( '/' ) )."author/agarrett1105" ?>">
-								Adriano Garrett
-							</a>
-						</h3>
+					<div class="contact-author">
+						<img src="<?= $url ?>/assets/img/adriano-garrett.jpg" alt="Adriano Garrett">	
 						
-						<a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
-							<svg class="icon icon-envelope">
-								<use xlink:href="#icon-envelope"></use>
-							</svg>
-							<?= $user_email ?>
-						</a>
-
-						<?php
-							$facebook = "adrianogarrett";
-						?>
-						<?php if ($facebook) : ?>
-							<a href="https://www.facebook.com/<?= $facebook ?>" target="_blank">
-								<svg class="icon icon-facebook">
-									<use xlink:href="#icon-facebook"></use>
+						<div class="contact-author--info">
+							<h3>
+								<a href="<?= esc_url( home_url( '/' ) )."author/agarrett1105" ?>">
+									Adriano Garrett
+								</a>
+							</h3>
+							
+							<a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
+								<svg class="icon icon-envelope">
+									<use xlink:href="#icon-envelope"></use>
 								</svg>
-								/<?= $facebook ?>
+								<?= $user_email ?>
 							</a>
-						<?php endif; ?>
 
-						<?php if ($twitter) : ?>
-							<a href="https://www.twitter.com/<?= $twitter ?>" target="_blank">
-								<svg class="icon icon-twitter">
-									<use xlink:href="#icon-twitter"></use>
-								</svg>
-								@<?= $twitter ?>
-							</a>
-						<?php endif; ?>
+							<?php
+								$facebook = "adrianogarrett";
+							?>
+							<?php if ($facebook) : ?>
+								<a href="https://www.facebook.com/<?= $facebook ?>" target="_blank">
+									<svg class="icon icon-facebook">
+										<use xlink:href="#icon-facebook"></use>
+									</svg>
+									/<?= $facebook ?>
+								</a>
+							<?php endif; ?>
+
+							<?php if ($twitter) : ?>
+								<a href="https://www.twitter.com/<?= $twitter ?>" target="_blank">
+									<svg class="icon icon-twitter">
+										<use xlink:href="#icon-twitter"></use>
+									</svg>
+									@<?= $twitter ?>
+								</a>
+							<?php endif; ?>
+						</div>
+
 					</div>
-
-				</div>
+				</section>
 			</section>
 		</article>
 

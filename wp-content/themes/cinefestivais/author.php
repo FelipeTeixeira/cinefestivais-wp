@@ -66,7 +66,7 @@
     </div>
 </section>
 
-<section class="content">
+<section class="content p-margin-bottom-24">
     <h2 class="content-title">
         Textos Publicados
     </h2>

@@ -24,9 +24,12 @@
 
     .profile-photo {
         width: 60px;
+        height: 60px;
+        display: block;
 
         @media screen and (min-width: 768px) {
             width: 120px;
+            height: 120px;
         }
     }
 
