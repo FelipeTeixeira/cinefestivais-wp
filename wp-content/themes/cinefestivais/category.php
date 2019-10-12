@@ -1,6 +1,7 @@
 <?php
 	get_header();
 	$category = get_queried_object();
+	$isShowCategoryDefault = (categoryDefault($category->slug)) ? 'isShowCategoryDefault' : '';
 ?>
 	<header class="post-header full bg-img" 
 		style="background-image: url(<?php if (get_field('image_background', $category)) the_field('image_background', $category); ?>)">
@@ -15,7 +16,7 @@
 		<?= category_description(); ?>
 	</h2>
 
-	<section class="content content-category <?= $category->slug ?>Pg">
+	<section class="content content-category <?= $category->slug ?>Pg <?= $isShowCategoryDefault ?>">
 		<?php
 			echo do_shortcode('		 [ajax_load_more
 									transition_container="false" 

@@ -75,3 +75,17 @@
         border-radius: 4px;
     }
 }
+
+.label--category {
+    display: none;
+}
+
+.isShowCategoryDefault {
+    .label--coberturas {
+        display: none;
+    }
+
+    .label--category {
+        display: inline-block;
+    }
+}

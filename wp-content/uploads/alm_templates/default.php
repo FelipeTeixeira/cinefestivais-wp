@@ -16,8 +16,13 @@
                     
                     if (categoryDefault($slug))    
                     {  
-                        echo '<span class="card-label__text">'. esc_attr( $name) .'</span>';
+            echo '<span class="card-label__text label--coberturas">'. esc_attr( $name) .'</span>';
                     } 
+                
+                if (!categoryDefault($slug, true))    
+                    {  
+            echo '<span class="card-label__text label--category">'. esc_attr( $name) .'</span>';
+                    }
                 }
             ?>
         </div>
