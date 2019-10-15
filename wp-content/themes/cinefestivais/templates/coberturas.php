@@ -8,6 +8,7 @@
     </h2>
 
     <?php
+        $posts_per_page = 6;
         include get_template_directory().'/templates/list-coberturas.php';
     ?>
 

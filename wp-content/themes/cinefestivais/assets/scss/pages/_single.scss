@@ -176,13 +176,6 @@
             font-size: 14px;
             font-family: $fontSerif;
             margin: 38px 0 46px;
-
-            &::before {
-                content: 'LEGENDA';
-                font-family: $fontSerif;
-                font-weight: bold;
-                margin-right: 4px;
-            }
         }
     }
 }

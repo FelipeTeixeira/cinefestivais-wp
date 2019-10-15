@@ -15,6 +15,7 @@
 
 	<section class="content">
 		<?php
+			$posts_per_page = 9999;
 			include get_template_directory().'/templates/list-coberturas.php';
 		?>
 	</section>
