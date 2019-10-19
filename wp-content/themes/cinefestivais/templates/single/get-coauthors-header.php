@@ -1,4 +1,5 @@
 <?php
+    $size = 'thumbnail';
     $coauthors = get_coauthors();
 ?>
 

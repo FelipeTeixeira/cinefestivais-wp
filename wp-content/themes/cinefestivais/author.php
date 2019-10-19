@@ -4,15 +4,13 @@
 
     if( have_posts() ) 
     {
-
-    $author_id = get_the_author_meta('ID');
-	$user = 'user_'. $author_id;
-    $image_user = get_field('user_photo', $user);
-    
-    // User
-    $first_name = get_the_author_meta('first_name');
-	$last_name = get_the_author_meta('last_name');
-	$user_email = get_the_author_meta('user_email');
+        $author_id = get_the_author_meta('ID');
+        $user = 'user_'. $author_id;
+        $image_user = get_field('user_photo', $user);
+        
+        // User
+        $authorname = get_the_author_meta('display_name');
+        $user_email = get_the_author_meta('user_email');
 ?>
 
 <section class="author author-info">
@@ -25,14 +23,13 @@
     
     <div class="author-info--column">
         <h1 class="author-title">
-            <?= $first_name ?>
-            <?= $last_name ?>
+            <?php 
+                echo $authorname;
+            ?>
         </h1>
         <p class="author-text">
             <?= get_the_author_meta('description') ?>
         </p>
-        
-
         <div class="author-contact">
             <a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
 				<svg class="icon icon-envelope">

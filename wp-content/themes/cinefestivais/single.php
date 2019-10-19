@@ -1,34 +1,12 @@
 <?php
-global $pageClass;
-$pageClass = "singlePg";
-get_header();
+	global $pageClass;
+	$pageClass = "singlePg";
+	get_header();
 
-include 'templates/reader-bar.php';
+	include 'templates/reader-bar.php';
 
-if (have_posts()) : while (have_posts()) : the_post();
-
-		$author_id = get_the_author_meta('ID');
-		$user = 'user_' . $author_id;
-		$image_user = get_field('user_photo', $user);
-		$size = 'thumbnail';
-
-		// User
-		$first_name = get_the_author_meta('first_name');
-		$last_name = get_the_author_meta('last_name');
-		$user_email = get_the_author_meta('user_email');
-
-		$post = get_post();
-
-		$partnerAuthor = get_field('partner_author');
-		if ($partnerAuthor) {
-			$partnerAuthorId = $partnerAuthor['ID'];
-
-
-			$partnerUser = 'user_' . $partnerAuthorId;
-			$partnerImage_user = get_field('user_photo', $partnerUser);
-		}
-
-		?>
+	if (have_posts()) : while (have_posts()) : the_post();
+?>
 
 		<section id="js-progressbar-container">
 			<div class="tags singlePg-container singleTagsHeader">
@@ -71,6 +49,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 			</article>
 
 			<?php
+				$post = get_post();
 				$tags = get_the_tags($post->ID);
 				if ($tags) 
 				{
