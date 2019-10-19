@@ -7,11 +7,11 @@
     $menu_contato		= esc_url( home_url( '/' ) )."contato";
     $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
 	$menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
-	$menu_entrevistas	= esc_url( home_url( '/' ) )."entrevistas";
-	$menu_criticas		= esc_url( home_url( '/' ) )."criticas";
-	$menu_noticias		= esc_url( home_url( '/' ) )."noticias";
-	$menu_reportagens	= esc_url( home_url( '/' ) )."reportagens";
-	$menu_podcasts		= esc_url( home_url( '/' ) )."podcasts";
+    $menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
+    $menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
+    $menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
+    $menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
+    $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
     $url = get_template_directory_uri(); 
 ?>
 </main>
