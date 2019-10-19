@@ -26,10 +26,6 @@ if (have_posts()) {
 					Anuncie
 				</h1>
 
-				<button class="btn btn-purple">
-					Ver midia Kit
-				</button>
-
 				<article class="content-container content-card-text">
 					<?php the_content(); ?>
 				</article>
