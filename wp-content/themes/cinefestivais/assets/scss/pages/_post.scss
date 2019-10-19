@@ -169,7 +169,11 @@
 
     &--contact {
         display: block;
-        padding: 24px 32px 0 32px;
+        padding: 24px 12px 0 12px;
+
+        @media screen and (min-width: $screen-phone-small-min) {
+            padding: 24px 32px 0 32px;
+        }
 
         .content-title {
             width: 100%;
