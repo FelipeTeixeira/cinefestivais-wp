@@ -19,7 +19,6 @@
                     </a>
                 </h3>
 
-
                 <a href="mailto:<?= $coauthor->user_email; ?>?Subject=Cinefestivais" target="_top">
                     <svg class="icon icon-envelope">
                         <use xlink:href="#icon-envelope"></use>

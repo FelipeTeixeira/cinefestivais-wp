@@ -53,59 +53,10 @@ if (have_posts()) : while (have_posts()) : the_post();
 			<h1 class="singlePg-container singlePg-title">
 				<?php the_title(); ?>
 			</h1>
-
-			<section class="postpage-body--author singlePg-container">
-
-				<div class="author-picture">
-					<?php
-						if ($image_user) {
-							echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
-						}
-
-						if ($partnerImage_user) {
-							echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
-						}
-					?>
-				</div>
-
-				<div class="author-names">
-					<a href="<?= get_author_posts_url($author_id) ?>" class="author-name">
-						<?= $first_name ?>
-						<?= $last_name ?>
-					</a>
-
-					<?php if ($partnerAuthor) : ?>
-						,
-						<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>" class="author-name">
-							<?= $partnerAuthor['user_firstname'] ?>
-							<?= $partnerAuthor['user_lastname'] ?>
-						</a>
-					<?php endif; ?>
-
-
-					<div class="singlePg-date">
-						<span class="postpage-body--timehour">
-							<?= get_the_date('d/m/y'); ?>
-							às
-							<?= the_time('H:i'); ?>
-						</span>
-						<?php
-							if (get_the_time('H:i') !== get_the_modified_time('H:i')) 
-							{
-						?>
-							<span class="postpage-body--updated">
-								Atualizado em
-								<?= get_the_modified_date('d/m/y') ?>
-								as
-								<?= get_the_modified_time('H:i') ?>
-							</span>
-						<?php
-							}
-						?>
-					</div>
-				</div>
-
-			</section>
+			
+			<?php
+				include get_template_directory().'/templates/single/get-coauthors-header.php';
+			?>
 
 			<div class="socialShared-container singlePg-container">
 				<?php include 'templates/single/socialShared.php'; ?>
@@ -149,7 +100,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 		</section>
 
 		<?php
-			include get_template_directory().'/templates/single/get_coauthors.php';
+			include get_template_directory().'/templates/single/get-coauthors.php';
 		?>
 
 		<section class="singlePg-container singlePg-disqus postpage-body--contact" id="js-disqusContainer">

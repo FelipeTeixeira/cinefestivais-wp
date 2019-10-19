@@ -19,7 +19,7 @@
         &.singleTagsHeader {
             padding: 50px 32px 10px;
             margin: 0 auto;
-            
+
             @media screen and (min-width: 767px) {
                 padding: 74px $paddingSides 2px;
             }
@@ -50,7 +50,7 @@
     &-date {
         line-height: 1;
 
-        @media screen and (min-width: 767px) {
+        @media screen and (min-width: 480px) {
             display: flex;
             align-items: baseline;
         }
@@ -58,6 +58,7 @@
 
     .author-names {
         color: $pink;
+        display: inline-flex;
 
         @media screen and (min-width: 600px) {
             padding-bottom: 4px;
@@ -74,7 +75,7 @@
     }
 
     .author-picture {
-        display: flex;
+        display: inline-flex;
     }
 
     .postpage-body--text {
@@ -114,7 +115,7 @@
             font-size: 24px;
             line-height: 36px;
             padding: 0 50px;
-        
+
             p {
                 font-size: 24px;
                 line-height: 36px;
@@ -176,6 +177,17 @@
             font-size: 14px;
             font-family: $fontSerif;
             margin: 38px 0 46px;
+        }
+    }
+}
+
+.containerInfoHeader {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 767px) {
+        .author-name {
+            margin: 0;
         }
     }
 }

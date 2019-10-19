@@ -3,7 +3,7 @@
     &--author {
         padding: 0 32px;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 767px) {
             display: flex;
             align-items: center;
         }
@@ -13,10 +13,14 @@
             font-weight: bold;
             margin-bottom: 16px;
             text-decoration: underline;
+            display: inline-flex;
+            align-items: flex-end;
 
-            a:not(:last-child)::after {
+            &:not(:last-child)::after {
                 content: ',';
                 font-family: 'Noto Sans', sans-serif;
+                display: inline;
+                margin-right: 8px;
             }
         }
 
