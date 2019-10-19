@@ -20,20 +20,20 @@
          </div>
       </div>
       <div class="clear"></div>
-      <div class="cache_id">
-         <div class="clear"></div>
-         <hr>
-         <div class="section-title">
-            <h4><?php _e('Cache ID', 'ajax-load-more'); ?></h4>
-   		 	<p><?php _e('You <u>must</u> generate a unique ID for this cached query - this unique ID will be used as a content identifier.', 'ajax-load-more'); ?></p>
-   		 </div>
-         <div class="wrap">
-            <div class="inner">
-               <input type="text" class="alm_element" name="cache-id" id="cache-id">
-               <div class="clear"></div>
-               <p class="generate-id"><a href="javascript:void(0);" data-id="cache-id"><i class="fa fa-random"></i> <?php _e('Generate Cache ID', 'ajax-load-more'); ?></a></p>
-            </div>
-         </div>
+      <div class="cache_id nested-component">            
+	      <div class="nested-component--inner">	
+	         <div class="section-title">
+	            <h4><?php _e('Cache ID', 'ajax-load-more'); ?></h4>
+	   		 	<p><?php _e('You <u>must</u> generate a unique ID for this cached query - this unique ID will be used as a content identifier.', 'ajax-load-more'); ?></p>
+	   		 </div>
+	         <div class="wrap">
+	            <div class="inner">
+	               <input type="text" class="alm_element" name="cache-id" id="cache-id">
+	               <div class="clear"></div>
+	               <p class="generate-id"><a href="javascript:void(0);" data-id="cache-id"><i class="fa fa-random"></i> <?php _e('Generate Cache ID', 'ajax-load-more'); ?></a></p>
+	            </div>
+	         </div>
+	      </div>
       </div>
    </div>
 </div>

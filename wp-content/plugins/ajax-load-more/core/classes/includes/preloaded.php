@@ -48,14 +48,29 @@ $query_args['posts_per_page'] = $preloaded_amount;
 $type = alm_get_repeater_type($repeater);
 
 
+// Tabs
+if($tabs === 'true'){
+	
+	/*
+	 *	alm_tabs_preloaded
+	 * Preloaded Tabs Filter
+	 *
+	 * @return $preloaded_tabs;
+	 */
+   $preloaded_tabs = apply_filters('alm_tabs_preloaded', $tab_template);
+	$preloaded_output .= $alm_reveal;
+		$preloaded_output .= $preloaded_tabs;
+	$preloaded_output .= '</div>';
+	
+}
+
 // Comments
-if($comments){ 
+elseif($comments){ 
 
 	if(has_action('alm_comments_installed') && $comments){
 
 		/*
    	 *	alm_comments_preloaded
-   	 *
    	 * Preloaded Comments Filter
    	 *
    	 * @return $preloaded_comments;

@@ -5,12 +5,15 @@
  * @param {Boolean} init
  * @param {String} preloaded
  * @param {HTMLElement} element
+ * @param {Boolean} alm_is_filtering
  * @since 5.1
  */  
-let setFocus = (init = true, preloaded = 'false', element) => {
+let setFocus = (init = true, preloaded = 'false', element, alm_is_filtering = false) => {
 	
-	if( (init || !element) && preloaded !== 'true' ){
-      return false; // Exit if first run
+	if(!alm_is_filtering){
+		if( (init || !element) && preloaded !== 'true' ){
+	      return false; // Exit if first run
+	   }
    }
 
    // Check if element is an array.
@@ -22,9 +25,11 @@ let setFocus = (init = true, preloaded = 'false', element) => {
    
    // Set tabIndex on `.alm-reveal`
 	element.setAttribute('tabIndex', '-1');
+   element.style.outline = 'none';
    
    // Get Parent container
-   let parent = element.parentNode;	
+   // If `.alm-listing` set parent to element
+   let parent = (!element.classList.contains('alm-listing')) ? element.parentNode : element;	
    
    // Scroll Container
 	let scrollContainer = parent.dataset.scrollContainer;

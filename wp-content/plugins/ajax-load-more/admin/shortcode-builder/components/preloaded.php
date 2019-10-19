@@ -20,19 +20,21 @@
          </div>
       </div>
       <div class="clear"></div>
-      <div class="preload_amount">
-         <div class="clear"></div>
-         <hr>
-         <div class="section-title">
-            <h4><?php _e('Preload Amount', 'ajax-load-more'); ?></h4>
-   		 	<p><?php _e('Enter the number of posts to preload.', 'ajax-load-more'); ?></p>
-   		 </div>
-         <div class="wrap">
-            <div class="inner">
-               <input type="number" class="alm_element numbers-only" name="preload-amount" id="preload-amount" step="1" min="1" value="5">
-            </div>
-         </div>
+      
+      <div class="preload_amount nested-component">            
+	      <div class="nested-component--inner">
+	         <div class="section-title">
+	            <h4><?php _e('Preload Amount', 'ajax-load-more'); ?></h4>
+	   		 	<p><?php _e('Enter the number of posts to preload.', 'ajax-load-more'); ?></p>
+	   		 </div>
+	         <div class="wrap">
+	            <div class="inner">
+	               <input type="number" class="alm_element numbers-only" name="preload-amount" id="preload-amount" step="1" min="1" value="5">
+	            </div>
+	         </div>
+	      </div>
       </div>
+      
    </div>
 </div>
 <?php } ?>

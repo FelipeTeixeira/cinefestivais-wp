@@ -29,16 +29,16 @@ if( !class_exists('ALM_SHORTCODE') ):
    	 */
 
       public static function alm_render_shortcode($atts){
-         
-         
+
+
 			// Get global $post obj
          global $post;
 
 
 			// Get ALM options
    		$options = get_option( 'alm_settings' );
-   		
-   		
+
+
    		/*
 	   	 *	alm_settings
 	   	 * Override default ALM Settings
@@ -48,8 +48,8 @@ if( !class_exists('ALM_SHORTCODE') ):
 	   	 * @return $options;
 	   	 */
    		$options = (has_filter('alm_settings')) ? apply_filters('alm_settings', $options) : $options;
-   		
-   		
+
+
    		// Add count
    		self::$counter++;
 
@@ -62,10 +62,10 @@ if( !class_exists('ALM_SHORTCODE') ):
    		// Custom CSS for Layouts - Only run this once.
    		if(has_action('alm_layouts_custom_css')){
       		do_action('alm_layouts_custom_css', self::$counter);
-         }   
-         
-         
-         
+         }
+
+
+
          /*
 	   	 *	alm_shortcode_defaults
 	   	 * Set default shortcode values that can be over written via shortcode atts
@@ -74,16 +74,18 @@ if( !class_exists('ALM_SHORTCODE') ):
 	   	 *
 	   	 * @return $atts;
 	   	 */
-   		$default_atts = apply_filters('alm_shortcode_defaults', '');  
-   		
+   		$default_atts = apply_filters('alm_shortcode_defaults', '');
+
    		// Merge arrays. Allows for defaults to be overwritten by the actual shortcode.
    		$atts = ($default_atts) ? array_merge($default_atts, $atts) : $atts;
-   		
-   		
-         
+
+
+
          // Extact shortcode arrtibutes
    		extract(shortcode_atts(array(
 	   		'nested' => false,
+	   		'tabs' => false,
+	   		'tab_template' => '',
 	   		'filters' => false,
 	   		'target' => '',
 	   		'filters_url' => 'true',
@@ -132,6 +134,7 @@ if( !class_exists('ALM_SHORTCODE') ):
       		'single_post_order' => 'previous',
       		'single_post_taxonomy' => '',
       		'single_post_excluded_terms' => '',
+      		'single_post_progress_bar' => '',
    			'cache' => 'false',
    			'cache_id' => '',
    			'paging' => 'false',
@@ -206,14 +209,15 @@ if( !class_exists('ALM_SHORTCODE') ):
    			'button_loading_label' => '',
    			'container_type' => '',
    			'css_classes' => '',
+   			'loading_style' => '',
    			'id' => '',
    			'primary' => false,
    			'woocommerce' => false,
    			'no_results_text' => ''
-   		), $atts));   		
-   			
-   		
-   		
+   		), $atts));
+
+
+
    		// Backwards compat
    		// If $previous_post_ is true, set the $single_post_{value} params
    		if($previous_post === 'true'){
@@ -226,8 +230,8 @@ if( !class_exists('ALM_SHORTCODE') ):
 
 
 			// Start Enqueue Scripts
-   		
-   		
+
+
    		// Inline Core CSS
    		if( !is_admin() && alm_do_inline_css('_alm_inline_css') && !alm_css_disabled('_alm_disable_css') && self::$counter === 1 ){
 		   	$file = ALM_PATH . '/core/dist/css/'. ALM_SLUG .'.min.css'; // Core Ajax Load More
@@ -238,20 +242,25 @@ if( !class_exists('ALM_SHORTCODE') ):
    		if(isset($options['_alm_legacy_callbacks']) && $options['_alm_legacy_callbacks'] == '1'){ // Load if active
       	   wp_enqueue_script( 'ajax-load-more-legacy-callbacks' );
       	}
-      	
+
    		// Core ALM
       	wp_enqueue_script( 'ajax-load-more' );
-      	
+
+   		// Layouts
+   		if(has_action('alm_layouts_installed')){
+      		// Inline Layouts CSS
+      		if( !is_admin() && alm_do_inline_css('_alm_inline_css') && self::$counter === 1 ){
+	      		if(defined('ALM_LAYOUTS_PATH') && defined('ALM_LAYOUTS_URL')){
+	      			$file = ALM_LAYOUTS_PATH.'/core/css/ajax-load-more-layouts.min.css';
+						echo ALM_ENQUEUE::alm_inline_css('ajax-load-more-layouts', $file, ALM_LAYOUTS_URL);
+		         }
+	      	}
+         }
+
 			// Masonry
          if($transition === 'masonry'){
       		wp_enqueue_script( 'ajax-load-more-masonry' ); // Enqueue before core ALM
          }
-
-			// Progress Bar
-			if($progress_bar === 'true'){ // Enqueue bar JS
-				wp_add_inline_script( 'ajax-load-more', 'window.paceOptions = {restartOnPushState: false};' );
-         	wp_enqueue_script( 'ajax-load-more-progress' );
-			}
 
          // Next Page
          if(has_action('alm_nextpage_installed') && $nextpage === 'true'){
@@ -262,8 +271,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    		if(has_action('alm_paging_installed') && $paging === 'true'){
       		wp_enqueue_script( 'ajax-load-more-paging' );
       		wp_enqueue_script( 'ajax-load-more-images-loaded' ); // Required for Paging
-      		
-      		// Inline paging CSS      		
+
+      		// Inline paging CSS
       		if( !is_admin() && alm_do_inline_css('_alm_inline_css') && !alm_css_disabled('_alm_paging_disable_css') ){
 	      		if(defined('ALM_PAGING_PATH') && defined('ALM_PAGING_URL')){
 	      			$file = ALM_PAGING_PATH.'/core/css/ajax-load-more-paging.min.css';
@@ -272,16 +281,11 @@ if( !class_exists('ALM_SHORTCODE') ):
 	      	}
          }
 
-   		// Layouts
-   		if(has_action('alm_layouts_installed')){      		
-      		// Inline Layouts CSS      		
-      		if( !is_admin() && alm_do_inline_css('_alm_inline_css') && self::$counter === 1 ){
-	      		if(defined('ALM_LAYOUTS_PATH') && defined('ALM_LAYOUTS_URL')){
-	      			$file = ALM_LAYOUTS_PATH.'/core/css/ajax-load-more-layouts.min.css';
-						echo ALM_ENQUEUE::alm_inline_css('ajax-load-more-layouts', $file, ALM_LAYOUTS_URL);
-		         }
-	      	}
-         }
+			// Progress Bar
+			if($progress_bar === 'true'){ // Enqueue bar JS
+				wp_add_inline_script( 'ajax-load-more', 'window.paceOptions = {restartOnPushState: false};' );
+         	wp_enqueue_script( 'ajax-load-more-progress' );
+			}
 
          // Previous Post
          if(has_action('alm_single_post_installed') && $single_post === 'true'){
@@ -292,7 +296,20 @@ if( !class_exists('ALM_SHORTCODE') ):
    		if(has_action('alm_seo_installed') && $seo === 'true'){
       		wp_enqueue_script( 'ajax-load-more-seo' );
    		}
-   		         
+
+   		// Tabs
+   		if(has_action('alm_tabs_installed') && $tabs === 'true'){
+      		wp_enqueue_script( 'ajax-load-more-tabs' );
+
+      		// Inline tabs CSS
+      		if( !is_admin() && alm_do_inline_css('_alm_inline_css') && !alm_css_disabled('_alm_tabs_disable_css') ){
+	      		if(defined('ALM_TABS_PATH') && defined('ALM_TABS_URL')){
+	      			$file = ALM_TABS_PATH.'/core/css/ajax-load-more-tabs.min.css';
+						echo ALM_ENQUEUE::alm_inline_css('ajax-load-more-tabs', $file, ALM_TABS_URL);
+		         }
+	      	}
+         }
+
 
 
          /*
@@ -306,26 +323,26 @@ if( !class_exists('ALM_SHORTCODE') ):
 
 
    		// End Enqueue Scripts
-   		
-   		
+
+
    		// Filters - Set initial shortcode state
    		$filters = ($filters === 'true' && class_exists('ALMFilters')) ? true : false;
-   		if($filters){      		
+   		if($filters){
       		$single_post = $seo = false;
       		$transition_container = "true"; // required
       		if(defined('ALM_FILTERS_PATH')){
 	   			include(ALM_FILTERS_PATH .'includes/initial-state-params.php');
 	   		}
-   		}   			
-			
-         $single_post = ($single_post === 'true') ? true : false;      
+   		}
+
+         $single_post = ($single_post === 'true') ? true : false;
 
    		$transition_container = ($seo === "true" || $single_post || $filters) ? 'true' : $transition_container;
-         
+
          // Transition Container Classes
 			$transition_container_classes = (!empty($transition_container_classes)) ? ' '. $transition_container_classes : '';
-			
-			
+
+
 			// REST API
          if($restapi === 'true'){
             $restapi = true;
@@ -337,7 +354,7 @@ if( !class_exists('ALM_SHORTCODE') ):
    		if($options['_alm_container_type'] == '2' || $single_post){
    			$container_element = 'div';
          }
-         
+
          // CSS Classes
          $css_classes = (!empty($css_classes)) ? ' ' . $css_classes : '';
 
@@ -349,9 +366,9 @@ if( !class_exists('ALM_SHORTCODE') ):
       		$posts_per_page = 1;
    			$container_element = 'div';
    		}
-   		
+
    		// Users
-   		$users = ($users === 'true') ? true : false;   	
+   		$users = ($users === 'true') ? true : false;
 
    		// Comments
    		$container_element = ($comments === 'true') ? $comments_style : $container_element;
@@ -363,20 +380,18 @@ if( !class_exists('ALM_SHORTCODE') ):
    			$classname = (empty($classname)) ? '' : ' '.$classname;
    		}
 
-   		// Get button color
-   		$btn_color = '';
-   		if(isset($options['_alm_btn_color'])){
-   			$btn_color = ' '.$options['_alm_btn_color'];
-   		}
+   		// Get loading style (color/style)
+   		$alm_loading_style = (isset($options['_alm_btn_color'])) ? ' '.$options['_alm_btn_color'] : ' default';
+   		$alm_loading_style = ($loading_style !== '') ? ' ' . $loading_style : $alm_loading_style;
 
    		// Get paging color
-   		$paging_color = '';
-   		if(isset($options['_alm_paging_color']) && has_action('alm_paging_installed') && $paging === 'true'){
-   			$paging_color = ' paging-'.$options['_alm_paging_color'];
-   		}
+   		$paging_color = (isset($options['_alm_paging_color']) && has_action('alm_paging_installed') && $paging === 'true') ? ' paging-'.$options['_alm_paging_color'] : '';
 
-   		// Get Layouts activated
+   		// Layouts Class
    		$alm_layouts = (has_action('alm_layouts_installed')) ? ' alm-layouts' : '';
+
+   		// Tabs Class
+   		$alm_tabs = (has_action('alm_tabs_installed')) ? ' alm-tabs' : '';
 
    		// Get btn classnames
    		$button_classname = (isset($options['_alm_btn_classname'])) ? ' '.$options['_alm_btn_classname'] : '';
@@ -389,7 +404,7 @@ if( !class_exists('ALM_SHORTCODE') ):
          if (function_exists('qtrans_getLanguage')){ // qTranslate - https://wordpress.org/plugins/qtranslate/
    		   $lang = qtrans_getLanguage();
    		}
-			
+
 			// Global Posts Per Page
    		$wp_posts_per_page = get_option( 'posts_per_page' ); // Posts per page	- settings -> reading
 
@@ -411,12 +426,12 @@ if( !class_exists('ALM_SHORTCODE') ):
             	$pause_override = 'false';
          	}
          }
-         
+
 
    		// Start ALM object
    		$ajaxloadmore = '';
-			
-			
+
+
 
 			/*
 	   	 *	alm_before_container
@@ -432,31 +447,31 @@ if( !class_exists('ALM_SHORTCODE') ):
 
 			// Generate ALM ID
          $div_id = (self::$counter > 1) ? 'ajax-load-more-'.self::$counter : 'ajax-load-more';
-         
+
          // Localized ID - ID used for storin glocalized variables
    		$localize_id = (empty($id)) ? $div_id : 'ajax-load-more-'.$id;
-   		
+
    		// Master ID - Manual or generated ALM ID
    		$master_id = (empty($id)) ? $div_id : $id;
-   		
+
 			// Custom unique ALM ID (shortcode)
          $unique_id = (!empty($id)) ? 'data-id="'.$id.'"' : '';
 
 			// Search atts - Used with SEO
          $is_search = (is_search()) ? 'data-search="true"' : '';
 
-			// Search atts - Used with SEO
+			// Nested Instance
          $is_nested = ($nested === 'true') ? ' data-nested="true"' : '';
 
 
 			// Start .alm-listing
-   		$ajaxloadmore .= '<div id="'. $div_id .'" class="ajax-load-more-wrap'. $btn_color .''. $paging_color .''. $alm_layouts .'" '. $unique_id .' data-alm-id="" data-canonical-url="'. $canonicalURL .'" data-slug="'. $slug .'" data-post-id="'. $post_id .'" '. $is_search . $is_nested .' data-localized="'. alm_convert_dashes_to_underscore($localize_id) .'_vars' .'">';
+   		$ajaxloadmore .= '<div id="'. $div_id .'" class="ajax-load-more-wrap'. $alm_loading_style .''. $paging_color .''. $alm_layouts . $alm_tabs .'" '. $unique_id .' data-alm-id="" data-canonical-url="'. $canonicalURL .'" data-slug="'. $slug .'" data-post-id="'. $post_id .'" '. $is_search . $is_nested .' data-localized="'. alm_convert_dashes_to_underscore($localize_id) .'_vars' .'">';
 
 
 				//	Masonry Hook (Before)
 				$ajaxloadmore .= apply_filters('alm_masonry_before', $transition);
-				
-				
+
+
 				// WooCommerce
 				// - Set required WooCommerce config options
 				if($woocommerce === 'true'){
@@ -512,20 +527,20 @@ if( !class_exists('ALM_SHORTCODE') ):
 	      		$acf = false;
 	      		$pause = 'true';
 	   		}
-	   		
+
 	   		// If SEO, set preloaded_amount to posts_per_page
 	   		if($seo === 'true' || $filters){
             	$preloaded_amount = $posts_per_page;
 	   		}
-	   		
+
 	   		// If Filters & Filters Paging, set preloaded_amount to posts_per_page
 	   		if($filters && $filters_paging === 'true'){
 	   		   $preloaded_amount = $posts_per_page;
 	   		}
-	   		
-	   		
+
+
 	   		// $query_args array to store global ALM variables
-            $query_args = array( 
+            $query_args = array(
             	'post_id'        		=> $post_id,
             	'preloaded'				=> $preloaded,
             	'preloaded_amount'	=> $preloaded_amount,
@@ -587,14 +602,14 @@ if( !class_exists('ALM_SHORTCODE') ):
                'theme_repeater'     => $theme_repeater,
                'paged'              => (get_query_var('paged')) ? get_query_var('paged') : 1
             );
-            
-            
+
+
 				$listing_class = ($comments === 'true') ? 'commentlist alm-comments' : 'alm-listing'; // If Comments
-            
-            
+
+
             // Open #ajax-load-more
-            
-	   		$ajaxloadmore .= '<'.$container_element.' aria-live="polite"';   	   		
+
+	   		$ajaxloadmore .= '<'.$container_element.' aria-live="polite" aria-atomic="true"';
 					$ajaxloadmore .= ' class="'.$listing_class.' alm-ajax'. $paging_container_class . $classname . $css_classes .'"'.$paging_transition.'';
 
 					// Build container data atts
@@ -611,8 +626,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $acf_return;
    	         }
-   	         
-   
+
+
    	   		// Cache Add-on
    	   		if(has_action('alm_cache_installed') && $cache === 'true'){
    	   		   $cache_return = apply_filters(
@@ -623,8 +638,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $cache_return;
    	         }
-   
-   
+
+
    	   		// CTA Add-on
    	   		if(has_action('alm_cta_installed') && $cta === 'true'){
    	   		   $cta_return = apply_filters(
@@ -636,8 +651,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $cta_return;
    	         }
-   	         
-   
+
+
    	   		// Comments Add-on
    	   		if(has_action('alm_comments_installed') && $comments === 'true'){
    	   		   $comments_return = apply_filters(
@@ -652,8 +667,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $comments_return;
    	         }
-   	         
-   	         
+
+
    	   		// Filters Add-on
    	   		if(has_action('alm_filters_installed') && $filters){
    	   		   $filters_return = apply_filters(
@@ -670,8 +685,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $filters_return;
    	         }
-   
-   
+
+
    	   		// Paging Add-on
    	         if(has_action('alm_paging_installed') && $paging === 'true'){
    	   		   $paging_return = apply_filters(
@@ -679,7 +694,7 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   	$paging,
    	   		   	$paging_controls,
    	   		   	$paging_show_at_most,
-   	   		   	$paging_classes,   	   		   	
+   	   		   	$paging_classes,
                      $paging_first_label,
                      $paging_last_label,
                      $paging_previous_label,
@@ -688,18 +703,35 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $paging_return;
    	         }
-   
-   
+
+
+   	   		// Tabs Add-on
+   	         if(has_action('alm_tabs_installed') && $tabs === 'true'){
+   	   		   $tabs_return = apply_filters(
+   	   		   	'alm_tabs_shortcode',
+   	   		   	$tabs,
+   	   		   	$tab_template,
+                     $options
+   	   		   );
+   	   			$ajaxloadmore .= $tabs_return;
+
+   	   			$transition_container = "true"; // required
+
+   	   			// Set `pause` true for tabs and preloaded
+   	   			if($preloaded === 'true'){
+	   	   			$pause = "true";
+   	   			}
+   	         }
+
+
    	   		// Preloaded Add-on
-   	         if(has_action('alm_preload_installed') && $preloaded === 'true'){	   	         
-	   	         
-	   	         $preloaded = ($seo === 'true' && (int)$query_args['paged'] < 1 && $paging !== 'true') ? 'true' : $preloaded; // SEO page 1	   	         
-	   	         
-	   	         
+   	         if(has_action('alm_preload_installed') && $preloaded === 'true'){
+
+	   	         $preloaded = ($seo === 'true' && (int)$query_args['paged'] < 1 && $paging !== 'true') ? 'true' : $preloaded; // SEO page 1
+
 	   	         // SEO > page 1
 	   	         $preloaded = ($seo === 'true' && $query_args['paged'] > 1 && $paging !== 'true') ? false : $preloaded; // SEO page > 1
-	   	         
-	   	         
+
 	   	         // Filters
 	   	         if($filters && $_SERVER['QUERY_STRING']){
 		   	         $querystring = $_SERVER['QUERY_STRING'];
@@ -709,18 +741,16 @@ if( !class_exists('ALM_SHORTCODE') ):
 			   	         $ajaxloadmore .= ' data-is-preloaded="true"';
 		   	         }
 	   	         }
-	   	         
-	   	         
-	   	         // Set was-preloaded attribute to add alm-preloaded class to first alm-reveal div
-   	   		   if($seo === 'true' && $query_args['paged'] > 1){
-	   	   		   $ajaxloadmore .= ' data-is-preloaded="true"';
-   	   		   }
-   	   		   
-	   		   	$ajaxloadmore .= ' data-preloaded="'.$preloaded.'"';   	   		   
+
+	   	         // Set `is-preloaded` attribute to add `.alm-preloaded` class to first `.alm-reveal` div
+   	   		   $ajaxloadmore .= ($seo === 'true' && $query_args['paged'] > 1) ? ' data-is-preloaded="true"' : '';
+
+   	   		   // Add `preloaded` atts
+	   		   	$ajaxloadmore .= ' data-preloaded="'.$preloaded.'"';
 						$ajaxloadmore .= ' data-preloaded-amount="'.$preloaded_amount.'"';
    	   		}
-   
-   
+
+
    	   		// REST API Extension
    	   		if(has_action('alm_rest_api_installed') && $restapi === true){
    	   		   $restapi_return = apply_filters(
@@ -734,8 +764,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $restapi_return;
    	         }
-   
-   
+
+
    	   		// SEO Add-on
    	   		if(has_action('alm_seo_installed') && $seo === 'true'){
    	   		   $seo_return = apply_filters(
@@ -746,8 +776,8 @@ if( !class_exists('ALM_SHORTCODE') ):
    	            );
    	   			$ajaxloadmore .= $seo_return;
    	         }
-   
-   
+
+
    	   		// Single Posts Add-on
    	   		if(has_action('alm_single_post_installed') && $single_post){
    	   		   $single_post_return = apply_filters(
@@ -756,12 +786,13 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   	$single_post_order,
    	   		   	$single_post_taxonomy,
    	   		   	$single_post_excluded_terms,
+   	   		   	$single_post_progress_bar,
    	   		   	$options
    	   		   );
    	   			$ajaxloadmore .= $single_post_return;
    	         }
-   
-   
+
+
    	   		// Nextpage Post Add-on
    	   		if(has_action('alm_nextpage_installed') && $nextpage){
    	   		   $nextpage_return = apply_filters(
@@ -774,11 +805,11 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   );
    	   			$ajaxloadmore .= $nextpage_return;
    	         }
-   	         
-   	         
+
+
    	         // Users Add-on
-   	         if(has_action('alm_users_installed') && $users){      	         	         
-   	   			$posts_per_page = $users_per_page; // Update $posts_per_page var to be $users_per_page	   			
+   	         if(has_action('alm_users_installed') && $users){
+   	   			$posts_per_page = $users_per_page; // Update $posts_per_page var to be $users_per_page
    	   		   $users_return = apply_filters(
    	   		   	'alm_users_shortcode',
    	   		   	$users_role,
@@ -789,82 +820,82 @@ if( !class_exists('ALM_SHORTCODE') ):
    	   		   	$users_orderby,
    	   		   	$options
    	   		   );
-   	   			$ajaxloadmore .= $users_return;	   			
+   	   			$ajaxloadmore .= $users_return;
    	         }
-   	         
-   	   		$ajaxloadmore .= ' data-container-type="'.$container_element.'"';	   
-   
-   
-   	   		$ajaxloadmore .= ' data-repeater="'.$repeater.'"';	   		
-               $ajaxloadmore .= ($theme_repeater != 'null') ? ' data-theme-repeater="'.$theme_repeater.'"' : ''; 
-               
-               // Post Type	                 
+
+   	   		$ajaxloadmore .= ' data-container-type="'.$container_element.'"';
+
+
+   	   		$ajaxloadmore .= ' data-repeater="'.$repeater.'"';
+               $ajaxloadmore .= ($theme_repeater != 'null') ? ' data-theme-repeater="'.$theme_repeater.'"' : '';
+
+               // Post Type
    	   		$ajaxloadmore .= ' data-post-type="'.$post_type.'"';
-   	   		
+
    	   		// Sticky posts
                $ajaxloadmore .= ($sticky_posts === 'true') ? ' data-sticky-posts="'.$sticky_posts.'"' : '';
-               
+
                // Post Format
                $ajaxloadmore .= (!empty($post_format)) ? ' data-post-format="'.$post_format.'"' : '';
-               
+
                // Category
                $ajaxloadmore .= (!empty($category)) ? ' data-category="'.$category.'"' : '';
                $ajaxloadmore .= (!empty($category__and)) ? ' data-category-and="'.$category__and.'"' : '';
                $ajaxloadmore .= (!empty($category__not_in)) ? ' data-category-not-in="'.$category__not_in.'"' : '';
-               
+
                // Tag
                $ajaxloadmore .= (!empty($tag)) ? ' data-tag="'.$tag.'"' : '';
                $ajaxloadmore .= (!empty($tag__and)) ? ' data-tag-and="'.$tag__and.'"' : '';
                $ajaxloadmore .= (!empty($tag__not_in)) ? ' data-tag-not-in="'.$tag__not_in.'"' : '';
-               
+
                // Taxonomy
    	   		$ajaxloadmore .= (!empty($taxonomy)) ? ' data-taxonomy="'.$taxonomy.'"' : '';
    	   		$ajaxloadmore .= (!empty($taxonomy_terms)) ? ' data-taxonomy-terms="'.$taxonomy_terms.'"' : '';
    	   		$ajaxloadmore .= (!empty($taxonomy_operator)) ? ' data-taxonomy-operator="'.$taxonomy_operator.'"' : '';
    	   		$ajaxloadmore .= (!empty($taxonomy_relation)) ? ' data-taxonomy-relation="'.$taxonomy_relation.'"' : '';
-   	   		
+
    	   		// Meta Query
    	   		$ajaxloadmore .= (!empty($meta_key)) ? ' data-meta-key="'.$meta_key.'"' : '';
    	   		$ajaxloadmore .= (!empty($meta_value) || $meta_value === '0') ? ' data-meta-value="'.$meta_value.'"' : '';
    	   		$ajaxloadmore .= (!empty($meta_compare)) ? ' data-meta-compare="'.$meta_compare.'"' : '';
    	   		$ajaxloadmore .= (!empty($meta_relation)) ? ' data-meta-relation="'.$meta_relation.'"' : '';
    	   		$ajaxloadmore .= (!empty($meta_type)) ? ' data-meta-type="'.$meta_type.'"' : '';
-   	   		
+
    	   		// Dates
    	   		$ajaxloadmore .= (!empty($year)) ? ' data-year="'.$year.'"' : '';
    	   		$ajaxloadmore .= (!empty($month)) ? ' data-month="'.$month.'"' : '';
    	   		$ajaxloadmore .= (!empty($day)) ? ' data-day="'.$day.'"' : '';
-   	   		
+
    	   		// Author
    	   		$ajaxloadmore .= (!empty($author)) ? ' data-author="'.$author.'"' : '';
-   	   		
+
    	   		// Post Parameters
    	   		$ajaxloadmore .= (!empty($post__in)) ? ' data-post-in="'.$post__in.'"' : '';
    	   		$ajaxloadmore .= (!empty($post__not_in)) ? ' data-post-not-in="'.$post__not_in.'"' : '';
    	   		$ajaxloadmore .= (!empty($exclude)) ? ' data-exclude="'.$exclude.'"' : '';
-   	   		
+
    	   		// Search
    	   		$ajaxloadmore .= (!empty($search)) ? ' data-search="'.$search.'"' : '';
-   	   		
+
    	   		// Custom Args
    	   		$ajaxloadmore .= (!empty($custom_args)) ? ' data-custom-args="'.$custom_args.'"' : '';
-   	   		
+
    	   		// Status
    	   		$ajaxloadmore .= (!empty($post_status)) ? ' data-post-status="'.$post_status.'"' : '';
-   	   		
+
    	   		// Order
    	   		$ajaxloadmore .= ' data-order="'.$order.'"';
    	   		$ajaxloadmore .= ' data-orderby="'.$orderby.'"';
-   	   		
+
    	   		// Offset
    	   		$ajaxloadmore .= ' data-offset="'.$offset.'"';
-   	   		
+
    	   		// Posts Per Page
    	   		$ajaxloadmore .= ' data-posts-per-page="'.$posts_per_page.'"';
-   	   		
+
    	   		// Lang
    	   		$ajaxloadmore .= (!empty($lang)) ? ' data-lang="'.$lang.'"' : '';
-   	   		
+
    	   		// Scroll
    	   		$ajaxloadmore .= ' data-scroll="'.$scroll.'"';
    	   		if($scroll === 'true'){
@@ -873,54 +904,54 @@ if( !class_exists('ALM_SHORTCODE') ):
       	   		$ajaxloadmore .= ' data-max-pages="'.$max_pages.'"';
       	   		$ajaxloadmore .= (!empty($pause_override)) ? ' data-pause-override="'.$pause_override.'"' : '';
    	   		}
-   	   		
+
    	   		// Pause
    	   		$ajaxloadmore .= ' data-pause="'.$pause.'"';
-   	   		
+
    	   		// Button
-   	   		$ajaxloadmore .= ' data-button-label="'.$button_label.'"';	   		
+   	   		$ajaxloadmore .= ' data-button-label="'.$button_label.'"';
    	   		$ajaxloadmore .= (!empty($button_loading_label)) ? ' data-button-loading-label="'.$button_loading_label.'"' : '';
-   	   		
+
    	   		// Destroy After
    	   		$ajaxloadmore .= (!empty($destroy_after)) ? ' data-destroy-after="'.$destroy_after.'"' : '';
-   	   		
+
    	   		// Transition
    	   		$ajaxloadmore .= ' data-transition="'.$transition.'"';
    	   		$ajaxloadmore .= ($transition_container === 'false') ? ' data-transition-container="'.$transition_container.'"' : '';
    	   		$ajaxloadmore .= (!empty($transition_container_classes)) ? ' data-transition-container-classes="'.$transition_container_classes.'"' : '';
-   	   		   
+
    	   		// Masonry
    	   		$ajaxloadmore .= (!empty($masonry_selector)) ? ' data-masonry-selector="'.$masonry_selector.'"' : '';
    	   		$ajaxloadmore .= (!empty($masonry_columnwidth)) ? ' data-masonry-columnwidth="'.$masonry_columnwidth.'"' : '';
    	   		$ajaxloadmore .= (!empty($masonry_animation)) ? ' data-masonry-animation="'.$masonry_animation.'"' : '';
    	   		$ajaxloadmore .= (!empty($masonry_horizontalorder)) ? ' data-masonry-horizontalorder="'.$masonry_horizontalorder.'"' : '';
-   	         
+
    	         // Images Loaded
    	   		$ajaxloadmore .= (!empty($images_loaded)) ? ' data-images-loaded="'.$images_loaded.'"' : '';
-   
+
                // Primary
    	   		$ajaxloadmore .= ($primary !== false) ? ' data-primary="true"' : '';
-	         
+
 	   		$ajaxloadmore .= '>';
 	   		// End .alm-listing
-	   		
-	   		
-   			// Preloaded  			
+
+
+   			// Preloaded
    			// Add Preloaded Posts
    			$noscript_pagingnav = '';
 				if(has_action('alm_preload_installed') && $preloaded === 'true'){
 	   		   include(ALM_PATH .'core/classes/includes/preloaded.php');
 	   		}
-	   		
+
 
 	   		// Single Post
 	         // Get first post and append to alm object
 	   		if(has_action('alm_single_post_installed') && $single_post){
-   	   		
-   	   		
+
+
 	      		$repeater_type = preg_split('/(?=\d)/', $repeater, 2); // split $repeater at number to retrieve type
 	      		$repeater_type = $repeater_type[0]; // (default | repeater | template_)
-	      		
+
 	      		if($theme_repeater != 'null' && has_filter('alm_get_theme_repeater')){
 	               $repeater_type = null;
 	            }
@@ -937,12 +968,12 @@ if( !class_exists('ALM_SHORTCODE') ):
    			   	 *
    			   	 * @return $args;
    			   	 */
-   			   	 
+
                   if($offset < 1){
                      // Only render include if offset is zero
    	      		   $single_post_output .= apply_filters('alm_single_post_inc', $repeater, $repeater_type, $theme_repeater, $single_post_id, $post_type);
    	      		}
-   	      		
+
 
 	            $single_post_output .= '</div>';
 	   			$ajaxloadmore .= $single_post_output; // Add $single_post_output data to $ajaxloadmore
@@ -959,7 +990,7 @@ if( !class_exists('ALM_SHORTCODE') ):
 	            $nextpage_is_paged = ($nextpage_start > 1) ? true : false;
 
 	            $alm_nextpage_output = apply_filters('alm_init_nextpage', $nextpage_post_id, $nextpage_start,$nextpage_is_paged, $paging, $div_id, $id);
-	            	            
+
 	            $ajaxloadmore .= $alm_nextpage_output;
 
 	         }
@@ -968,22 +999,22 @@ if( !class_exists('ALM_SHORTCODE') ):
 
 				//	Masonry Hook (After)
 				$ajaxloadmore .= apply_filters('alm_masonry_after', $transition);
-				
-				
+
+
 				// Close ALM container element
 	   		$ajaxloadmore .= '</'.$container_element.'>';
-            
-            
+
+
             /*
 		   	 *	alm_noscript (Generates <noscript/> element of current query)
 		   	 *
-		   	 * ALM Core Filter Hook 
+		   	 * ALM Core Filter Hook
 		   	 *
 		   	 * @return html;
 		   	 */
 	   		if(($seo === 'true' || $filters) && $preloaded !== 'true' && !$restapi){
 	            $ajaxloadmore .= apply_filters('alm_noscript', $query_args, $container_element, $css_classes, $transition_container_classes);
-	         }	 
+	         }
 
 
 				/*
@@ -993,28 +1024,28 @@ if( !class_exists('ALM_SHORTCODE') ):
 		   	 *
 		   	 * @return html;
 		   	 */
-	         $ajaxloadmore .= apply_filters('alm_before_button', '');	         
-	         
-	         
-	         // Create Load More button
-	         $ajaxloadmore .= self::alm_render_button($seo, $paging, $button_classname, $button_label, $canonicalURL);	         
+	         $ajaxloadmore .= apply_filters('alm_before_button', '');
 
-            
+
+	         // Create Load More button
+	         $ajaxloadmore .= self::alm_render_button($seo, $paging, $button_classname, $button_label, $canonicalURL);
+
+
             // Render <noscript> pagination for SEO and Preloaded (./preloaded.php)
             $ajaxloadmore .= (!empty($noscript_pagingnav)) ? $noscript_pagingnav : '';
-            
-            
-            // Render <noscript> pagination for Nextpage addon		
-            if(has_action('alm_nextpage_installed') && $nextpage){   
+
+
+            // Render <noscript> pagination for Nextpage addon
+            if(has_action('alm_nextpage_installed') && $nextpage){
 		      	$ajaxloadmore .= apply_filters( 'alm_nextpage_noscript_paging', $query_args['post_id'], $query_args['id'] ); // located in Nextpage add-on
 		      }
-		      
+
 		      // No results text
 		      if($no_results_text !== '' && !empty($no_results_text)){
 					$ajaxloadmore .= '<div class="alm-no-results" style="display: none;">'. $no_results_text .'</div>';
 		      }
-            
-            
+
+
 			// Close #ajax-load-more
    		$ajaxloadmore .= '</div>';
 
@@ -1044,14 +1075,14 @@ if( !class_exists('ALM_SHORTCODE') ):
    			}
    		}
    		// End REST API Add-on
-   		
-   		
-   		
+
+
+
    		// Add localized vars
    		ALM_LOCALIZE::add_localized_var('id', $master_id, $localize_id);
-         
-         
-         
+
+
+
          /*
 	   	 *	alm_create_script_vars
 	   	 *
@@ -1060,15 +1091,15 @@ if( !class_exists('ALM_SHORTCODE') ):
 	   	 * @return <script>
 	   	 */
 	      ALM_LOCALIZE::create_script_vars($localize_id);
-	      
-	         		
-         
+
+
+
    		return $ajaxloadmore; // End $ajaxloadmore object
-   		
+
       }
-      
-      
-      
+
+
+
       /**
 	    * alm_render_button
 	    * Render the load more button.
@@ -1077,21 +1108,21 @@ if( !class_exists('ALM_SHORTCODE') ):
    	 * @return        $html
    	 */
       public static function alm_render_button($seo, $paging, $button_classname, $button_label, $canonicalURL){
-         
-         $html = '<div class="alm-btn-wrap" style="visibility: hidden;">';	         
-         if($paging !== 'true'){            	         
+
+         $html = '<div class="alm-btn-wrap" style="visibility: hidden;">';
+         if($paging !== 'true'){
 	         $btn_element = 'button';
 	         $btn_href = '';
-	         $btn_rel = ' rel="next"';      	         
-	         $html .= '<'. $btn_element .' class="alm-load-more-btn more'. $button_classname .'"'. $btn_href . $btn_rel .'>'. $button_label .'</'. $btn_element .'>';	         
-         }         
+	         $btn_rel = ' rel="next"';
+	         $html .= '<'. $btn_element .' class="alm-load-more-btn more'. $button_classname .'"'. $btn_href . $btn_rel .'>'. $button_label .'</'. $btn_element .'>';
+         }
          $html .= '</div>';
-         
-         return $html;         
-         
-      }  
+
+         return $html;
+
+      }
 
    }
-   
+
 endif;
 

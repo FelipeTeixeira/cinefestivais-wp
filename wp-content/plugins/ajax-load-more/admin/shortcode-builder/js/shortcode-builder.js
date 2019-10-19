@@ -89,8 +89,6 @@ jQuery(document).ready(function($) {
    });
 
 
-
-
    // Add additional meta_query
    var meta_query_obj = $('.meta-query-wrap').eq(0).clone();
    $('.meta-query-wrap .remove').remove();
@@ -123,6 +121,7 @@ jQuery(document).ready(function($) {
       }
 
    });
+   
 
    /* Delete Meta Query */
    $(document).on('click', '.remove-meta-query', function(e){
@@ -132,11 +131,9 @@ jQuery(document).ready(function($) {
          el.parent('.meta-query-wrap').remove();
          _alm.buildShortcode();
       });
-
       if($('.meta-query-wrap').length > 3){ // Show "Add" button if less than 4 $('.meta-query-wrap')
          $('#alm-meta-key .controls button').removeClass('disabled');
       }
-
    });
 
 
@@ -160,6 +157,24 @@ jQuery(document).ready(function($) {
       var unique_id = $('input#unique-id').val();
       if(unique_id)
          output += ' id="'+unique_id+'"';
+
+
+      // ---------------------------
+      // - Loading Style
+      // ---------------------------
+
+      var loading_style = $('select#loading-style').val();
+      var loading_style_default = $('select#loading-style').data('default');
+      var loading_style_target = $('select#loading-style').parent().find('.ajax-load-more-wrap');
+      
+      if(loading_style_target){
+	      var loading_style_base = loading_style_target.data('base');
+			loading_style_target.removeAttr('class');
+			loading_style_target.attr('class', loading_style_base + loading_style);
+      }
+      if(loading_style && loading_style !== loading_style_default){
+         output += ' loading_style="'+loading_style+'"';
+      }
 
 
       // ---------------------------
@@ -510,7 +525,6 @@ jQuery(document).ready(function($) {
       if(seo !== 'false' && seo != undefined){
 	      if(preload === 'true')
 		      $('.preload_amount').slideUp(250, 'alm_easeInOutQuad');
-
          output += ' seo="'+seo+'"';
       }
 
@@ -527,7 +541,9 @@ jQuery(document).ready(function($) {
              pp_order = $('#pp-order').val(),
              pp_post__in_order = $('#pp_post__in_input').val(),
              pp_taxonomy = $('#pp-taxonomy-select').val(),
-             pp_excluded_terms = $('#pp-term-exclude').val();
+             pp_excluded_terms = $('#pp-term-exclude').val(),
+             pp_progress_bar = $('.previous-post input[name=prev-post-progress]:checked').val();
+             
              
          $('.prev_post_options').slideDown(250, 'alm_easeInOutQuad');
          
@@ -559,6 +575,38 @@ jQuery(document).ready(function($) {
 
 			output += (pp_taxonomy !== '' ) ? ' single_post_taxonomy="'+pp_taxonomy+'"' : '';
 			output += (pp_excluded_terms !== '' ) ? ' single_post_excluded_terms="'+pp_excluded_terms+'"' : '';
+         
+         // Reading Progress Bar
+         if(pp_progress_bar === 'true'){       
+            $('#pp_progressbar_options').slideDown(250, 'alm_easeInOutQuad');
+            
+	         var pp_progress_bar_position = $('#pp_progressbar_options input[name=prev-post-progress-position]:checked').val();
+	         var pp_progress_bar_height = $('#pp_progressbar_options input[name=prev-post-progress-height]').val();	
+	         
+	         var pp_progress_bar_color = $('.prev-post-progress-front-color input').val();
+	         var pp_progress_indicator = $('.prev-post-progress-front-color .progress_bar_color_indicator'); 	
+	         
+	         var pp_progress_bar_bkg_color = $('.prev-post-progress-back-color input').val();
+	         pp_progress_bar_bkg_color = (pp_progress_bar_bkg_color.length === 6) ? pp_progress_bar_bkg_color : ''; // Minimum 6
+	         var pp_progress_indicator_bkg = $('.prev-post-progress-back-color .progress_bar_color_indicator');  
+	         
+	         
+	         // Remove style atts from indicator
+	         pp_progress_indicator_bkg.removeAttr('style');
+	         pp_progress_indicator.removeAttr('style');
+   	   	
+   	   	
+   	   	// If all values are set
+   	   	if(pp_progress_bar_color.length === 6 && pp_progress_bar_height && pp_progress_bar_position){
+   	   	   pp_progress_indicator.css("background-color", '#'+pp_progress_bar_color);   
+   	   	   pp_progress_indicator_bkg.css("background-color", '#'+pp_progress_bar_bkg_color);   	 
+   	   	   pp_progress_bar_bkg_color = (pp_progress_bar_bkg_color !== '') ? ':'+ pp_progress_bar_bkg_color : '';  	
+               output += ' single_post_progress_bar="'+ pp_progress_bar_position +':'+ pp_progress_bar_height +':'+ pp_progress_bar_color + pp_progress_bar_bkg_color +'"';
+   			}
+   			
+         } else {
+			   $('#pp_progressbar_options').slideUp(250, 'alm_easeInOutQuad');            
+         }
          
       }else{
          $('.prev_post_options').slideUp(250, 'alm_easeInOutQuad');
@@ -1124,13 +1172,13 @@ jQuery(document).ready(function($) {
       var scroll_load = $('.scroll_load input[name=scroll]:checked').val();
       if(scroll_load === 'f'){
 
-         $('.max_pages, .scroll_distance, .pause_override, .scroll_container').slideUp(250, 'alm_easeInOutQuad');
+         $('.scrolling-options').slideUp(250, 'alm_easeInOutQuad');
          if($('.scroll_load input').hasClass('changed'))
             output += ' scroll="false"';
 
       }else{
 
-         $('.max_pages, .scroll_distance, .pause_override, .scroll_container').slideDown(250, 'alm_easeInOutQuad');
+         $('.scrolling-options').slideDown(250, 'alm_easeInOutQuad');
 
          var scroll_distance = $('.scroll_distance input').val();
          if(scroll_distance !== '100')
@@ -1212,10 +1260,10 @@ jQuery(document).ready(function($) {
 	      var progress_bar_color = $('.alm-progress-bar input[name=progress_bar_color]').val();
 	   	$('.progress-bar-options').slideDown(250, 'alm_easeInOutQuad');
 	   	output += ' progress_bar="true"';
-   	   $('.progress_bar_color_indicator').removeAttr('style');
+   	   $('.alm-progress-bar .progress_bar_color_indicator').removeAttr('style');
 	   	if(progress_bar_color){
    	   	if(progress_bar_color.length === 6){
-   	   	   $('.progress_bar_color_indicator').css("background-color", '#'+progress_bar_color);
+   	   	   $('.alm-progress-bar .progress_bar_color_indicator').css("background-color", '#'+progress_bar_color);
    	   	}
 	   		output += ' progress_bar_color="'+ progress_bar_color +'"';
 			}

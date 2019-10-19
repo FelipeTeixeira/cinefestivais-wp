@@ -66,6 +66,49 @@
 	         </div>
 	
 	         <div class="clear"></div>
+	         <hr/>	         
+	
+	         <!-- Loading Style -->
+	         <?php
+		        $loading_style = (isset($alm_options['_alm_btn_color'])) ? $alm_options['_alm_btn_color'] : 'default';
+		        $selected = ' selected="selected"';
+		      ?>
+	         <div class="section-title">
+	            <h4><?php _e('Button/Loading Style', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('You can define a global button/loading style on the Ajax Load More settings screen','ajax-load-more'); ?>."></a></h4>
+	   		 	<p><?php _e('Select an Ajax loading style - you can choose between a Button or Infinite Scroll.', 'ajax-load-more'); ?></p>
+	   		</div>
+	         <div class="wrap">
+	            <div class="inner">
+						<select id="loading-style" class="alm_element" data-default="<?php echo $loading_style; ?>">
+							<optgroup label="<?php _e('Button', 'ajax-load-more'); ?>">
+								<option value="default" class="alm-color default"<?php echo ($loading_style === 'default') ? $selected : ''; ?>>Default</option>
+								<option value="blue" class="alm-color blue"<?php echo ($loading_style === 'blue') ? $selected : ''; ?>>Blue</option>
+								<option value="green" class="alm-color green"<?php echo ($loading_style === 'green') ? $selected : ''; ?>>Green</option>
+								<option value="purple" class="alm-color purple"<?php echo ($loading_style === 'purple') ? $selected : ''; ?>>Purple</option>
+								<option value="grey" class="alm-color grey"<?php echo ($loading_style === 'grey') ? $selected : ''; ?>>Grey</option>
+							</optgroup>						
+							<optgroup label="<?php _e('Infinite Scroll (No Button)', 'ajax-load-more'); ?>">
+								<option value="infinite classic" class="infinite classic"<?php echo ($loading_style === 'infinite classic') ? $selected : ''; ?>>Classic</option>
+								<option value="infinite skype" class="infinite skype"<?php echo ($loading_style === 'infinite skype') ? $selected : ''; ?>>Skype</option>
+								<option value="infinite ring" class="infinite ring"<?php echo ($loading_style === 'infinite ring') ? $selected : ''; ?>>Circle Fill</option>
+								<option value="infinite fading-blocks" class="infinite fading-blocks"<?php echo ($loading_style === 'infinite fading-blocks') ? $selected : ''; ?>>Fading Blocks</option>
+								<option value="infinite fading-circles" class="infinite fading-circles"<?php echo ($loading_style === 'infinite fading-circles') ? $selected : ''; ?>>Fading Circles</option>
+								<option value="infinite chasing-arrows" class="infinite chasing-arrows"<?php echo ($loading_style === 'infinite chasing-arrows') ? $selected : ''; ?>>Chasing Arrows</option>
+							</optgroup>
+	               </select>
+	               <div class="clear"></div>
+						<div class="alm-btn-wrap">
+							<div class="ajax-load-more-wrap core target <?php echo $loading_style; ?>" data-base="ajax-load-more-wrap core ">
+								<span><?php _e('Preview', 'ajax-load-more'); ?></span>
+								<button class="alm-load-more-btn loading" disabled="disabled">
+									<?php echo apply_filters('alm_button_label', __('Older Posts', 'ajax-load-more')) ;?>
+								</button>
+							</div>
+						</div>
+	            </div>
+	         </div>
+	
+	         <div class="clear"></div>
 	         <hr/>
 	
 	         <!-- Container Type -->
@@ -132,7 +175,7 @@
 	
 	         <!-- Nested ALM -->	         
 	         <div class="section-title">
-	            <h4><?php _e('Nested Instance', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('When nesting ALM instances it\'s important to set this to true as it removes certain problematic functionality.','ajax-load-more'); ?>"></a></h4>
+	            <h4><?php _e('Nested Instance', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('When nesting ALM instances it\'s important to set this to true as it removes any problematic JavaScript functionality.','ajax-load-more'); ?>"></a></h4>
 	   		 	<p><?php _e('Is this instance of Ajax Load More nested inside another instance of Ajax Load More?', 'ajax-load-more'); ?></p>
 	   		 </div>
 	         <div class="wrap">
@@ -156,7 +199,7 @@
 	         <!-- No Results -->	         
 	         <div class="section-title">
 	            <h4><?php _e('No Results Text', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('HTML is allowed, however when adding quote marks in classnames or IDs you must single quotes as shown in the example.','ajax-load-more'); ?>"></a></h4>
-	   		 	<p><?php _e('Add text/html to be displayed when no results are returned in the Ajax query.', 'ajax-load-more'); ?><br/><small><?php _e('e.g. &lt;div>Sorry, nothing found in this query&lt;/div>', 'ajax-load-more'); ?></small></p>
+	   		 	<p><?php _e('Add text/html to be displayed when no results are returned in the Ajax query.', 'ajax-load-more'); ?><br/><small><?php _e('e.g. &lt;div class=\'no-results\'>Sorry, nothing found in this query&lt;/div>', 'ajax-load-more'); ?></small></p>
 	   		 </div>
 	         <div class="wrap">
 	            <div class="inner">
@@ -248,6 +291,7 @@
 	   <div class="row checkbox scroll_load" id="alm-scroll">
 	      <h3 class="heading" tabindex="0"><?php _e('Scrolling', 'ajax-load-more'); ?></h3>
 	      <div class="expand-wrap">
+	         
 	         <div class="section-title">
 	            <h4><?php _e('Enable Scrolling', 'ajax-load-more'); ?></h4>
 	   		 	<p><?php _e('Load more posts as the user scrolls the page.', 'ajax-load-more'); ?></p>
@@ -266,65 +310,78 @@
 	               </ul>
 	            </div>
 	         </div>
+	         
 	         <div class="clear"></div>
-	         <div class="scroll_distance">
-	            <div class="clear"></div>
-	            <hr>
-	            <div class="section-title">
-	               <h4><?php _e('Scroll Distance', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Distance is based on the position of the loading button from the bottom of the screen','ajax-load-more'); ?>."></a></h4>
-	      		 	<p><?php _e('The distance from the bottom of the screen to trigger loading of posts. (Default = 100)', 'ajax-load-more'); ?></p>
-	      		 </div>
-	            <div class="wrap">
-	               <div class="inner">
-	                  <input type="number" class="alm_element numbers-only" name="scroll-distance" id="scroll-distance" step="10" min="0" value="100">
-	               </div>
-	            </div>
-	         </div>
-	         <div class="scroll_container">
-	            <div class="clear"></div>
-	            <hr>
-	            <div class="section-title">
-	               <h4><?php _e('Scroll Container', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Confine Ajax Load More scrolling to a parent container','ajax-load-more'); ?>."></a></h4>
-	      		 	<p><?php _e('Enter the ID or classname of the parent container', 'ajax-load-more'); ?></p>
-	      		 </div>
-	            <div class="wrap">
-	               <div class="inner">
-	                  <input type="text" class="alm_element" name="scroll-container" id="scroll-container" placeholder="#my-div">
-	               </div>
-	            </div>
-	         </div>
-	         <div class="max_pages">
-	            <div class="clear"></div>
-	            <hr>
-	            <div class="section-title">
-	               <h4><?php _e('Maximum Pages', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('If using an Infinite Scroll button style you should set this to 0','ajax-load-more'); ?>."></a></h4>
-	      		 	<p><?php _e('Maximum number of pages to load while scrolling. (0 = unlimited)', 'ajax-load-more'); ?></p>
-	      		 </div>
-	            <div class="wrap">
-	               <div class="inner">
-	                  <input type="number" class="alm_element numbers-only" name="max-select" id="max-select" step="1" min="0" value="0">
-	               </div>
-	            </div>
-	         </div>
-	         <div class="pause_override">
-	            <div class="clear"></div>
-	            <hr>
-	            <div class="section-title">
-	               <h4><?php _e('Pause Override', 'ajax-load-more'); ?></h4>
-	      		 	<p><?php _e('Allow scrolling to override the Pause parameter and trigger the loading of posts on scroll.', 'ajax-load-more'); ?></p>
-	      		 </div>
-	            <div class="wrap">
-	               <ul>
-	                  <li>
-	                     <input class="alm_element" type="radio" name="pause_override" value="t" id="pause_override_t">
-	                     <label for="pause_override_t"><?php _e('True', 'ajax-load-more'); ?></label>
-	                  </li>
-	                  <li>
-	                     <input class="alm_element" type="radio" name="pause_override" value="f" id="pause_override_f" checked="checked">
-	                     <label for="pause_override_f"><?php _e('False', 'ajax-load-more'); ?></label>
-	                  </li>
-	               </ul>
-	            </div>
+	         
+	         <div class="scrolling-options nested-component">            
+            	<div class="nested-component--inner">
+						
+						<!-- Scroll Distance -->
+			         <div class="scroll_distance">
+			            <div class="section-title">
+			               <h4><?php _e('Scroll Distance', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Distance is based on the position of the loading button from the bottom of the screen','ajax-load-more'); ?>."></a></h4>
+			      		 	<p><?php _e('The distance from the bottom of the screen to trigger loading of posts. (Default = 100)', 'ajax-load-more'); ?></p>
+			      		 </div>
+			            <div class="wrap">
+			               <div class="inner">
+			                  <input type="number" class="alm_element numbers-only" name="scroll-distance" id="scroll-distance" step="10" min="0" value="100">
+			               </div>
+			            </div>
+			         </div>
+			         
+			         <div class="scroll_container">
+			            <div class="clear"></div>
+			            <hr>		           
+			            
+			            <!-- Scroll Container -->
+			            <div class="section-title">
+			               <h4><?php _e('Scroll Container', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Confine Ajax Load More scrolling to a parent container','ajax-load-more'); ?>."></a></h4>
+			      		 	<p><?php _e('Enter the ID or classname of the parent container', 'ajax-load-more'); ?></p>
+			      		 </div>
+			            <div class="wrap">
+			               <div class="inner">
+			                  <input type="text" class="alm_element" name="scroll-container" id="scroll-container" placeholder="#my-div">
+			               </div>
+			            </div>
+			         </div>
+			         
+			         <!-- Max Pages -->
+			         <div class="max_pages">
+			            <div class="clear"></div>
+			            <hr>
+			            <div class="section-title">
+			               <h4><?php _e('Maximum Pages', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('If using an Infinite Scroll button style you should set this to 0','ajax-load-more'); ?>."></a></h4>
+			      		 	<p><?php _e('Maximum number of pages to load while scrolling. (0 = unlimited)', 'ajax-load-more'); ?></p>
+			      		 </div>
+			            <div class="wrap">
+			               <div class="inner">
+			                  <input type="number" class="alm_element numbers-only" name="max-select" id="max-select" step="1" min="0" value="0">
+			               </div>
+			            </div>
+			         </div>
+			         
+			         <!-- Pause Override -->
+			         <div class="pause_override">
+			            <div class="clear"></div>
+			            <hr>
+			            <div class="section-title">
+			               <h4><?php _e('Pause Override', 'ajax-load-more'); ?></h4>
+			      		 	<p><?php _e('Allow scrolling to override the Pause parameter and trigger the loading of posts on scroll.', 'ajax-load-more'); ?></p>
+			      		 </div>
+			            <div class="wrap">
+			               <ul>
+			                  <li>
+			                     <input class="alm_element" type="radio" name="pause_override" value="t" id="pause_override_t">
+			                     <label for="pause_override_t"><?php _e('True', 'ajax-load-more'); ?></label>
+			                  </li>
+			                  <li>
+			                     <input class="alm_element" type="radio" name="pause_override" value="f" id="pause_override_f" checked="checked">
+			                     <label for="pause_override_f"><?php _e('False', 'ajax-load-more'); ?></label>
+			                  </li>
+			               </ul>
+			            </div>
+			         </div>
+            	</div>
 	         </div>
 	      </div>
 	   </div>
@@ -350,118 +407,120 @@
 	
 				<div class="clear"></div>
 	
-	         <div class="masonry-options">
-	
-		         <div class="clear"></div>
-		         <hr>
-		         <div class="section-title full" style="padding-bottom: 10px;">
-		         	<h4><?php _e('Masonry Options', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Ajax Load More does not support all available Masonry options','ajax-load-more'); ?>."></a></h4>
-		         	<p><?php _e('The following Masonry <a href="https://masonry.desandro.com/options.html" target="_blank">options</a> are supported by Ajax Load More.', 'ajax-load-more'); ?></p>
-		         </div>
-		         <div class="clear"></div>
-	
-		         <div class="section-title">
-		            <h4><?php _e('Item Selector', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Item Selector is required for Masonry to target each element loaded with Ajax.','ajax-load-more'); ?>"></a></h4>
-		   		 	<p><?php _e('Enter the target classname of each masonry item.', 'ajax-load-more'); ?><br/>
-		   		 	e.g <span>.grid-item</span>
-		   		 	</p>
-		   		 </div>
-		   		 <div class="wrap">
-		            <div class="inner">
-		               <input type="text" class="alm_element" name="masonry-item" id="masonry-item" placeholder=".grid-item">
-		            </div>
-		         </div>
-		         
-		         <div class="clear"></div>
-		         <hr class="indented" />
-	
-		         <div class="section-title">
-		            <h4><?php _e('Column Width', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('If columnWidth is not set, Masonry will use the outer width of the first Item Selector.','ajax-load-more'); ?>"></a></h4>
-		   		 	<p><?php _e('Enter the <a href="https://masonry.desandro.com/options.html#columnwidth" target="_blank">columnWidth</a> of the masonry items.', 'ajax-load-more'); ?><br/>
-		   		 	e.g <span>80</span>
-		   		 	</p>
-		   		 </div>
-		   		 <div class="wrap">
-		            <div class="inner">
-		               <input type="number" class="alm_element numbers-only" name="masonry-columnwidth" id="masonry-columnwidth" placeholder="80" min="0" step="1">
-		            </div>
-		         </div>
-		         
-		         <div class="clear"></div>
-		         <hr class="indented" />
-	
-		         <div class="section-title">
-		            <h4><?php _e('Animation Type', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('All Masonry animations include a fade-in effect as items are loaded.','ajax-load-more'); ?>"></a></h4>
-		   		 	<p><?php _e('Select a loading transition for Masonry items.', 'ajax-load-more'); ?></p>
-		   		</div>
-		   		<div class="wrap">
-		            <div class="inner">
-	                  <ul>
-	                     <li style="width:100%;">
-	                        <input class="alm_element" type="radio" name="masonry-animation" value="default" id="masonry-animation-default" checked="checked">
-	                        <label for="masonry-animation-default">
-	                           <?php _e('Default (Zoom)', 'ajax-load-more'); ?> 
-	                           <span class="description"><?php _e('Items scale up from 50% to 100% size on load.','ajax-load-more'); ?></span>
-	                        </label>
-	                     </li>
-	                     <li style="width:100%;">
-	                        <input class="alm_element" type="radio" name="masonry-animation" value="zoom-out" id="masonry-animation-zoom-out">
-	                        <label for="masonry-animation-zoom-out">
-	                           <?php _e('Zoom Out', 'ajax-load-more'); ?>  
-	                           <span class="description"><?php _e('Items scale down from 125% to 100% size on load.','ajax-load-more'); ?></span>
-	                        </label>
-	                     </li>
-	                     <li style="width:100%;">
-	                        <input class="alm_element" type="radio" name="masonry-animation" value="slide-up" id="masonry-animation-up">
-	                        <label for="masonry-animation-up">
-	                           <?php _e('Slide Up', 'ajax-load-more'); ?>
-	                           <span class="description"><?php _e('Items animate up as they are loaded into view.','ajax-load-more'); ?></span>
-	                        </label>
-	                     </li>
-	                     <li style="width:100%;">
-	                        <input class="alm_element" type="radio" name="masonry-animation" value="slide-down" id="masonry-animation-down">
-	                        <label for="masonry-animation-down">
-	                           <?php _e('Slide Down', 'ajax-load-more'); ?>
-	                           <span class="description"><?php _e('Items animate down when loaded into view.','ajax-load-more'); ?></span>
-	                        </label>
-	                     </li>
-	                     <li style="width:100%;">
-	                        <input class="alm_element" type="radio" name="masonry-animation" value="none" id="masonry-animation-none">
-	                        <label for="masonry-animation-none">
-	                           <?php _e('None', 'ajax-load-more'); ?>
-	                        </label>
-	                     </li>
-	                  </ul>	               
-		            </div>
-		         </div>
-		         
-		         <div class="clear"></div>
-		         <hr class="indented" />
-	
-		         <div class="section-title">
-		            <h4><?php _e('Horizontal Order', 'ajax-load-more'); ?></h4>
-		   		 	<p><?php _e('Lays out items to maintain left-to-right order.', 'ajax-load-more'); ?>
-		   		 	</p>
-		   		 </div>
-		   		 <div class="wrap">
-		            <div class="inner">
-							<ul>
-								<li>
-									<input class="alm_element" type="radio" name="masonry-horizontalorder" value="t" id="horizontalOrder_t" checked="checked">
-									<label for="horizontalOrder_t"><?php _e('True', 'ajax-load-more'); ?></label>
-								</li>
-								<li>
-									<input class="alm_element" type="radio" name="masonry-horizontalorder" value="f" id="horizontalOrder_f">
-									<label for="horizontalOrder_f"><?php _e('False', 'ajax-load-more'); ?></label>
-								</li>
-							</ul>
-		            </div>
-		         </div>
-		         
-					<p class="warning-callout">
-						<?php _e('Don\'t see your favorite Masonry option listed? You can always add your own!', 'ajax-load-more'); ?>
-						<a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/masonry/" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a>
-					</p>
+	         <div class="masonry-options nested-component" style="display: none;">            
+            	<div class="nested-component--inner">
+	            	
+			         <div class="section-title full" style="padding-bottom: 10px;">
+			         	<h4><?php _e('Masonry Options', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Ajax Load More does not support all available Masonry options','ajax-load-more'); ?>."></a></h4>
+			         	<p><?php _e('The following Masonry <a href="https://masonry.desandro.com/options.html" target="_blank">options</a> are supported by Ajax Load More.', 'ajax-load-more'); ?></p>
+			         </div>
+			         <div class="clear"></div>
+		
+			         <div class="section-title">
+			            <h4><?php _e('Item Selector', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Item Selector is required for Masonry to target each element loaded with Ajax.','ajax-load-more'); ?>"></a></h4>
+			   		 	<p><?php _e('Enter the target classname of each masonry item.', 'ajax-load-more'); ?><br/>
+			   		 	e.g <span>.grid-item</span>
+			   		 	</p>
+			   		 </div>
+			   		 <div class="wrap">
+			            <div class="inner">
+			               <input type="text" class="alm_element" name="masonry-item" id="masonry-item" placeholder=".grid-item">
+			            </div>
+			         </div>
+			         
+			         <div class="clear"></div>
+			         <hr class="indented" />
+		
+			         <div class="section-title">
+			            <h4><?php _e('Column Width', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('If columnWidth is not set, Masonry will use the outer width of the first Item Selector.','ajax-load-more'); ?>"></a></h4>
+			   		 	<p><?php _e('Enter the <a href="https://masonry.desandro.com/options.html#columnwidth" target="_blank">columnWidth</a> of the masonry items.', 'ajax-load-more'); ?><br/>
+			   		 	e.g <span>80</span>
+			   		 	</p>
+			   		 </div>
+			   		 <div class="wrap">
+			            <div class="inner">
+			               <input type="number" class="alm_element numbers-only" name="masonry-columnwidth" id="masonry-columnwidth" placeholder="80" min="0" step="1">
+			            </div>
+			         </div>
+			         
+			         <div class="clear"></div>
+			         <hr class="indented" />
+		
+			         <div class="section-title">
+			            <h4><?php _e('Animation Type', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('All Masonry animations include a fade-in effect as items are loaded.','ajax-load-more'); ?>"></a></h4>
+			   		 	<p><?php _e('Select a loading transition for Masonry items.', 'ajax-load-more'); ?></p>
+			   		</div>
+			   		<div class="wrap">
+			            <div class="inner">
+		                  <ul>
+		                     <li style="width:100%;">
+		                        <input class="alm_element" type="radio" name="masonry-animation" value="default" id="masonry-animation-default" checked="checked">
+		                        <label for="masonry-animation-default">
+		                           <?php _e('Default (Zoom)', 'ajax-load-more'); ?> 
+		                           <span class="description"><?php _e('Items scale up from 50% to 100% size on load.','ajax-load-more'); ?></span>
+		                        </label>
+		                     </li>
+		                     <li style="width:100%;">
+		                        <input class="alm_element" type="radio" name="masonry-animation" value="zoom-out" id="masonry-animation-zoom-out">
+		                        <label for="masonry-animation-zoom-out">
+		                           <?php _e('Zoom Out', 'ajax-load-more'); ?>  
+		                           <span class="description"><?php _e('Items scale down from 125% to 100% size on load.','ajax-load-more'); ?></span>
+		                        </label>
+		                     </li>
+		                     <li style="width:100%;">
+		                        <input class="alm_element" type="radio" name="masonry-animation" value="slide-up" id="masonry-animation-up">
+		                        <label for="masonry-animation-up">
+		                           <?php _e('Slide Up', 'ajax-load-more'); ?>
+		                           <span class="description"><?php _e('Items animate up as they are loaded into view.','ajax-load-more'); ?></span>
+		                        </label>
+		                     </li>
+		                     <li style="width:100%;">
+		                        <input class="alm_element" type="radio" name="masonry-animation" value="slide-down" id="masonry-animation-down">
+		                        <label for="masonry-animation-down">
+		                           <?php _e('Slide Down', 'ajax-load-more'); ?>
+		                           <span class="description"><?php _e('Items animate down when loaded into view.','ajax-load-more'); ?></span>
+		                        </label>
+		                     </li>
+		                     <li style="width:100%;">
+		                        <input class="alm_element" type="radio" name="masonry-animation" value="none" id="masonry-animation-none">
+		                        <label for="masonry-animation-none">
+		                           <?php _e('None', 'ajax-load-more'); ?>
+		                        </label>
+		                     </li>
+		                  </ul>	               
+			            </div>
+			         </div>
+			         
+			         <div class="clear"></div>
+			         <hr class="indented" />
+		
+			         <div class="section-title">
+			            <h4><?php _e('Horizontal Order', 'ajax-load-more'); ?></h4>
+			   		 	<p><?php _e('Lays out items to maintain left-to-right order.', 'ajax-load-more'); ?>
+			   		 	</p>
+			   		 </div>
+			   		 <div class="wrap">
+			            <div class="inner">
+								<ul>
+									<li>
+										<input class="alm_element" type="radio" name="masonry-horizontalorder" value="t" id="horizontalOrder_t" checked="checked">
+										<label for="horizontalOrder_t"><?php _e('True', 'ajax-load-more'); ?></label>
+									</li>
+									<li>
+										<input class="alm_element" type="radio" name="masonry-horizontalorder" value="f" id="horizontalOrder_f">
+										<label for="horizontalOrder_f"><?php _e('False', 'ajax-load-more'); ?></label>
+									</li>
+								</ul>
+			            </div>
+			         </div>
+			         <div class="clear"></div>
+			         <hr/>
+						<p class="warning-callout">
+							<?php _e('Don\'t see your favorite Masonry option listed? You can always add your own!', 'ajax-load-more'); ?>
+							<a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/masonry/" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a>
+						</p>
+						
+            	</div>
 	
 	         </div>
 	
@@ -559,24 +618,21 @@
 	
 	      <div class="clear"></div>
 	
-	      <div class="progress-bar-options">
-	
-	         <div class="clear"></div>
-	         <hr>
-	
-	         <div class="section-title"> 
-	            <h4><?php _e('Color', 'ajax-load-more'); ?> </h4>
-	   		 	<p><?php _e('Enter the hex color of the progress bar', 'ajax-load-more'); ?>.<br/>
-	   		 	Default: #<span>ed7070</span>
-	   		 	</p>
-	   		 </div>
-	   		 <div class="wrap">
-	            <div class="inner" style="position: relative;">
-	               <input type="text" class="alm_element" name="progress_bar_color" id="progress_bar_color" placeholder="ed7070" value="ed7070" maxlength="6" style="padding-left: 40px;">
-	               <span class="progress_bar_color_indicator"></span>
-	            </div>
-	         </div>
-	
+	      <div class="progress-bar-options nested-component" style="display: none;">            
+            <div class="nested-component--inner">	
+		         <div class="section-title"> 
+		            <h4><?php _e('Color', 'ajax-load-more'); ?> </h4>
+		   		 	<p><?php _e('Enter the hex color of the progress bar', 'ajax-load-more'); ?>.<br/>
+		   		 	<?php _e('Default:', 'ajax-load-more'); ?> #<span>ed7070</span>
+		   		 	</p>
+		   		 </div>
+		   		 <div class="wrap">
+		            <div class="inner" style="position: relative;">
+		               <input type="text" class="alm_element" name="progress_bar_color" id="progress_bar_color" placeholder="ed7070" value="ed7070" maxlength="6" style="padding-left: 40px;">
+		               <span class="progress_bar_color_indicator"></span>
+		            </div>
+		         </div>
+            </div>	
 	      </div>
 	
 	   </div>
@@ -667,11 +723,9 @@
 	      	   </div>
 	      	   <div class="clear"></div>
 	
-	      	   <div class="sticky-wrap">
-		      	   <div style="display: block;">
-			      	   <div class="clear"></div>
-				         <hr/>
-	
+					<!-- Sticky Posts -->
+	      	   <div class="sticky-wrap nested-component">            
+	            	<div class="nested-component--inner">		
 				         <div class="section-title">
 				            <h4><?php _e('Sticky Posts', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Sticky posts are only available for Posts','ajax-load-more'); ?>."></a></h4>
 				   		 	<p><?php _e('Preserve the ordering of sticky posts by having them appear first in the Ajax listing.', 'ajax-load-more'); ?></p>
@@ -685,8 +739,8 @@
 				                   </li>
 				               </ul>
 				            </div>
-				         </div>
-		      	   </div>
+			      	   </div>
+	            	</div>
 	      	   </div>
 	
 	   	   </div>

@@ -3,8 +3,8 @@ Contributors: dcooney, connekthq
 Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, infinite scrolling, scroll, infinite, lazy load, lazy loading, endless scroll, pagination, ajax pagination, ajax, ajax posts, woocommerce, ajax load more, masonry
 Requires at least: 4.0
-Tested up to: 5.2.2
-Stable tag: 5.1.4
+Tested up to: 5.2.3
+Stable tag: 5.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,6 +121,7 @@ Ajax Load More accepts a number of parameters that are passed to the WordPress q
 *   **progress_bar_color** - Enter the hex color of the progress bar. Default = 'ed7070'
 *   **button_label** - The label text for Load More button. Default = 'Older Posts'
 *   **button_loading_label** - Update the text of the Load More button while content is loading. Default = null
+*   **loading_style** - Select an Ajax loading style - you can choose between a Button or Infinite Scroll. Default = null
 *   **container_type** - Override the global Container Type that was set on ALM Settings page. Default = null
 *   **css_classes** - Add custom CSS classes to the Ajax Load More container. Default = null
 *   **id** - A unique ID for the Ajax Load More instance.
@@ -140,7 +141,7 @@ Ajax Load More accepts a number of parameters that are passed to the WordPress q
 * **[Default](https://connekthq.com/plugins/ajax-load-more/examples/default/)** - Out of the box functionality and styling.
 * **[Advanced Custom Fields](https://connekthq.com/plugins/ajax-load-more/examples/advanced-custom-fields/)** - Infinite scroll Advanced Custom Fields data with Ajax Load More.
 * **[Attachments](https://connekthq.com/plugins/ajax-load-more/examples/attachments/)** - Endless scroll post attachments.
-* **[CSS Grid](https://connekthq.com/plugins/ajax-load-more/examples/css-grid/)** - Rendering Ajax Load More listings with CSS Grid.
+* **[CSS Grid](https://connekthq.com/plugins/ajax-load-more/examples/css-grid/)** - Rendering Ajax Load More listings with CSS GridRe.
 * **[Destroy After](https://connekthq.com/plugins/ajax-load-more/examples/destroy-after/)** - Remove Ajax Load More functionality after 'n' number of pages.
 * **[Event Listing](https://connekthq.com/plugins/ajax-load-more/examples/event-listing/)** - Ordering and listing events by custom field date.
 * **[Filtering](https://connekthq.com/plugins/ajax-load-more/examples/filtering/)** - Reset and filter an Ajax Load More instance.
@@ -379,6 +380,19 @@ How to install Ajax Load More.
 
 
 == Changelog ==
+
+= 5.1.5 - October 1, 2019 =
+* NEW - Added new `loading_style` parameter that allows users to override the global button style at the shortcode level.
+* NEW - Added mousewheel detection, 'end' and 'page down' keyup listeners for loading posts. In some rare cases users would not be able to load posts unless the user scroll back up the page. This will hopefully solve that issue.
+* UPDATE - Improved plugin accessibility and focus states.
+* UPDATE - Improved admin UI of license updates and expiration notifications.
+* FIX - Fixed issue with `no_results_text` not displaying for some users.
+* FIX - Fixed issue with table data not rendering correctly in Ajax results.
+* FIX - Added fix for `meta_value` not working if set to `0` in a Meta_Query.
+* FIX - Fixed issue with focus not being set on Ajax Load More after a filter method.
+* FIX - Fixed posisble issue with ALM continuously loading posts when using SEO/Next Page or Single Posts addon.
+* FIX - Fixed issue in ALM admin with filename adding single quotes when exporting a Repeater Template from inside the ALM admin.
+
 
 = 5.1.4 - August 15, 2019 =
 * NEW - Added No Results Text(`no_results_text`) parameter to display text/html when zero results are returned in an Ajax Load More query.

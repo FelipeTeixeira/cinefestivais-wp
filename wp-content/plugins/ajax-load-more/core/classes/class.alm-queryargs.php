@@ -232,7 +232,7 @@ if(!class_exists('ALM_QUERY_ARGS')):
    	   }	
    	   
    	   // Meta Query
-   		if(!empty($meta_key) && !empty($meta_value) || !empty($meta_key) && $meta_compare !== "IN"){
+   		if(!empty($meta_key) && isset($meta_value) || !empty($meta_key) && $meta_compare !== "IN"){
       		
       		// Parse multiple meta query    
             $meta_query_total = count(explode(":", $meta_key)); // Total meta_query objects

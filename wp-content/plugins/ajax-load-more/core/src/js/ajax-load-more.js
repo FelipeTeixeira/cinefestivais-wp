@@ -139,7 +139,7 @@ let alm_is_filtering = false;
       alm.transition = alm.listing.dataset.transition; // Transition
       alm.transition_container = alm.listing.dataset.transitionContainer; // Transition Container
       alm.tcc = alm.listing.dataset.transitionContainerClasses; // Transition Container Classes
-      alm.speed = (alm_localize.speed) ? parseInt(alm_localize.speed) : 250;
+      alm.speed = (alm_localize.speed) ? parseInt(alm_localize.speed) : 200;
       alm.images_loaded = (alm.listing.dataset.imagesLoaded) ? alm.listing.dataset.imagesLoaded : false;
       alm.destroy_after = (alm.listing.dataset.destroyAfter) ? alm.listing.dataset.destroyAfter : '';
       alm.orginal_posts_per_page = parseInt(alm.listing.dataset.postsPerPage); // Used for paging add-on
@@ -173,6 +173,7 @@ let alm_is_filtering = false;
       alm.addons.single_post_init_id = alm.listing.dataset.singlePostId;
       alm.addons.single_post_taxonomy = alm.listing.dataset.singlePostTaxonomy;
       alm.addons.single_post_excluded_terms = alm.listing.dataset.singlePostExcludedTerms;
+      alm.addons.single_post_progress_bar = alm.listing.dataset.singlePostProgressBar;
 
       alm.addons.comments = alm.listing.dataset.comments; // Comments add-on      
       alm.addons.comments_post_id = alm.listing.dataset.comments_post_id; // current post id
@@ -183,6 +184,8 @@ let alm_is_filtering = false;
       alm.addons.comments_template = alm.listing.dataset.comments_template;
       alm.addons.comments_callback = alm.listing.dataset.comments_callback;
 
+      alm.addons.tabs = alm.listing.dataset.tabs;
+      
       alm.addons.filters = alm.listing.dataset.filters;
 
       alm.addons.seo = alm.listing.dataset.seo; // SEO add-on
@@ -266,6 +269,26 @@ let alm_is_filtering = false;
          alm.addons.filters = false;
       }
       /* End Filters  */
+
+
+      /* TABS */
+      if (alm.addons.tabs === 'true') { 
+         alm.addons.tabs = true;         
+         alm.addons.tab_template = (alm.listing.dataset.tabTemplate) ? alm.listing.dataset.tabTemplate : '';
+			
+			// Set current template		
+			setTimeout(function(){
+				//window.almTabsOnLoad(alm);
+			}, 500);
+         if (typeof almTabsOnLoad === 'function' && window.location.hash) {
+			   //alm.addons.tab_template = window.almTabsOnLoad(alm);
+			} 
+         
+         alm.addons.tabs_resturl = (alm.listing.dataset.tabsRestUrl) ? alm.listing.dataset.tabsRestUrl : '';
+      } else {
+         alm.addons.tabs = false;
+      }
+      /* End TABS  */
 
 
       /* REST API */
@@ -371,6 +394,7 @@ let alm_is_filtering = false;
       alm.addons.single_post_order = (alm.addons.single_post_order === undefined) ? 'previous' : alm.addons.single_post_order;
       alm.addons.single_post_taxonomy = (alm.addons.single_post_taxonomy === undefined) ? '' : alm.addons.single_post_taxonomy;
       alm.addons.single_post_excluded_terms = (alm.addons.single_post_excluded_terms === undefined) ? '' : alm.addons.single_post_excluded_terms;
+      alm.addons.single_post_progress_bar = (alm.addons.single_post_progress_bar === undefined) ? '' : alm.addons.single_post_progress_bar;
       alm.addons.single_post_title_template = alm.listing.dataset.singlePostTitleTemplate;
       alm.addons.single_post_siteTitle = alm.listing.dataset.singlePostSiteTitle;
       alm.addons.single_post_siteTagline = alm.listing.dataset.singlePostSiteTagline;
@@ -477,6 +501,7 @@ let alm_is_filtering = false;
       alm.resultsText = document.querySelector('.alm-results-text');
       if (alm.resultsText) {
 	      alm.resultsText.setAttribute('aria-live', 'polite');
+	      alm.resultsText.setAttribute('aria-atomic', 'true');
       } else {
          alm.resultsText = false;
       }
@@ -629,10 +654,14 @@ let alm_is_filtering = false;
                'cta_theme_repeater': alm.addons.cta_theme_repeater,
             };
          }
+         
 
          // REST API
          if (alm.extensions.restapi) {
             alm.AjaxLoadMore.restapi(alm, action, queryType);
+         }
+         else if(alm.addons.tabs){
+	         alm.AjaxLoadMore.tabs(alm);
          }
 
          // Standard ALM
@@ -711,8 +740,72 @@ let alm_is_filtering = false;
       
       
       /**  
+	    * tabs
+       * Send request to the WP REST API
+       *
+       * @param {*} alm | ALm object
+       * @since 5.2.0
+       */
+      alm.AjaxLoadMore.tabs = function(alm){
+	      
+         let alm_rest_url = `${alm.addons.tabs_resturl}ajaxloadmore/tab`;   
+              
+         let params = {
+				post_id : alm.post_id,
+				template: alm.addons.tab_template
+         }
+
+			// Axios Interceptor for nested data objects
+			axios.interceptors.request.use(config => {
+				config.paramsSerializer = params => {
+					// Qs is already included in the Axios package
+					return qs.stringify(params, {
+						arrayFormat: 'brackets',
+						encode: false
+					});
+				};
+				return config;
+			});                     
+         
+         // Send Ajax request
+         axios.get(alm_rest_url, {params})
+         .then(function(response){
+	         
+            // Success            
+            let results = response.data; // Get data from response
+				let html = results.html;
+            
+            // Create object to pass to success()
+            let obj = {
+               'html': html,
+               'meta': {
+                  'postcount': 1,
+                  'totalposts': 1
+               },
+            };
+            alm.AjaxLoadMore.success(obj, false); // Send data
+            
+            
+            // Callback to Tabs add-on
+            if (typeof almTabLoaded === 'function') {
+               window.almTabLoaded(alm);
+            }
+            
+            
+         })
+         .catch(function (error) { 
+            // Error            
+            alm.AjaxLoadMore.error(error, 'restapi');    
+             					
+			});
+			
+      };
+      
+      
+      
+      /**  
 	    * restapi
-       * Send request to the WP RESP APT
+       * Send request to the WP REST API
        *
        * @param {*} alm | ALm object
        * @param {*} action | Ajax action
@@ -806,8 +899,9 @@ let alm_is_filtering = false;
 
 			let isPaged = false;
 			         
-         // Create `.alm-reveal` div                   
-         let reveal = document.createElement('div');
+         // Create `.alm-reveal` element                   
+         //let reveal = document.createElement('div');
+         let reveal = (alm.container_type === 'table') ? document.createElement('tbody') : document.createElement('div');
          alm.el = reveal;
          reveal.style.opacity = 0;
          reveal.style.height = 0;
@@ -818,7 +912,8 @@ let alm_is_filtering = false;
 			
          var html, meta, total;
 
-         if (is_cache) { // If cached don't look for json data - we won't be querying the DB.
+         if (is_cache) {
+            // If Cache, do not look for json data as we won't be querying the DB.
             html = data;
             
          } else {
@@ -842,7 +937,7 @@ let alm_is_filtering = false;
 	         // Set Meta		         
             if (meta) {
                alm.main.dataset.totalPosts = (meta.totalposts) ? meta.totalposts : 0;
-            }            
+            }   
             // Paging	            
             if (alm.addons.paging && total > 0) {                
 	            // Add paging containers and content
@@ -855,9 +950,11 @@ let alm_is_filtering = false;
                      window.almPagingEmpty(alm);
                   }
                }
-               if (typeof almEmpty === 'function') {
-	               almNoResults(alm.content, alm.no_results);
+               if (typeof almEmpty === 'function') {	               
                   window.almEmpty(alm);
+               }
+               if(alm.no_results){
+	               almNoResults(alm.content, alm.no_results);
                }
             }
 
@@ -881,8 +978,7 @@ let alm_is_filtering = false;
 
          /*
           *  Set localized variables
-          */
-          
+          */          
          setLocalizedVars(alm);
          
          
@@ -904,8 +1000,7 @@ let alm_is_filtering = false;
                   reveal.dataset.url = alm.addons.single_post_permalink;
                   reveal.dataset.page = alm.page;
                   reveal.dataset.id = alm.addons.single_post_id;
-                  reveal.dataset.title = alm.addons.single_post_title;
-                                    
+                  reveal.dataset.title = alm.addons.single_post_title;                                    
                   reveal.innerHTML = alm.html;
                   
                } else {
@@ -995,8 +1090,8 @@ let alm_is_filtering = false;
 	                              // Filters
                               	alm_reveal.setAttribute('class', 'alm-reveal' + filters_class + preloaded_class + alm.tcc);
 											alm_reveal.dataset.url = alm.canonical_url + alm.AjaxLoadMore.buildFilterURL(querystring, 0);
-											alm_reveal.dataset.page = '1';
-											
+											alm_reveal.dataset.page = '1';			
+																						
                               }                              
                            } 
                            
@@ -1124,7 +1219,6 @@ let alm_is_filtering = false;
 	               }
 	               
                }
-
 					
 					// *****
                // Transitions	
@@ -1171,6 +1265,31 @@ let alm_is_filtering = false;
                      alm.AjaxLoadMore.transitionEnd();
                   }
                }
+               
+               
+               // *****
+               // TABS - Trigger almTabsSetHeight callback in Tabs add-on
+               // *****
+					if (typeof almTabsSetHeight === 'function') {
+						if (alm.images_loaded === 'true') {
+   						imagesLoaded( reveal, function() {
+      						setTimeout(function(){	   
+                           almFadeIn(alm.listing, alm.speed);
+                           setTimeout(function(){                              
+						            window.almTabsSetHeight(alm);
+                           }, alm.speed);
+						      }, alm.speed + 1);
+						   });
+						} else {
+							setTimeout(function(){
+                        almFadeIn(alm.listing, alm.speed);
+                        setTimeout(function(){                              
+					            window.almTabsSetHeight(alm);
+                        }, alm.speed);
+							}, alm.speed + 1);
+						}
+					}
+					
 
             } else {
 
@@ -1298,13 +1417,24 @@ let alm_is_filtering = false;
          }
          
 			
-			// Set focus (only with transition_containers)
-			if(alm.transition_container){
+			// Set Focus for A11y
+			if(alm.transition_container && total > 0){
 				if(alm.addons.paging){
-			   	setFocus(alm.init, alm.addons.preloaded, pagingContent);
-			   } else {
-			   	setFocus(alm.init, alm.addons.preloaded, reveal);
-			   }
+   				// Paging
+			   	setFocus(alm.init, alm.addons.preloaded, alm.listing, alm_is_filtering);
+			   	
+			   } else if(alm.addons.single_post || alm.addons.nextpage){
+   			   // Single Posts OR Next Page, set `init` to false to trigger focus
+		   	   setFocus(false, alm.addons.preloaded, reveal, alm_is_filtering);
+		   	   
+            } else {
+               // Standard ALM
+		   	   setFocus(alm.init, alm.addons.preloaded, reveal, alm_is_filtering);                  
+            }
+			} else if(!alm.transition_container && alm.container_type === 'table'){
+   			
+   			// Table Layout
+		   	setFocus(alm.init, alm.addons.preloaded, reveal[0], alm_is_filtering);
 			}
          
                 
@@ -1347,8 +1477,10 @@ let alm_is_filtering = false;
                window.almPagingEmpty(alm);
             }
             if (typeof almEmpty === 'function') {
-	            almNoResults(alm.content, alm.no_results);
                window.almEmpty(alm);
+            }
+            if(alm.no_results){
+               almNoResults(alm.content, alm.no_results);
             }
          }
          
@@ -1435,7 +1567,6 @@ let alm_is_filtering = false;
          }, alm.speed);
          
       };
-
 
 
       /**
@@ -1666,21 +1797,27 @@ let alm_is_filtering = false;
 
 
 
-
       /**
 	    * Window Resize
-       * Add resize function for Paging add-on only.
+       * Add resize function for Paging & Tabs add-ons.
        * 
        * @since 2.1.2
-       * @updated 4.2
+       * @updated 5.2
        */
-      if (alm.addons.paging) {
-         let pagingResize;
+      if (alm.addons.paging || alm.addons.tabs) {
+         let resize;
          alm.window.onresize = function() {
-            clearTimeout(pagingResize);
-            pagingResize = setTimeout(function(e) {
-               if (typeof almOnWindowResize === 'function') {
-                  window.almOnWindowResize(alm);
+            clearTimeout(resize);
+            resize = setTimeout(function(e) {
+	            if(alm.addons.tabs){ // Tabs
+	               if (typeof almOnTabsWindowResize === 'function') {
+	                  window.almOnTabsWindowResize(alm);
+	               }
+               }
+	            if(alm.addons.paging){ // Paging
+	               if (typeof almOnWindowResize === 'function') {
+	                  window.almOnWindowResize(alm);
+	               }
                }
             }, alm.speed);
          };
@@ -1752,8 +1889,25 @@ let alm_is_filtering = false;
          if (alm.scroll_container !== '') { // Scroll Container         
             alm.window = (document.querySelector(alm.scroll_container)) ? document.querySelector(alm.scroll_container) : alm.window;
          }
-         alm.window.addEventListener('scroll', alm.AjaxLoadMore.scroll);
-         alm.window.addEventListener('touchstart', alm.AjaxLoadMore.scroll);
+         alm.window.addEventListener('scroll', alm.AjaxLoadMore.scroll); // Scroll
+         alm.window.addEventListener('touchstart', alm.AjaxLoadMore.scroll); // Touch Devices
+         alm.window.addEventListener('wheel', function(e) { // Mousewheel
+				let direction = Math.sign(e.deltaY);
+				if(direction > 0){
+					alm.AjaxLoadMore.scroll();
+				}
+			});
+			alm.window.addEventListener('keyup', function(e) { // End, Page Down
+				let code = (e.keyCode ? e.keyCode : e.which);
+				switch (code) {
+					case 35 :
+					case 34 :
+						alm.AjaxLoadMore.scroll();
+					break;
+				}
+			});
+         
+         
       }
       
       
@@ -1787,14 +1941,15 @@ let alm_is_filtering = false;
          setTimeout(function() {
 	         alm.AjaxLoadMore.resetBtnText();
             alm.main.classList.remove('alm-loading');
+            alm.button.classList.remove('loading'); // Loading button
             alm.AjaxLoadMore.triggerAddons(alm);
             if (!alm.addons.paging) {
                setTimeout(function() {
-                  alm.button.classList.remove('loading'); // Loading button
+                  
                   alm.loading = false; // Delay to prevent loading to fast
-               }, alm.speed);               
+               }, alm.speed * 3 );               
             }
-         }, alm.speed);
+         }, 100);
       };
 
 
@@ -1933,9 +2088,11 @@ let alm_is_filtering = false;
                // almEmpty
                if (alm.addons.preloaded_total_posts == 0) {
                   if (typeof almEmpty === 'function') {
-	                  almNoResults(alm.content, alm.no_results);
                      window.almEmpty(alm);
                   }
+                  if(alm.no_results){
+		               almNoResults(alm.content, alm.no_results);
+	               }
                }
             }, alm.speed);
 
@@ -2104,7 +2261,7 @@ let alm_is_filtering = false;
     */
    window.almInit = function(el, id = 0) {
       new ajaxloadmore(el, id);
-   };
+   }; 
 
 
 
@@ -2133,14 +2290,39 @@ let alm_is_filtering = false;
  * @param {*} speed
  * @param {*} data
  */
-let filter = function(transition = 'fade', speed = '250', data = '') {
+let filter = function(transition = 'fade', speed = '200', data = '') {
    if (!transition || !speed || !data) {
       return false;
    }
    alm_is_filtering = true;
-   almFilter(transition, speed, data);
+   almFilter(transition, speed, data, 'filter');
 };
 export { filter };
+
+
+
+/** 
+ * tab
+ * Tabbed content for Ajax Load More instance
+ * 
+ * @since 5.2
+ * @param {*} data
+ * @param {*} url
+ */
+let tab = function(data = '', url = false) {
+	
+	let transition = 'fade';
+	let speed = (alm_localize.speed) ? parseInt(alm_localize.speed) : 200;
+	
+   if (!data) {
+      return false;
+   }
+   
+   alm_is_filtering = true;
+   almFilter(transition, speed, data, 'tab');
+   
+};
+export { tab };
 
 
 
@@ -2151,18 +2333,28 @@ export { filter };
  * @since 5.0
  * @param {*} path
  */
+
 let tracking = function(path) {
    if (typeof gtag === 'function') { // Gtag GA Tracking
       gtag('event', 'page_view', {
          'page_path': path
       });
+      if(alm_localize.ga_debug){
+         console.log('Pageview sent to Google Analytics (gtag)');
+      }
    }
    if (typeof ga === 'function') { // Deprecated GA Tracking
       ga('send', 'pageview', path);
+      if(alm_localize.ga_debug){
+         console.log('Pageview sent to Google Analytics (ga)');
+      }
    }
    if (typeof __gaTracker === 'function') { // Monster Insights
       __gaTracker('send', 'pageview', path);
-   } 
+      if(alm_localize.ga_debug){
+         console.log('Pageview sent to Google Analytics (__gaTracker)');
+      }
+   }    
    
    // Dispatch global Analytics callback
    if (typeof almAnalytics === 'function') {
@@ -2227,3 +2419,20 @@ let getOffset = function(el = null){
    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 };
 export { getOffset };
+
+
+
+/** 
+ *  almScroll
+ *  Scroll window to position (global function)
+ *
+ *  @since 5.0
+ *  @param {*} position
+ */
+let render = function(el, options = null) {
+   if (!el) {
+      return false;
+   }
+   // console.log(el, options);
+};
+export { render };

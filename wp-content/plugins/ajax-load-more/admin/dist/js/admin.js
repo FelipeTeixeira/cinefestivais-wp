@@ -1395,7 +1395,6 @@ jQuery(document).ready(function ($) {
     *
     *  @since 2.8.4
     */
-
   $('body').on('mouseenter', '.tooltip:not(.tooltipstered)', function () {
     $(this).tooltipster({
       delay: 100,
@@ -1556,9 +1555,12 @@ jQuery(document).ready(function ($) {
   var almActivating = false;
   $(document).on('click', '.license-btn', function (e) {
     e.preventDefault();
+
     if (!almActivating) {
+
       $('.license-btn-wrap .msg').remove();
       almActivating = true;
+
       var el = $(this),
           wrap = el.closest('.license-btn-wrap'),
           parent = el.closest('.license'),
@@ -1600,12 +1602,15 @@ jQuery(document).ready(function ($) {
             $('.license-key-field .status', parent).addClass('active').removeClass('inactive').text(alm_admin_localize.active);
             $('.license-title .status', parent).addClass('valid').removeClass('invalid');
             $('.activate.license-btn', parent).addClass('hide');
+            $('.check-licence.license-btn', parent).addClass('hide');
             $('.deactivate.license-btn', parent).removeClass('hide');
+            $('.renew-btn', parent).addClass('hide');
             $('.no-license', parent).slideUp(200);
           } else {
             $('.license-key-field .status', parent).removeClass('active').addClass('inactive').text(alm_admin_localize.inactive);
             $('.license-title .status', parent).removeClass('valid').addClass('invalid');
             $('.activate.license-btn', parent).removeClass('hide');
+            $('.check-licence.license-btn', parent).addClass('hide');
             $('.deactivate.license-btn', parent).addClass('hide');
             $('.no-license', parent).slideDown(200);
           }
@@ -1613,6 +1618,7 @@ jQuery(document).ready(function ($) {
           $('.loading', parent).delay(250).fadeOut(300);
           almActivating = false;
         },
+
         error: function error(xhr, status, _error2) {
           console.log(status);
           $('.loading', parent).delay(250).fadeOut(300);
@@ -1690,7 +1696,8 @@ jQuery(document).ready(function ($) {
   $(document).on('click', '.alm-notification--dismiss', function (e) {
     e.preventDefault();
     var el = $(this),
-        container = el.parent('.group');
+        container = el.parent('.cta');
+
     // Get value from Ajax
     $.ajax({
       type: 'POST',

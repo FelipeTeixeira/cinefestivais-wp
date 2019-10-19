@@ -100,7 +100,7 @@ var ajaxloadmore =
 Object.defineProperty(exports, "__esModule", {
    value: true
 });
-exports.getOffset = exports.almScroll = exports.start = exports.tracking = exports.filter = undefined;
+exports.render = exports.getOffset = exports.almScroll = exports.start = exports.tracking = exports.tab = exports.filter = undefined;
 
 var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
@@ -324,7 +324,7 @@ var alm_is_filtering = false;
       alm.transition = alm.listing.dataset.transition; // Transition
       alm.transition_container = alm.listing.dataset.transitionContainer; // Transition Container
       alm.tcc = alm.listing.dataset.transitionContainerClasses; // Transition Container Classes
-      alm.speed = alm_localize.speed ? parseInt(alm_localize.speed) : 250;
+      alm.speed = alm_localize.speed ? parseInt(alm_localize.speed) : 200;
       alm.images_loaded = alm.listing.dataset.imagesLoaded ? alm.listing.dataset.imagesLoaded : false;
       alm.destroy_after = alm.listing.dataset.destroyAfter ? alm.listing.dataset.destroyAfter : '';
       alm.orginal_posts_per_page = parseInt(alm.listing.dataset.postsPerPage); // Used for paging add-on
@@ -357,6 +357,7 @@ var alm_is_filtering = false;
       alm.addons.single_post_init_id = alm.listing.dataset.singlePostId;
       alm.addons.single_post_taxonomy = alm.listing.dataset.singlePostTaxonomy;
       alm.addons.single_post_excluded_terms = alm.listing.dataset.singlePostExcludedTerms;
+      alm.addons.single_post_progress_bar = alm.listing.dataset.singlePostProgressBar;
 
       alm.addons.comments = alm.listing.dataset.comments; // Comments add-on      
       alm.addons.comments_post_id = alm.listing.dataset.comments_post_id; // current post id
@@ -366,6 +367,8 @@ var alm_is_filtering = false;
       alm.addons.comments_style = alm.listing.dataset.comments_style;
       alm.addons.comments_template = alm.listing.dataset.comments_template;
       alm.addons.comments_callback = alm.listing.dataset.comments_callback;
+
+      alm.addons.tabs = alm.listing.dataset.tabs;
 
       alm.addons.filters = alm.listing.dataset.filters;
 
@@ -448,6 +451,25 @@ var alm_is_filtering = false;
          alm.addons.filters = false;
       }
       /* End Filters  */
+
+      /* TABS */
+      if (alm.addons.tabs === 'true') {
+         alm.addons.tabs = true;
+         alm.addons.tab_template = alm.listing.dataset.tabTemplate ? alm.listing.dataset.tabTemplate : '';
+
+         // Set current template		
+         setTimeout(function () {
+            //window.almTabsOnLoad(alm);
+         }, 500);
+         if (typeof almTabsOnLoad === 'function' && window.location.hash) {
+            //alm.addons.tab_template = window.almTabsOnLoad(alm);
+         }
+
+         alm.addons.tabs_resturl = alm.listing.dataset.tabsRestUrl ? alm.listing.dataset.tabsRestUrl : '';
+      } else {
+         alm.addons.tabs = false;
+      }
+      /* End TABS  */
 
       /* REST API */
       if (alm.extensions.restapi === 'true') {
@@ -549,6 +571,7 @@ var alm_is_filtering = false;
       alm.addons.single_post_order = alm.addons.single_post_order === undefined ? 'previous' : alm.addons.single_post_order;
       alm.addons.single_post_taxonomy = alm.addons.single_post_taxonomy === undefined ? '' : alm.addons.single_post_taxonomy;
       alm.addons.single_post_excluded_terms = alm.addons.single_post_excluded_terms === undefined ? '' : alm.addons.single_post_excluded_terms;
+      alm.addons.single_post_progress_bar = alm.addons.single_post_progress_bar === undefined ? '' : alm.addons.single_post_progress_bar;
       alm.addons.single_post_title_template = alm.listing.dataset.singlePostTitleTemplate;
       alm.addons.single_post_siteTitle = alm.listing.dataset.singlePostSiteTitle;
       alm.addons.single_post_siteTagline = alm.listing.dataset.singlePostSiteTagline;
@@ -656,6 +679,7 @@ var alm_is_filtering = false;
       alm.resultsText = document.querySelector('.alm-results-text');
       if (alm.resultsText) {
          alm.resultsText.setAttribute('aria-live', 'polite');
+         alm.resultsText.setAttribute('aria-atomic', 'true');
       } else {
          alm.resultsText = false;
       }
@@ -804,6 +828,8 @@ var alm_is_filtering = false;
          // REST API
          if (alm.extensions.restapi) {
             alm.AjaxLoadMore.restapi(alm, action, queryType);
+         } else if (alm.addons.tabs) {
+            alm.AjaxLoadMore.tabs(alm);
          }
 
          // Standard ALM
@@ -871,8 +897,63 @@ var alm_is_filtering = false;
       };
 
       /**  
+      * tabs
+       * Send request to the WP REST API
+       *
+       * @param {*} alm | ALm object
+       * @since 5.2.0
+       */
+      alm.AjaxLoadMore.tabs = function (alm) {
+
+         var alm_rest_url = alm.addons.tabs_resturl + 'ajaxloadmore/tab';
+
+         var params = {
+            post_id: alm.post_id,
+            template: alm.addons.tab_template
+
+            // Axios Interceptor for nested data objects
+         };_axios2.default.interceptors.request.use(function (config) {
+            config.paramsSerializer = function (params) {
+               // Qs is already included in the Axios package
+               return qs.stringify(params, {
+                  arrayFormat: 'brackets',
+                  encode: false
+               });
+            };
+            return config;
+         });
+
+         // Send Ajax request
+         _axios2.default.get(alm_rest_url, { params: params }).then(function (response) {
+
+            // Success            
+            var results = response.data; // Get data from response
+            var html = results.html;
+
+            // Create object to pass to success()
+            var obj = {
+               'html': html,
+               'meta': {
+                  'postcount': 1,
+                  'totalposts': 1
+               }
+            };
+            alm.AjaxLoadMore.success(obj, false); // Send data
+
+
+            // Callback to Tabs add-on
+            if (typeof almTabLoaded === 'function') {
+               window.almTabLoaded(alm);
+            }
+         }).catch(function (error) {
+            // Error            
+            alm.AjaxLoadMore.error(error, 'restapi');
+         });
+      };
+
+      /**  
       * restapi
-       * Send request to the WP RESP APT
+       * Send request to the WP REST API
        *
        * @param {*} alm | ALm object
        * @param {*} action | Ajax action
@@ -958,8 +1039,9 @@ var alm_is_filtering = false;
 
          var isPaged = false;
 
-         // Create `.alm-reveal` div                   
-         var reveal = document.createElement('div');
+         // Create `.alm-reveal` element                   
+         //let reveal = document.createElement('div');
+         var reveal = alm.container_type === 'table' ? document.createElement('tbody') : document.createElement('div');
          alm.el = reveal;
          reveal.style.opacity = 0;
          reveal.style.height = 0;
@@ -971,7 +1053,7 @@ var alm_is_filtering = false;
          var html, meta, total;
 
          if (is_cache) {
-            // If cached don't look for json data - we won't be querying the DB.
+            // If Cache, do not look for json data as we won't be querying the DB.
             html = data;
          } else {
             // Standard ALM query results
@@ -1008,8 +1090,10 @@ var alm_is_filtering = false;
                   }
                }
                if (typeof almEmpty === 'function') {
-                  (0, _noResults2.default)(alm.content, alm.no_results);
                   window.almEmpty(alm);
+               }
+               if (alm.no_results) {
+                  (0, _noResults2.default)(alm.content, alm.no_results);
                }
             }
 
@@ -1032,7 +1116,6 @@ var alm_is_filtering = false;
          /*
           *  Set localized variables
           */
-
          (0, _setLocalizedVars2.default)(alm);
 
          /*
@@ -1053,7 +1136,6 @@ var alm_is_filtering = false;
                   reveal.dataset.page = alm.page;
                   reveal.dataset.id = alm.addons.single_post_id;
                   reveal.dataset.title = alm.addons.single_post_title;
-
                   reveal.innerHTML = alm.html;
                } else {
 
@@ -1289,6 +1371,29 @@ var alm_is_filtering = false;
                            alm.AjaxLoadMore.transitionEnd();
                         }
                      }
+
+               // *****
+               // TABS - Trigger almTabsSetHeight callback in Tabs add-on
+               // *****
+               if (typeof almTabsSetHeight === 'function') {
+                  if (alm.images_loaded === 'true') {
+                     imagesLoaded(reveal, function () {
+                        setTimeout(function () {
+                           (0, _fadeIn2.default)(alm.listing, alm.speed);
+                           setTimeout(function () {
+                              window.almTabsSetHeight(alm);
+                           }, alm.speed);
+                        }, alm.speed + 1);
+                     });
+                  } else {
+                     setTimeout(function () {
+                        (0, _fadeIn2.default)(alm.listing, alm.speed);
+                        setTimeout(function () {
+                           window.almTabsSetHeight(alm);
+                        }, alm.speed);
+                     }, alm.speed + 1);
+                  }
+               }
             } else {
 
                // Paging               
@@ -1402,13 +1507,22 @@ var alm_is_filtering = false;
             }
          }
 
-         // Set focus (only with transition_containers)
-         if (alm.transition_container) {
+         // Set Focus for A11y
+         if (alm.transition_container && total > 0) {
             if (alm.addons.paging) {
-               (0, _setFocus2.default)(alm.init, alm.addons.preloaded, pagingContent);
+               // Paging
+               (0, _setFocus2.default)(alm.init, alm.addons.preloaded, alm.listing, alm_is_filtering);
+            } else if (alm.addons.single_post || alm.addons.nextpage) {
+               // Single Posts OR Next Page, set `init` to false to trigger focus
+               (0, _setFocus2.default)(false, alm.addons.preloaded, reveal, alm_is_filtering);
             } else {
-               (0, _setFocus2.default)(alm.init, alm.addons.preloaded, reveal);
+               // Standard ALM
+               (0, _setFocus2.default)(alm.init, alm.addons.preloaded, reveal, alm_is_filtering);
             }
+         } else if (!alm.transition_container && alm.container_type === 'table') {
+
+            // Table Layout
+            (0, _setFocus2.default)(alm.init, alm.addons.preloaded, reveal[0], alm_is_filtering);
          }
 
          // Comment Reply Fix
@@ -1445,8 +1559,10 @@ var alm_is_filtering = false;
                window.almPagingEmpty(alm);
             }
             if (typeof almEmpty === 'function') {
-               (0, _noResults2.default)(alm.content, alm.no_results);
                window.almEmpty(alm);
+            }
+            if (alm.no_results) {
+               (0, _noResults2.default)(alm.content, alm.no_results);
             }
          }
       };
@@ -1739,18 +1855,27 @@ var alm_is_filtering = false;
 
       /**
       * Window Resize
-       * Add resize function for Paging add-on only.
+       * Add resize function for Paging & Tabs add-ons.
        * 
        * @since 2.1.2
-       * @updated 4.2
+       * @updated 5.2
        */
-      if (alm.addons.paging) {
-         var pagingResize = void 0;
+      if (alm.addons.paging || alm.addons.tabs) {
+         var resize = void 0;
          alm.window.onresize = function () {
-            clearTimeout(pagingResize);
-            pagingResize = setTimeout(function (e) {
-               if (typeof almOnWindowResize === 'function') {
-                  window.almOnWindowResize(alm);
+            clearTimeout(resize);
+            resize = setTimeout(function (e) {
+               if (alm.addons.tabs) {
+                  // Tabs
+                  if (typeof almOnTabsWindowResize === 'function') {
+                     window.almOnTabsWindowResize(alm);
+                  }
+               }
+               if (alm.addons.paging) {
+                  // Paging
+                  if (typeof almOnWindowResize === 'function') {
+                     window.almOnWindowResize(alm);
+                  }
                }
             }, alm.speed);
          };
@@ -1817,8 +1942,25 @@ var alm_is_filtering = false;
             // Scroll Container         
             alm.window = document.querySelector(alm.scroll_container) ? document.querySelector(alm.scroll_container) : alm.window;
          }
-         alm.window.addEventListener('scroll', alm.AjaxLoadMore.scroll);
-         alm.window.addEventListener('touchstart', alm.AjaxLoadMore.scroll);
+         alm.window.addEventListener('scroll', alm.AjaxLoadMore.scroll); // Scroll
+         alm.window.addEventListener('touchstart', alm.AjaxLoadMore.scroll); // Touch Devices
+         alm.window.addEventListener('wheel', function (e) {
+            // Mousewheel
+            var direction = Math.sign(e.deltaY);
+            if (direction > 0) {
+               alm.AjaxLoadMore.scroll();
+            }
+         });
+         alm.window.addEventListener('keyup', function (e) {
+            // End, Page Down
+            var code = e.keyCode ? e.keyCode : e.which;
+            switch (code) {
+               case 35:
+               case 34:
+                  alm.AjaxLoadMore.scroll();
+                  break;
+            }
+         });
       }
 
       /** 
@@ -1848,14 +1990,15 @@ var alm_is_filtering = false;
          setTimeout(function () {
             alm.AjaxLoadMore.resetBtnText();
             alm.main.classList.remove('alm-loading');
+            alm.button.classList.remove('loading'); // Loading button
             alm.AjaxLoadMore.triggerAddons(alm);
             if (!alm.addons.paging) {
                setTimeout(function () {
-                  alm.button.classList.remove('loading'); // Loading button
+
                   alm.loading = false; // Delay to prevent loading to fast
-               }, alm.speed);
+               }, alm.speed * 3);
             }
-         }, alm.speed);
+         }, 100);
       };
 
       /**  
@@ -1988,8 +2131,10 @@ var alm_is_filtering = false;
                // almEmpty
                if (alm.addons.preloaded_total_posts == 0) {
                   if (typeof almEmpty === 'function') {
-                     (0, _noResults2.default)(alm.content, alm.no_results);
                      window.almEmpty(alm);
+                  }
+                  if (alm.no_results) {
+                     (0, _noResults2.default)(alm.content, alm.no_results);
                   }
                }
             }, alm.speed);
@@ -2166,16 +2311,41 @@ var alm_is_filtering = false;
  */
 var filter = function filter() {
    var transition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'fade';
-   var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '250';
+   var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '200';
    var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
    if (!transition || !speed || !data) {
       return false;
    }
    alm_is_filtering = true;
-   (0, _filtering2.default)(transition, speed, data);
+   (0, _filtering2.default)(transition, speed, data, 'filter');
 };
 exports.filter = filter;
+
+/** 
+ * tab
+ * Tabbed content for Ajax Load More instance
+ * 
+ * @since 5.2
+ * @param {*} data
+ * @param {*} url
+ */
+
+var tab = function tab() {
+   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+   var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+   var transition = 'fade';
+   var speed = alm_localize.speed ? parseInt(alm_localize.speed) : 200;
+
+   if (!data) {
+      return false;
+   }
+
+   alm_is_filtering = true;
+   (0, _filtering2.default)(transition, speed, data, 'tab');
+};
+exports.tab = tab;
 
 /** 
  * tracking
@@ -2191,14 +2361,23 @@ var tracking = function tracking(path) {
       gtag('event', 'page_view', {
          'page_path': path
       });
+      if (alm_localize.ga_debug) {
+         console.log('Pageview sent to Google Analytics (gtag)');
+      }
    }
    if (typeof ga === 'function') {
       // Deprecated GA Tracking
       ga('send', 'pageview', path);
+      if (alm_localize.ga_debug) {
+         console.log('Pageview sent to Google Analytics (ga)');
+      }
    }
    if (typeof __gaTracker === 'function') {
       // Monster Insights
       __gaTracker('send', 'pageview', path);
+      if (alm_localize.ga_debug) {
+         console.log('Pageview sent to Google Analytics (__gaTracker)');
+      }
    }
 
    // Dispatch global Analytics callback
@@ -2263,6 +2442,24 @@ var getOffset = function getOffset() {
    return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
 };
 exports.getOffset = getOffset;
+
+/** 
+ *  almScroll
+ *  Scroll window to position (global function)
+ *
+ *  @since 5.0
+ *  @param {*} position
+ */
+
+var render = function render(el) {
+   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+   if (!el) {
+      return false;
+   }
+   // console.log(el, options);
+};
+exports.render = render;
 
 /***/ }),
 
@@ -3378,33 +3575,33 @@ exports.default = almFadeOut;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;_e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }return _arr;
-  }return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
+	function sliceIterator(arr, i) {
+		var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
+			for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+				_arr.push(_s.value);if (i && _arr.length === i) break;
+			}
+		} catch (err) {
+			_d = true;_e = err;
+		} finally {
+			try {
+				if (!_n && _i["return"]) _i["return"]();
+			} finally {
+				if (_d) throw _e;
+			}
+		}return _arr;
+	}return function (arr, i) {
+		if (Array.isArray(arr)) {
+			return arr;
+		} else if (Symbol.iterator in Object(arr)) {
+			return sliceIterator(arr, i);
+		} else {
+			throw new TypeError("Invalid attempt to destructure non-iterable instance");
+		}
+	};
 }();
 
 var _fadeIn = __webpack_require__(/*! ./fadeIn */ "./core/src/js/modules/fadeIn.js");
@@ -3416,43 +3613,46 @@ var _fadeOut = __webpack_require__(/*! ./fadeOut */ "./core/src/js/modules/fadeO
 var _fadeOut2 = _interopRequireDefault(_fadeOut);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+	return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _toConsumableArray(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }return arr2;
-  } else {
-    return Array.from(arr);
-  }
+	if (Array.isArray(arr)) {
+		for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+			arr2[i] = arr[i];
+		}return arr2;
+	} else {
+		return Array.from(arr);
+	}
 }
 
 /**
  * almFilter(type, speed, data)
  * Filter Ajax Load More
  *
- * @param transition string;
- * @param speed number;
- * @param data obj;
+ * @param {*} transition string;
+ * @param {*} speed number;
+ * @param {*} data obj;
+ * @param {*} type string;
  * @since 2.6.1
  */
 
 var almFilter = function almFilter(transition, speed, data) {
-  if (data.target) {
-    // if a target has been specified
-    var target = document.querySelectorAll('.ajax-load-more-wrap[data-id="' + data.target + '"]');
-    target.forEach(function (element) {
-      almFilterTransition(transition, speed, data, element);
-    });
-  } else {
-    // Target not specified
-    var alm = document.querySelectorAll('.ajax-load-more-wrap');
-    alm.forEach(function (element) {
-      almFilterTransition(transition, speed, data, element);
-    });
-  }
+	var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "filter";
+
+	if (data.target) {
+		// if a target has been specified
+		var target = document.querySelectorAll('.ajax-load-more-wrap[data-id="' + data.target + '"]');
+		target.forEach(function (element) {
+			almFilterTransition(transition, speed, data, element, type);
+		});
+	} else {
+		// Target not specified
+		var alm = document.querySelectorAll('.ajax-load-more-wrap');
+		alm.forEach(function (element) {
+			almFilterTransition(transition, speed, data, element, type);
+		});
+	}
 };
 exports.default = almFilter;
 
@@ -3460,151 +3660,196 @@ exports.default = almFilter;
  * almFilterTransition(transition, speed, data, el)
  * Transition Ajax Load More
  *
- * @param transition string;
- * @param speed number;
- * @param data obj;
- * @param el element;
+ * @param {*} transition string;
+ * @param {*} speed number;
+ * @param {*} data obj;
+ * @param {*} el element;
+ * @param {*} type string;
  * @since 2.13.1
  */
 
-var almFilterTransition = function almFilterTransition(transition, speed, data, el) {
+var almFilterTransition = function almFilterTransition(transition, speed, data, el, type) {
 
-  if (transition === 'fade' || transition === 'masonry') {
-    // Fade, Masonry transition
-    (0, _fadeOut2.default)(el, speed);
-    setTimeout(function () {
-      el.classList.add('alm-is-filtering');
-      almCompleteFilterTransition(speed, data, el);
-    }, speed);
-  } else {
-    // No transition
-    el.classList.add('alm-is-filtering');
-    almCompleteFilterTransition(speed, data, el);
-  }
+	if (transition === 'fade' || transition === 'masonry') {
+		// Fade, Masonry transition
+
+		switch (type) {
+			case 'filter':
+				el.classList.add('alm-is-filtering');
+				(0, _fadeOut2.default)(el, speed);
+
+				break;
+
+			case 'tab':
+				el.classList.add('alm-loading');
+				var new_el = el.querySelector('.alm-listing');
+				el.style.height = new_el.offsetHeight + 'px';
+				(0, _fadeOut2.default)(new_el, speed);
+
+				break;
+		}
+
+		// Move to next function
+		setTimeout(function () {
+			almCompleteFilterTransition(speed, data, el, type);
+		}, speed);
+	} else {
+		// No transition
+		el.classList.add('alm-is-filtering');
+		almCompleteFilterTransition(speed, data, el, type);
+	}
 };
 
 /**  
  * almCompleteFilterTransition
  * Complete the filter transition
  * 
- * @param speed number;
- * @param data obj;
- * @param el element;
+ * @param {*} speed number;
+ * @param {*} data obj;
+ * @param {*} el element;
+ * @param {*} type string;
  * @since 3.3
  */
-var almCompleteFilterTransition = function almCompleteFilterTransition(speed, data, el) {
+var almCompleteFilterTransition = function almCompleteFilterTransition(speed, data, el, type) {
 
-  // Get `.alm-btn-wrap` element
-  var btnWrap = el.querySelector('.alm-btn-wrap');
+	// Get `.alm-btn-wrap` element
+	var btnWrap = el.querySelector('.alm-btn-wrap');
 
-  // Get `.alm-listing` element
-  var listing = el.querySelectorAll('.alm-listing');
+	// Get `.alm-listing` element
+	var listing = el.querySelectorAll('.alm-listing');
 
-  // Loop over all .alm-listing divs
-  [].concat(_toConsumableArray(listing)).forEach(function (e) {
-    e.innerHTML = ''; // Clear listings
-  });
+	// Loop over all .alm-listing divs
+	[].concat(_toConsumableArray(listing)).forEach(function (e) {
+		e.innerHTML = ''; // Clear listings
+	});
 
-  // Get Load More button
-  var button = btnWrap.querySelector('.alm-load-more-btn');
-  if (button) {
-    button.classList.remove('done'); // Reset Button 
-  }
+	// Get Load More button
+	var button = btnWrap.querySelector('.alm-load-more-btn');
+	if (button) {
+		button.classList.remove('done'); // Reset Button 
+	}
 
-  // Clear paging navigation
-  var paging = btnWrap.querySelector('.alm-paging');
-  if (paging) {
-    paging.style.opacity = 0;
-  }
+	// Clear paging navigation
+	var paging = btnWrap.querySelector('.alm-paging');
+	if (paging) {
+		paging.style.opacity = 0;
+	}
 
-  // Dispatch Filters
-  almSetFilters(speed, data, el);
+	// Dispatch Filters
+	almSetFilters(speed, data, el, type);
 };
 
 /**
  * almSetFilters
  * Set filter parameters on .alm-listing element
  *
- * @param speed number;
- * @param el element;
- * @param data string;
+ * @param {*} speed number;
+ * @param {*} el element;
+ * @param {*} data string;
+ * @param {*} type string;
  * @updated 3.3
  * @since 2.6.1
  */
 var almSetFilters = function almSetFilters() {
-  var speed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 250;
-  var data = arguments[1];
-  var el = arguments[2];
+	var speed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 250;
+	var data = arguments[1];
+	var el = arguments[2];
+	var type = arguments[3];
 
-  // Get `alm-listing` container
-  var listing = el.querySelector('.alm-listing') || el.querySelector('.alm-comments');
-  if (!listing) {
-    return false;
-  }
+	// Get `alm-listing` container
+	var listing = el.querySelector('.alm-listing') || el.querySelector('.alm-comments');
+	if (!listing) {
+		return false;
+	}
 
-  // Update data attributes
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+	switch (type) {
+		case 'filter':
+			// Update data attributes
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
 
-  try {
-    for (var _iterator = Object.entries(data)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _ref = _step.value;
+			try {
+				for (var _iterator = Object.entries(data)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var _ref = _step.value;
 
-      var _ref2 = _slicedToArray(_ref, 2);
+					var _ref2 = _slicedToArray(_ref, 2);
 
-      var key = _ref2[0];
-      var value = _ref2[1];
+					var key = _ref2[0];
+					var value = _ref2[1];
 
-      // Convert camelCase data atts back to dashes (-).
-      key = key.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-      listing.setAttribute('data-' + key, value);
-    }
+					// Convert camelCase data atts back to dashes (-).
+					key = key.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+					listing.setAttribute('data-' + key, value);
+				}
+				// Fade ALM back (Filters only)
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
 
-    // Fade ALM back in
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
+			(0, _fadeIn2.default)(el, speed);
+			break;
 
-  (0, _fadeIn2.default)(el, speed);
+		case 'tab':
+			// Update `data-tab-template` attribute
+			listing.setAttribute('data-preloaded', 'false');
+			listing.setAttribute('data-pause', 'false');
+			listing.setAttribute('data-tab-template', data.tabTemplate);
 
-  // Re-initiate Ajax Load More
-  var target = '';
-  if (data.target) {
-    // Target has been specified
-    target = document.querySelector('.ajax-load-more-wrap[data-id="' + data.target + '"]');
-    if (target) {
-      window.almInit(target);
-    }
-  } else {
-    // Target not specified
-    target = document.querySelector('.ajax-load-more-wrap');
-    if (target) {
-      window.almInit(target);
-    }
-  }
+			break;
+	}
 
-  // Filters Complete            
-  if (typeof almFilterComplete === 'function') {
-    // Standard Filtering
-    almFilterComplete();
-  }
-  if (typeof almFiltersAddonComplete === "function") {
-    // Filters Add-on
-    almFiltersAddonComplete(el);
-  }
-  // End Filters Complete
+	// Re-initiate Ajax Load More
+	var target = '';
+	if (data.target) {
+		// Target has been specified
+		target = document.querySelector('.ajax-load-more-wrap[data-id="' + data.target + '"]');
+		if (target) {
+			window.almInit(target);
+		}
+	} else {
+		// Target not specified
+		target = document.querySelector('.ajax-load-more-wrap');
+		if (target) {
+			window.almInit(target);
+		}
+	}
+
+	switch (type) {
+
+		case 'filter':
+			// Filters Complete            
+			if (typeof almFilterComplete === 'function') {
+				// Standard Filtering
+				almFilterComplete();
+			}
+			// Filter Add-on Complete
+			if (typeof almFiltersAddonComplete === "function") {
+				// Filters Add-on
+				almFiltersAddonComplete(el);
+			}
+			break;
+
+		case 'tab':
+			// Tabs Complete            
+			if (typeof almTabsComplete === 'function') {
+				// Standard Filtering
+				almTabsComplete();
+			}
+			break;
+
+	}
 };
 
 /***/ }),
@@ -4060,15 +4305,19 @@ Object.defineProperty(exports, "__esModule", {
  * @param {Boolean} init
  * @param {String} preloaded
  * @param {HTMLElement} element
+ * @param {Boolean} alm_is_filtering
  * @since 5.1
  */
 var setFocus = function setFocus() {
 	var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 	var preloaded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'false';
 	var element = arguments[2];
+	var alm_is_filtering = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
-	if ((init || !element) && preloaded !== 'true') {
-		return false; // Exit if first run
+	if (!alm_is_filtering) {
+		if ((init || !element) && preloaded !== 'true') {
+			return false; // Exit if first run
+		}
 	}
 
 	// Check if element is an array.
@@ -4080,9 +4329,11 @@ var setFocus = function setFocus() {
 
 	// Set tabIndex on `.alm-reveal`
 	element.setAttribute('tabIndex', '-1');
+	element.style.outline = 'none';
 
 	// Get Parent container
-	var parent = element.parentNode;
+	// If `.alm-listing` set parent to element
+	var parent = !element.classList.contains('alm-listing') ? element.parentNode : element;
 
 	// Scroll Container
 	var scrollContainer = parent.dataset.scrollContainer;
