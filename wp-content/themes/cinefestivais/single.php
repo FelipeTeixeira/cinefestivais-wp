@@ -33,21 +33,21 @@ if (have_posts()) : while (have_posts()) : the_post();
 		<section id="js-progressbar-container">
 			<div class="tags singlePg-container singleTagsHeader">
 				<?php
-						$categories = get_the_category();
-						foreach ($categories as $category) {
-							$name = $category->name;
-							$slug = $category->slug;
-							$category_link = get_category_link($category->term_id);
+					$categories = get_the_category();
+					foreach ($categories as $category) {
+						$name = $category->name;
+						$slug = $category->slug;
+						$category_link = get_category_link($category->term_id);
 
-							if (!categoryDefault($slug, true)) {
-								echo "<a href=" . $category_link . " class='tag is-active'>" . esc_attr($name) . "</a>";
-							}
-
-							if (categoryDefault($slug)) {
-								echo "<a href=" . $category_link . " class='tag'>" . esc_attr($name) . "</a>";
-							}
+						if (!categoryDefault($slug, true)) {
+							echo "<a href=" . $category_link . " class='tag is-active'>" . esc_attr($name) . "</a>";
 						}
-						?>
+
+						if (categoryDefault($slug)) {
+							echo "<a href=" . $category_link . " class='tag'>" . esc_attr($name) . "</a>";
+						}
+					}
+				?>
 			</div>
 
 			<h1 class="singlePg-container singlePg-title">
@@ -58,15 +58,14 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 				<div class="author-picture">
 					<?php
-							if ($image_user) {
-								echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
-							}
+						if ($image_user) {
+							echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
+						}
 
-							if ($partnerImage_user) {
-								echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
-							}
-							?>
-
+						if ($partnerImage_user) {
+							echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
+						}
+					?>
 				</div>
 
 				<div class="author-names">
@@ -91,8 +90,9 @@ if (have_posts()) : while (have_posts()) : the_post();
 							<?= the_time('H:i'); ?>
 						</span>
 						<?php
-								if (get_the_time('H:i') !== get_the_modified_time('H:i')) {
-									?>
+							if (get_the_time('H:i') !== get_the_modified_time('H:i')) 
+							{
+						?>
 							<span class="postpage-body--updated">
 								Atualizado em
 								<?= get_the_modified_date('d/m/y') ?>
@@ -100,8 +100,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 								<?= get_the_modified_time('H:i') ?>
 							</span>
 						<?php
-								}
-								?>
+							}
+						?>
 					</div>
 				</div>
 
@@ -112,17 +112,18 @@ if (have_posts()) : while (have_posts()) : the_post();
 			</div>
 
 			<?php
-					the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured'));
-					?>
+				the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured'));
+			?>
 
 			<article id="box" class="postpage-body--text">
 				<?php the_content(); ?>
 			</article>
 
 			<?php
-					$tags = get_the_tags($post->ID);
-					if ($tags) {
-						?>
+				$tags = get_the_tags($post->ID);
+				if ($tags) 
+				{
+			?>
 				<section class="postpage-body--related singlePg-container">
 					<h2 class="related-title">
 						Assuntos Relacionados
@@ -130,7 +131,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 					<div class="tags">
 						<?php
-							foreach ($tags as $tag) {
+							foreach ($tags as $tag) 
+							{
 								$tag_link = get_tag_link($tag->term_id);
 						?>
 							<a href="<?= $tag_link ?>" class="tag">
