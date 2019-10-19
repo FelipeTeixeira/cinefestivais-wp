@@ -26,7 +26,7 @@
     <div class="author-info--column">
         <h1 class="author-title">
             <?= $first_name ?>
-			<?= $last_name ?>
+            <?= $last_name ?>
         </h1>
         <p class="author-text">
             <?= get_the_author_meta('description') ?>

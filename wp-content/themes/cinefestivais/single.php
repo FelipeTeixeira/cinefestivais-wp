@@ -1,11 +1,11 @@
 <?php
-	global $pageClass;
-	$pageClass = "singlePg";
-	get_header();
+global $pageClass;
+$pageClass = "singlePg";
+get_header();
 
-	include 'templates/reader-bar.php';
+include 'templates/reader-bar.php';
 
-	if (have_posts()) : while (have_posts()) : the_post();
+if (have_posts()) : while (have_posts()) : the_post();
 
 		$author_id = get_the_author_meta('ID');
 		$user = 'user_' . $author_id;
@@ -27,246 +27,145 @@
 			$partnerUser = 'user_' . $partnerAuthorId;
 			$partnerImage_user = get_field('user_photo', $partnerUser);
 		}
-		
-?>
 
-<section id="js-progressbar-container">
-	<div class="tags singlePg-container singleTagsHeader">
-		<?php
-			$categories = get_the_category();
-			foreach ($categories as $category) {
-				$name = $category->name;
-				$slug = $category->slug;
-				$category_link = get_category_link($category->term_id);
-
-				if (!categoryDefault($slug, true))
-				{
-					echo "<a href=".$category_link." class='tag is-active'>". esc_attr($name) ."</a>"; 
-				}
-
-				if (categoryDefault($slug)) 
-				{
-					echo "<a href=".$category_link." class='tag'>". esc_attr($name) ."</a>"; 
-				}
-			}
 		?>
-	</div>
 
-	<h1 class="singlePg-container singlePg-title">
-		<?php the_title(); ?>
-	</h1>
-		
-	<section class="postpage-body--author singlePg-container">
+		<section id="js-progressbar-container">
+			<div class="tags singlePg-container singleTagsHeader">
+				<?php
+						$categories = get_the_category();
+						foreach ($categories as $category) {
+							$name = $category->name;
+							$slug = $category->slug;
+							$category_link = get_category_link($category->term_id);
 
-		<div class="author-picture">
+							if (!categoryDefault($slug, true)) {
+								echo "<a href=" . $category_link . " class='tag is-active'>" . esc_attr($name) . "</a>";
+							}
+
+							if (categoryDefault($slug)) {
+								echo "<a href=" . $category_link . " class='tag'>" . esc_attr($name) . "</a>";
+							}
+						}
+						?>
+			</div>
+
+			<h1 class="singlePg-container singlePg-title">
+				<?php the_title(); ?>
+			</h1>
+
+			<section class="postpage-body--author singlePg-container">
+
+				<div class="author-picture">
+					<?php
+							if ($image_user) {
+								echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
+							}
+
+							if ($partnerImage_user) {
+								echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
+							}
+							?>
+
+				</div>
+
+				<div class="author-names">
+					<a href="<?= get_author_posts_url($author_id) ?>" class="author-name">
+						<?= $first_name ?>
+						<?= $last_name ?>
+					</a>
+
+					<?php if ($partnerAuthor) : ?>
+						,
+						<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>" class="author-name">
+							<?= $partnerAuthor['user_firstname'] ?>
+							<?= $partnerAuthor['user_lastname'] ?>
+						</a>
+					<?php endif; ?>
+
+
+					<div class="singlePg-date">
+						<span class="postpage-body--timehour">
+							<?= get_the_date('d/m/y'); ?>
+							às
+							<?= the_time('H:i'); ?>
+						</span>
+						<?php
+								if (get_the_time('H:i') !== get_the_modified_time('H:i')) {
+									?>
+							<span class="postpage-body--updated">
+								Atualizado em
+								<?= get_the_modified_date('d/m/y') ?>
+								as
+								<?= get_the_modified_time('H:i') ?>
+							</span>
+						<?php
+								}
+								?>
+					</div>
+				</div>
+
+			</section>
+
+			<div class="socialShared-container singlePg-container">
+				<?php include 'templates/single/socialShared.php'; ?>
+			</div>
+
 			<?php
-				if ($image_user) 
-				{
-					echo wp_get_attachment_image($image_user, $size, "", ["class" => "profile-photo"]);
-				}
+					the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured'));
+					?>
 
-				if ($partnerImage_user) 
-				{
-					echo wp_get_attachment_image($partnerImage_user, $size, "", ["class" => "profile-photo"]);
+			<article id="box" class="postpage-body--text">
+				<?php the_content(); ?>
+			</article>
+
+			<?php
+					$tags = get_the_tags($post->ID);
+					if ($tags) {
+						?>
+				<section class="postpage-body--related singlePg-container">
+					<h2 class="related-title">
+						Assuntos Relacionados
+					</h2>
+
+					<div class="tags">
+						<?php
+							foreach ($tags as $tag) {
+								$tag_link = get_tag_link($tag->term_id);
+						?>
+							<a href="<?= $tag_link ?>" class="tag">
+								<?= $tag->name ?>
+							</a>
+						<?php
+							}
+						?>
+					</div>
+				</section>
+			<?php
 				}
 			?>
+		</section>
 
-		</div>
+		<?php
+			include get_template_directory().'/templates/single/get_coauthors.php';
+		?>
 
-		<div class="author-names">
-			<a href="<?= get_author_posts_url($author_id) ?>" class="author-name">
-				<?= $first_name ?>
-				<?= $last_name ?>
-			</a>
+		<section class="singlePg-container singlePg-disqus postpage-body--contact" id="js-disqusContainer">
+			<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
+				<svg class="icon icon-chevron-down">
+					<use xlink:href="#icon-chevron-down"></use>
+				</svg>
+				Ver Comentários
+			</button>
 
-			<?php if($partnerAuthor): ?>
-				,
-				<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>" class="author-name">
-					<?= $partnerAuthor['user_firstname'] ?>
-					<?= $partnerAuthor['user_lastname'] ?>
-				</a>
-			<?php endif; ?>
-
-
-			<div class="singlePg-date">
-				<span class="postpage-body--timehour">
-					<?= get_the_date('d/m/y'); ?>
-					às
-					<?= the_time('H:i'); ?>
-				</span>
-				<?php
-						if (get_the_time('H:i') !== get_the_modified_time('H:i')) 
-						{
-				?>
-					<span class="postpage-body--updated">
-						Atualizado em
-						<?= get_the_modified_date('d/m/y') ?>
-						as
-						<?= get_the_modified_time('H:i') ?>
-					</span>
-				<?php
-						}
-				?>
-			</div>
-		</div>
-
-	</section>
-
-	<div class="socialShared-container singlePg-container">
-		<?php include 'templates/single/socialShared.php'; ?>					
-	</div>	
-
-	<?php
-		the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured' ) ); 
-	?>
-
-	<article id="box" class="postpage-body--text">
-		<?php the_content(); ?>
-	</article>
-
-	<?php
-		$tags = get_the_tags($post->ID);
-		if ($tags) 
-		{
-	?>
-		<section class="postpage-body--related singlePg-container">
-			<h2 class="related-title">
-				Assuntos Relacionados
-			</h2>
-
-			<div class="tags">
-				<?php
-					foreach ($tags as $tag) 
-					{
-						$tag_link = get_tag_link($tag->term_id);
-				?>
-						<a href="<?= $tag_link ?>" class="tag">
-							<?= $tag->name ?>
-						</a>
-				<?php
-					}
-				?>
+			<div class="singlePg-disqus-container">
+				<?php disqus_embed(); ?>
 			</div>
 		</section>
-	<?php
-		}
-	?>
-</section>
-
-<section class="postpage-body--contact content singlePg-container">
-
-	<h2 class="content-title">Entre em contato</h2>
-
-	<div class="contact-author">
-		<?php if ($image_user) { echo wp_get_attachment_image($image_user, $size); } ?>
-		
-		<div class="contact-author--info">
-			<h3>
-				<a href="<?= get_author_posts_url($author_id) ?>">
-					<?= $first_name ?>
-					<?= $last_name ?>
-				</a>
-			</h3>
-			
-			<a href="mailto:<?= $user_email ?>?Subject=Cinefestivais" target="_top">
-				<svg class="icon icon-envelope">
-					<use xlink:href="#icon-envelope"></use>
-				</svg>
-				<?= $user_email ?>
-			</a>
-
-			<?php
-				$facebook = get_field('user_facebook', $user);
-				$twitter = get_field('user_twitter', $user);
-			?>
-			<?php if ($facebook) : ?>
-				<a href="https://www.facebook.com/<?= $facebook ?>" target="_blank">
-					<svg class="icon icon-facebook">
-						<use xlink:href="#icon-facebook"></use>
-					</svg>
-					/<?= $facebook ?>
-				</a>
-			<?php endif; ?>
-
-			<?php if ($twitter) : ?>
-				<a href="https://www.twitter.com/<?= $twitter ?>" target="_blank">
-					<svg class="icon icon-twitter">
-						<use xlink:href="#icon-twitter"></use>
-					</svg>
-					@<?= $twitter ?>
-				</a>
-			<?php endif; ?>
-		</div>
-
-	</div>
-
-	<?php if($partnerAuthor): ?>
-		
-		<div class="contact-author">
-
-
-			<?php if ($partnerImage_user) { echo wp_get_attachment_image($partnerImage_user, $size); } ?>
-			
-			<div class="contact-author--info">
-				<h3>
-					<a href="<?= get_author_posts_url($partnerAuthor['ID']) ?>">
-						<?= $partnerAuthor['user_firstname'] ?>
-						<?= $partnerAuthor['user_lastname'] ?>
-					</a>
-				</h3>
-				<a href="mailto:<?= $partnerAuthor['user_email'] ?>?Subject=Cinefestivais" target="_top">
-					<svg class="icon icon-envelope">
-						<use xlink:href="#icon-envelope"></use>
-					</svg>
-					<?= $partnerAuthor['user_email'] ?>
-				</a>
-
-				<?php
-					$facebookPartner = get_field('user_facebook', $partnerUser);
-					$twitterPartner = get_field('user_twitter', $partnerUser);
-				?>
-				<?php if ($facebookPartner) : ?>
-					<a href="https://www.facebook.com/<?= $facebookPartner ?>" target="_blank">
-						<svg class="icon icon-facebook">
-							<use xlink:href="#icon-facebook"></use>
-						</svg>
-						/<?= $facebookPartner ?>
-					</a>
-				<?php endif; ?>
-
-				<?php if ($twitterPartner) : ?>
-					<a href="https://www.twitter.com/<?= $twitterPartner ?>" target="_blank">
-						<svg class="icon icon-twitter">
-							<use xlink:href="#icon-twitter"></use>
-						</svg>
-						@<?= $twitterPartner ?>
-					</a>
-				<?php endif; ?>
-			</div>
-
-		</div>
-		
-	<?php endif; ?>
-	
-
-</section>
-
-<section class="singlePg-container singlePg-disqus postpage-body--contact" id="js-disqusContainer">
-	<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
-		<svg class="icon icon-chevron-down">
-			<use xlink:href="#icon-chevron-down"></use>
-		</svg>
-		Ver Comentários
-	</button>
-
-	<div class="singlePg-disqus-container">
-		<?php disqus_embed(); ?>
-	</div>
-</section>
 
 <?php
-	include get_template_directory().'/templates/newsletter.php';
-	include get_template_directory().'/templates/post-related.php';
+		include get_template_directory() . '/templates/newsletter.php';
+		include get_template_directory() . '/templates/post-related.php';
 
 	endwhile;
 endif;
