@@ -68,7 +68,7 @@ function ignoreCategories()
 	$slider 		= get_category_by_slug('slider');
 	$entrevistas 	= get_category_by_slug('entrevistas');
 	$area_nobre 	= get_category_by_slug('area-nobre');
-	$area_nobre 	= get_category_by_slug('sem-categoria');
+	$sem_categoria 	= get_category_by_slug('sem-categoria');
 
 	return array(
 		$criticas->term_id,
@@ -79,7 +79,8 @@ function ignoreCategories()
 		$especiais->term_id,
 		$slider->term_id,
 		$entrevistas->term_id,
-		$area_nobre->term_id
+		$area_nobre->term_id,
+		$sem_categoria->term_id
 	);
 }
 
