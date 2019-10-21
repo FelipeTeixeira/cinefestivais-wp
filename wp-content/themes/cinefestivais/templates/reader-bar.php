@@ -66,8 +66,7 @@
         document.getElementById('js-showMenu').classList.remove('is-hidden');
     };
 
-    const shareButton = document.querySelector('.share-button');
-
+    var shareButton = document.querySelector('.share-button');    
     function shareMobile() {
         if (navigator.share) {
             navigator.share({

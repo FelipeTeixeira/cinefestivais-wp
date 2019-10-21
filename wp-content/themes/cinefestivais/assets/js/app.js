@@ -27,7 +27,7 @@ function progressbar() {
         var progress = window.pageYOffset / adjustedHeight * 100;
         document.querySelector('#js-progressbar').style.width = progress + "%";
     }
-}
+} 
 
 // HOME
 var scrollLocation = debounce(function () {
@@ -81,9 +81,7 @@ function closeMenu() {
 function toggleSearch() {
     document.getElementById('js-searchBar').classList.toggle('search-bar-is-active');
     document.getElementById('btn-toggleSearch').classList.toggle('is-active-search');
-
     document.getElementById('js-navbar').classList.add('is-active');
-
     closeMenu();
 };
 
@@ -94,7 +92,10 @@ function closeSearch() {
 
 function goToComments() {
     var commentsPos = document.getElementById('js-disqusContainer').offsetTop;
-    window.scrollTo({ top: commentsPos - 104 - 32, behavior: 'smooth' });
+    window.scrollTo({
+        top: commentsPos - 104 - 32,
+        behavior: 'smooth'
+    });
 };
 
 window.onscroll = function (event) {
@@ -115,7 +116,6 @@ document.addEventListener('click', function (event) {
     if (isSearchBarOpen) {
         var isSearchBar = document.getElementById('js-searchBar').contains(event.target);
         var isSearchButton = document.getElementById('btn-toggleSearch').contains(event.target);
-
         document.getElementById('input-search').focus();
 
         if (!isSearchBar && !isSearchButton) {
@@ -123,23 +123,23 @@ document.addEventListener('click', function (event) {
             document.getElementById('js-navbar').classList.remove('is-active');
         }
     }
-});
+}); 
 
 
-// HOME COL NOTICES
+// HOME COL NOTICES :(
 if (document.querySelector('.newsPg')) {
     var htmlNotices = '';
-
-    document.querySelectorAll(".newsPg .noticesSmallContainer").forEach(item => {
+    document.querySelectorAll(".newsPg .noticesSmallContainer").forEach(function (item) {
         htmlNotices += item.innerHTML;
-    })
-
+    });
 
     if (!NodeList.prototype.forEach && Array.prototype.forEach) {
         NodeList.prototype.forEach = Array.prototype.forEach;
     }
 
-    document.querySelectorAll(".newsPg .noticesSmallContainer").forEach(e => e.parentNode.removeChild(e));
+    document.querySelectorAll(".newsPg .noticesSmallContainer").forEach(function (e) {
+        return e.parentNode.removeChild(e);
+    });
     var new_html = "<ul class='js-noticesCol'>" + htmlNotices + "</ul>";
     document.querySelector('.list-2').insertAdjacentHTML('afterend', new_html);
 }
