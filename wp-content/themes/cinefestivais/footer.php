@@ -72,24 +72,7 @@
     wp_footer();
     if ($pageClass === 'homePg') {
 ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.3.11/min/tiny-slider.js"></script>
-    <script>
-        if (document.querySelector('.carousel')) {
-            var slider = tns({
-                container: '.carousel',
-                loop: true,
-                items: 1,
-                slideBy: 'page',
-                nav: false,
-                autoplay: true,
-                speed: 400,
-                autoplayButtonOutput: false,
-                mouseDrag: true,
-                lazyload: true,
-                controlsContainer: "#customize-controls"
-            });
-        }
-    </script>
+    <script async src="<?= $url ?>/assets/js/tiny-slider.js"></script>
 <?php
     }
 ?>
