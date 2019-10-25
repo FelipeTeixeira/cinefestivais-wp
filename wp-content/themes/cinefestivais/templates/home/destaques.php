@@ -10,7 +10,8 @@
 
     <?php
         $ignoreCategory = 'destaques';
-		include get_template_directory().'/templates/list-card.php';
+        include get_template_directory().'/templates/list-card.php';
+        include get_template_directory().'/templates/adverts/ad-home-destaques.php';
 	?>    
     
 </section>

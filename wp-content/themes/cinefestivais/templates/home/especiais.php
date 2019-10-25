@@ -16,3 +16,7 @@
     ?> 
     
 </section>
+
+<?php
+    include get_template_directory().'/templates/adverts/ad-home-especiais.php';
+?>    

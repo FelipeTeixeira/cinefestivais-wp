@@ -41,7 +41,8 @@
 
 			<?php
 				the_post_thumbnail('', array('title' => get_the_title(), 'alt' => get_the_title(), 'class' => 'singlePg-imgFeatured'));
-			?>
+				include get_template_directory().'/templates/adverts/ad-post-imagem-principal.php';
+			?>    
 
 			<article id="box" class="postpage-body--text">
 				<?php the_content(); ?>
@@ -93,8 +94,8 @@
 				<?php disqus_embed(); ?>
 			</div>
 		</section>
-
 <?php
+		include get_template_directory().'/templates/adverts/ad-post-sessao-comentarios.php';
 		include get_template_directory() . '/templates/newsletter.php';
 		include get_template_directory() . '/templates/post-related.php';
 

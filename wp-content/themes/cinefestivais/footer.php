@@ -1,18 +1,18 @@
-<?php 
-    global $pageClass;
-    $pageClass      = (!isset($pageClass)) ? '' : $pageClass;
-    
-    // LINKS PAGES
-    $menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
-    $menu_contato		= esc_url( home_url( '/' ) )."contato";
-    $menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
-	$menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
-    $menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
-    $menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
-    $menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
-    $menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
-    $menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
-    $url = get_template_directory_uri(); 
+<?php
+global $pageClass;
+$pageClass      = (!isset($pageClass)) ? '' : $pageClass;
+
+// LINKS PAGES
+$menu_anuncie		= esc_url( home_url( '/' ) )."anuncie";
+$menu_contato		= esc_url( home_url( '/' ) )."contato";
+$menu_quem_somos	= esc_url( home_url( '/' ) )."quem-somos";
+$menu_coberturas	= esc_url( home_url( '/' ) )."coberturas";
+$menu_entrevistas	= esc_url( home_url( '/' ) )."category/entrevistas";
+$menu_criticas		= esc_url( home_url( '/' ) )."category/criticas";
+$menu_noticias		= esc_url( home_url( '/' ) )."category/noticias";
+$menu_reportagens	= esc_url( home_url( '/' ) )."category/reportagens";
+$menu_podcasts		= esc_url( home_url( '/' ) )."category/podcasts";
+$url = get_template_directory_uri();
 ?>
 </main>
 <footer class="footer">
@@ -60,7 +60,7 @@
         </a>
     </nav>
     <p class="footer-copyright">
-        © 
+        ©
         <?php echo currentYear(); ?> Cine festivais - Todos os direitos reservados
     </p>
     <a href="https://instinto.me/" target="_blank" class="footer-logoInstinto">
@@ -68,17 +68,31 @@
     </a>
 </footer>
 
-<?php 
-    wp_footer();
-    if ($pageClass === 'homePg') {
-?>
+<?php
+wp_footer();
+if ($pageClass === 'homePg') {
+    ?>
     <script async src="<?= $url ?>/assets/js/tiny-slider.js"></script>
 <?php
-    }
+}
 ?>
 
 <script async src="<?= $url ?>/assets/js/app.js"></script>
 <script async src="<?= $url ?>/assets/js/header-scroll.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79646896-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-79646896-1');
+</script>
+
 </body>
 
 </html>
