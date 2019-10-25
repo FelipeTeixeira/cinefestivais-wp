@@ -7,7 +7,6 @@
 
 	if (have_posts()) : while (have_posts()) : the_post();
 ?>
-
 		<section id="js-progressbar-container">
 			<div class="tags singlePg-container singleTagsHeader">
 				<?php
