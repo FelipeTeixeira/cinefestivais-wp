@@ -146,7 +146,6 @@
             letter-spacing: 1px;
             height: 56px;
             justify-content: end;
-            margin: auto auto 90px;
 
             @media screen and (min-width: 767px) {
                 font-size: 12px;
@@ -160,7 +159,7 @@
         &.is-active {
             .singlePg-disqus-container {
                 display: block;
-                margin-bottom: 32px;
+                margin: 32px auto;
             }
 
             .singlePg-disqus-btnComments {

@@ -3,7 +3,7 @@
     query_posts($argsDestaques);
 ?>  
 
-<section class="content">
+<section class="content p-padding-bottom-0">
     <h2 class="content-title">
         Destaques
     </h2>

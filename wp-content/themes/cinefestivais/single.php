@@ -82,7 +82,7 @@
 			include get_template_directory().'/templates/single/get-coauthors.php';
 		?>
 
-		<section class="singlePg-container singlePg-disqus postpage-body--contact" id="js-disqusContainer">
+		<section class="singlePg-container singlePg-disqus postpage-body--contact p-padding-bottom-32" id="js-disqusContainer">
 			<button onclick="openDisqus()" type="button" class="singlePg-disqus-btnComments btn btn-primary">
 				<svg class="icon icon-chevron-down">
 					<use xlink:href="#icon-chevron-down"></use>
