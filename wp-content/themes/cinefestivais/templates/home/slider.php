@@ -35,7 +35,7 @@
                             foreach( $categories as $category) {
                                 $name = $category->name;
                                 $slug = $category->slug;                                     
-                            if ($slug !== 'slider') {
+                            if ($slug !== 'slider' && !categoryDefault($slug)) {
                         ?>
                             <span class="tag is-active">
                                 <?= esc_attr( $name); ?>
