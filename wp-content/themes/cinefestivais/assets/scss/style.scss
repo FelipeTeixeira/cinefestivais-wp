@@ -94,5 +94,8 @@
     width: 100%;
     max-width: 1134px;
     margin: 16px auto 48px;
-}
 
+    &:empty {
+        display: none;
+    }
+}
